@@ -250,6 +250,7 @@ yay -S flat-remix catarell catarell-fonts
 
 yay -S xfce4-screensaver mugshot gnome-system-tools
 
+<span class="token comment"># To Install this, you need to do some more complicated stuff</span>
 <span class="token function">git</span> clone https://aur.archlinux.org/gnome-system-tools.git
 <span class="token function">cd</span> gnome-system-tools/
 <span class="token function">nano</span> PKGBUILD <span class="token punctuation">(</span>change FTP <span class="token punctuation">(</span>first to HTTP/S<span class="token punctuation">)</span>
@@ -271,6 +272,83 @@ nmcli connection <span class="token function">import</span> <span class="token f
 
 yay -S pycharm-professional
 </code></pre>
+<h4 id="make-xfce4-look-good">Make XFCE4 look good!</h4>
+<h5 id="desktop">Desktop</h5>
+<ol>
+<li>Right-Clock on Desktop -&gt; Settings:</li>
+<li>Select <em>usr/share/backgrounds/archlinux</em> as background folder and choose a nice background</li>
+<li>Symbols -&gt; Default Icons:
+<ul>
+<li>Deselect Home and Filesystem.</li>
+<li>Iconsize: 40</li>
+<li>Show icon tooltips. Size: 100</li>
+</ul>
+</li>
+</ol>
+<h5 id="theme-icon-and-font">Theme, Icon and Font</h5>
+<p>Settings-&gt;Appearance:</p>
+<ol>
+<li>Style: Arc-Dark</li>
+<li>Icons: Flat-Remix-Blue-Dark</li>
+<li>Fonts:
+<ul>
+<li>Default Font: Cantarell Regular - 11</li>
+<li>Default Monospace Font: Fira Code Medium - 10</li>
+<li>Rendering:
+<ul>
+<li>Hinting: Low (Gering)</li>
+<li>Sub-Pixel order: RGB</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>Settings-&gt;Window Manager:</p>
+<ol>
+<li>Style:
+<ul>
+<li>Style: Arc-Dark</li>
+<li>Title Font: Cantarell Bold - 9</li>
+<li>Hide arrow up</li>
+</ul>
+</li>
+</ol>
+<p>For more Themes visit <a href="https://www.xfce-look.org/">this Page</a></p>
+<h5 id="terminal">Terminal</h5>
+<p><img src="https://normannator.de/archlinux/IMG/term-1.png" alt="enter image description here"><br>
+<img src="https://normannator.de/archlinux/IMG/term-2.png" alt="enter image description here"><br>
+<img src="https://normannator.de/archlinux/IMG/term-3.png" alt="enter image description here"><br>
+<img src="https://normannator.de/archlinux/IMG/term-4.png" alt="enter image description here"><br>
+<img src="https://normannator.de/archlinux/IMG/term-5.png" alt="enter image description here"><br>
+<img src="https://normannator.de/archlinux/IMG/term-6.png" alt="enter image description here"></p>
+<h5 id="lightdm-settings">LightDM Settings</h5>
+<p>Theme: Arc-Dark<br>
+Icon: Arc<br>
+Font: Cantarell Bold - 10</p>
+<h5 id="screensaver">Screensaver</h5>
+<p>Settings-&gt;Screensaver:</p>
+<ul>
+<li>Floating XFCE</li>
+<li>Disable: Lock Screen with System Sleep<br>
+Settings-&gt;Keyboard: xflock4 (default Ctrl+Alt+L/Delete)</li>
+</ul>
+<h5 id="whisker-menu">Whisker-Menu</h5>
+<p>Delete the Old Menu Button and add the installed Wisker Menu to the Top Panel.<br>
+Right Click and Open Settings of Whisker Menu:</p>
+<ul>
+<li>List view</li>
+<li>Symbol-Size: Small</li>
+<li>Symbol Category: Smaller</li>
+<li>Head-&gt;Symbol only + Symbol -&gt; ArchLinux Symbol</li>
+<li>Behaviour: Select on Hover</li>
+</ul>
+<p>Settings-&gt;Keyboard-&gt;Shortcuts: add on pressing <em>super</em> (Windows Button): xfce4-popup-whiskermenu</p>
+<h4 id="more-configuration">More Configuration</h4>
+<p>Open Whisker-Menu and Klick on the User Icon:<br>
+-&gt; Mugshot should open: Enter your Credentials</p>
+<p>In Settings: Type “User” and Open: <em>User Settings</em> (gnome-system-tools)<br>
+Administrate User and Groups …</p>
+<p>Logout and Login again that the changes take effect.</p>
 <blockquote>
 <p>Written with <a href="https://stackedit.io/">StackEdit</a>.</p>
 </blockquote>
