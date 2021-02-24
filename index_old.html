@@ -105,7 +105,7 @@ hwclock --sysohc  <span class="token comment"># Sync Hardware-Clock to System-Cl
 127.0.0.1		<span class="token operator">&lt;</span>hostname<span class="token operator">&gt;</span>.localdomain	<span class="token operator">&lt;</span>hostname<span class="token operator">&gt;</span>
 </code></pre>
 <h3 id="install-packages">Install Packages</h3>
-<pre class=" language-bash"><code class="prism  language-bash">pacman -S grub efibootmgr networkmanager network-manager-applet wireless_tools wpa_supplicant dialog os-prober <span class="token function">mtools</span> dosfstools linux-headers <span class="token function">git</span> reflector bash-completion net-tools
+<pre class=" language-bash"><code class="prism  language-bash">pacman -S grub efibootmgr networkmanager network-manager-applet wireless_tools wpa_supplicant dialog os-prober <span class="token function">mtools</span> dosfstools linux-headers <span class="token function">git</span> reflector bash-completion
 <span class="token punctuation">(</span>bluez bluez-utils pulseaudio-bluetooth<span class="token punctuation">)</span> <span class="token comment"># Bluetooth</span>
 <span class="token punctuation">(</span>cups<span class="token punctuation">)</span> <span class="token comment"># Printing</span>
 xdg-utils xdg-user-dirs <span class="token comment"># Home Directories</span>
@@ -187,8 +187,7 @@ makepkg -si PKGBUILD
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S vivaldi vivaldi-ffmpeg-codecs
 </code></pre>
 <h3 id="install-xfce4-and-greeter">Install XFCE4 and Greeter</h3>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S --needed xorg
-<span class="token function">sudo</span> pacman -S --needed xfce4 xfce4-goodies lightdm lightdm-gtk-greeter lightdm-gkt-greeter-settings
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S xorg lightdm lightdm-gtk-greeter lightdm-gkt-greeter-settings xfce4 xfce4-goodies
 
 <span class="token function">sudo</span> systemctl <span class="token function">enable</span> lightdm
 <span class="token function">reboot</span>
@@ -350,39 +349,9 @@ Right Click and Open Settings of Whisker Menu:</p>
 <p>In Settings: Type “User” and Open: <em>User Settings</em> (gnome-system-tools)<br>
 Administrate User and Groups …</p>
 <p>Logout and Login again that the changes take effect.</p>
-<p>Edit the ~/.bashrc file to add alias permanently</p>
-<h4 id="and-more-programms">And More Programms</h4>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># sudo pacman -S firefox</span>
-
-<span class="token comment"># Version Control</span>
-yay -S github-desktop
-yay -S gitkraken
-
-<span class="token comment">#KVM Integration</span>
-<span class="token function">sudo</span> pacman -S qemu virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat
-
-<span class="token comment">#Python PIP</span>
-<span class="token function">sudo</span> pacman -S python-pip
-
-<span class="token comment"># For Python Code Checking</span>
-pip3 <span class="token function">install</span> pylint
-
-<span class="token comment">#Visual Studio Code</span>
-yay -S vscode
-
-<span class="token comment">#install Zoom Client</span>
-yay -S zoom
-
-<span class="token comment"># Write IMAGES to USB-Drives</span>
-yay -S balena-etcher
-
-<span class="token comment"># Music Streaming</span>
-yay -S spotify
-
-<span class="token comment"># communication</span>
-yay -S slack-desktop
-
-</code></pre>
+<blockquote>
+<p>Written with <a href="https://stackedit.io/">StackEdit</a>.</p>
+</blockquote>
 </div>
 </body>
 
