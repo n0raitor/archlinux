@@ -538,6 +538,14 @@ yay -Sc  <span class="token comment"># Removes Cache of YAY</span>
 <h3 id="optimize-pacmans-database-access-speeds">Optimize pacman’s database access speeds</h3>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman-optimize
 </code></pre>
+<h3 id="make-arch-stable-golden-rules">Make Arch Stable (Golden Rules)</h3>
+<ol>
+<li>Do Backups with Timeshift and BtrFS</li>
+<li>Update only every Week</li>
+<li>Install Linux and Linux-LTS but us the LTS Kernal. If the System breaks, you can switch to the non LTS Kernal when the system is not booting. (use: <code>uname -sr</code> to check the current used kernel)</li>
+<li>Ignore Linux Packages on Update (pacman.conf -&gt; ignorepkg = Linux)</li>
+<li>Do not install out of date packages! Use the AUR Page and search under package actions: <em>Flagged out-of-date (2019 )</em>. You can also see this in the aur-tool logs!</li>
+</ol>
 <h3 id="check-for-errors">Check for errors</h3>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> systemctl --failed <span class="token function">sudo</span> journalctl -p 3 -xb
 </code></pre>
