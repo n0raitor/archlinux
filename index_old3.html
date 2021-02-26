@@ -33,23 +33,14 @@ dhcpcd wlp0s1
 <h3 id="update-database">Update Database</h3>
 <pre class=" language-bash"><code class="prism  language-bash">pacman -Syyy
 </code></pre>
-<h3 id="extra-if-you-want-a-gui-install--config-use-archfi">(extra) If you want a gui install / config use archfi</h3>
-<pre class=" language-bash"><code class="prism  language-bash">pacman -S <span class="token function">wget</span> pacman-contrib
-<span class="token function">wget</span> archfi.sf.net/archfi
-sh archfi
-</code></pre>
 <h3 id="configure-partitions">Configure Partitions</h3>
 <p>I use <em>gdisk</em> for GPT Tables</p>
-<pre class=" language-bash"><code class="prism  language-bash">lsblk  <span class="token comment"># Print Devices</span>
-gdisk /dev/<span class="token operator">&lt;</span>os-device<span class="token operator">&gt;</span>
+<pre class=" language-bash"><code class="prism  language-bash">lsblk
+gdisk /dev/<span class="token operator">&lt;</span>device<span class="token operator">&gt;</span>
 
 n, 128, -200M, Enter, ef00  <span class="token comment"># Create EFI Partition</span>
 n, Enter, Enter, Enter, 8e00  <span class="token comment"># Create Linux LVM Partition</span>
 w
-
-<span class="token comment"># If you are using a separate home drive, use this</span>
-gdisk /dev/<span class="token operator">&lt;</span>home-device<span class="token operator">&gt;</span>
-n, Enter, Enter, Enter, Enter  <span class="token comment"># Create Linux Filesystem Partition for the entire drive</span>
 </code></pre>
 <h3 id="encrypt-root-partition">Encrypt Root Partition</h3>
 <pre class=" language-bash"><code class="prism  language-bash">cryptsetup luksFormat /dev/sda1  <span class="token comment"># Root Partition Device</span>
@@ -69,15 +60,11 @@ lvcreate -l 100%FREE vg1 -n root
 <p>Check your work with <em>lsblk</em></p>
 <h4 id="format-logical-volumes-and-partitions">Format Logical Volumes and Partitions</h4>
 <pre class=" language-bash"><code class="prism  language-bash">mkfs.fat -F32 /dev/sda128
-mkfs.ext4 /dev/vg1/root
+mkfs.ext7 /dev/vg1/root
 mkswap /dev/vg1/swap
-
-mkfs.ext4 /dev/<span class="token operator">&lt;</span>home-partition<span class="token operator">&gt;</span>
 </code></pre>
 <h4 id="mount-partitions">Mount Partitions</h4>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">mount</span> /dev/vg1/root /mnt
-<span class="token function">mkdir</span> /mnt/home
-<span class="token function">mount</span> /dev/<span class="token operator">&lt;</span>home-partition<span class="token operator">&gt;</span> /mnt/home
 <span class="token function">mkdir</span> /mnt/boot
 <span class="token function">mount</span> /dev/sda128 /mnt/boot
 swapon /dev/vg1/swap
@@ -296,9 +283,6 @@ yay -S flat-remix catarell catarell-fonts
 <h4 id="setup-undercover">setup undercover</h4>
 <pre class=" language-bash"><code class="prism  language-bash">yay -S kali-undercover
 <span class="token function">alias</span> ku<span class="token operator">=</span>/usr/bin/kali-undercover
-
-<span class="token comment">#### cmatrix is the opposite ;) </span>
-
 </code></pre>
 <h4 id="add-additional-packages">add additional packages</h4>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S gufw openssh
@@ -334,9 +318,6 @@ nmcli connection <span class="token function">import</span> <span class="token f
 yay -S pycharm-professional
 </code></pre>
 <h4 id="make-xfce4-look-good">Make XFCE4 look good!</h4>
-<h5 id="dockyplank">Docky/Plank</h5>
-<pre class=" language-bash"><code class="prism  language-bash">yay -S docky/plank  <span class="token comment"># Dock like OSX</span>
-</code></pre>
 <h5 id="desktop">Desktop</h5>
 <ol>
 <li>Right-Clock on Desktop -&gt; Settings:</li>
@@ -414,12 +395,6 @@ Right Click and Open Settings of Whisker Menu:</p>
 Administrate User and Groups …</p>
 <p>Logout and Login again that the changes take effect.</p>
 <p>Edit the ~/.bashrc file to add alias permanently</p>
-<p>Usefull Shortcuts:</p>
-<ul>
-<li>Super + T: Terminal</li>
-<li>Super + C: Chrome</li>
-<li>Super + F: File Manager</li>
-</ul>
 <h4 id="and-more-programms">And More Programms</h4>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># sudo pacman -S firefox</span>
 
@@ -450,84 +425,8 @@ yay -S spotify
 
 <span class="token comment"># communication</span>
 yay -S slack-desktop
+
 </code></pre>
-<h2 id="additional-optional-packages">Additional Optional Packages</h2>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Console Generic</span>
-<span class="token function">sudo</span> pacman -S pacman-contrib usbutils <span class="token function">lsof</span> dmidecode neofetch powertop
-
-<span class="token comment"># compression tools</span>
-<span class="token function">sudo</span> pacman -S <span class="token function">zip</span> unzip <span class="token function">unrar</span> p7zip lzop
-
-<span class="token comment"># Console Network</span>
-<span class="token function">sudo</span> pacman -S <span class="token function">rsync</span> <span class="token function">traceroute</span> bind-tools
-
-<span class="token comment"># Services</span>
-<span class="token punctuation">(</span>if not done<span class="token punctuation">)</span>
-<span class="token function">sudo</span> pacman -S cronie xdg-user-dirs numlockon haveged
-
-<span class="token comment"># File System</span>
-<span class="token function">sudo</span> pacman -S dosfstools ntfs-3g btrfs-progs exfat-utils gptfdisk autofs fuse2 fuse3 fuseiso sshfs cifs-utils smbclient nfs-utils open-iscsi
-
-<span class="token comment"># Printer</span>
-<span class="token function">sudo</span> pacman -S cups ghostscript cups-pdf hplip
-
-<span class="token comment"># fonts</span>
-<span class="token function">sudo</span> pacman -S font-bh-ttf gsfonts sdl_ttf ttf-bitstream-vera ttf-dejavu ttf-liberation xorg-fonts-type1 ttf-ms-fonts ttf-roboto ttf-roboto-mono ttf-font-awesome
-
-<span class="token comment"># input driver</span>
-<span class="token function">sudo</span> pacman -S xf86-input-libinput
-
-<span class="token comment">#video driver</span>
-<span class="token function">sudo</span> pacman -S nvidea
-
-<span class="token comment">#############################</span>
-<span class="token comment"># office</span>
-yay -S freeoffice/openoffice
-
-<span class="token comment"># Light Browser</span>
-<span class="token function">sudo</span> pacman -S midori
-
-<span class="token comment"># GStreamer</span>
-<span class="token function">sudo</span> pacman -S gst-plugins-base gst-plugins-good gst-plugins-ugly gst-plugins-libav
-
-<span class="token comment"># Video Player</span>
-<span class="token function">sudo</span> pacman -S celluloid <span class="token punctuation">(</span>alt. smplayer<span class="token punctuation">)</span>
-
-<span class="token comment"># Video Tools</span>
-<span class="token function">sudo</span> pacman -S avidemux-qt <span class="token punctuation">(</span>-<span class="token operator">&gt;</span>videoEditor<span class="token punctuation">)</span> simplescreenrecorder
-
-<span class="token comment"># Burner Tools</span>
-zZz
-
-<span class="token comment"># Image</span>
-<span class="token function">sudo</span> pacman -S gimp
-
-<span class="token comment"># Dev</span>
-<span class="token function">sudo</span> pacman -S code <span class="token comment"># vscode</span>
-
-<span class="token comment"># System Applications</span>
-<span class="token function">sudo</span> pacman -S gparted wine winetricks
-
-<span class="token comment"># Add Multilib to PacmanConfig and Enable Eastereggs ;-)</span>
-
-<span class="token comment"># Pacman GUI</span>
-<span class="token function">sudo</span> pacman -S octopo pamac-aur
-
-<span class="token comment"># Conky Desktop</span>
-<span class="token punctuation">[</span>Link to Tutorial Video<span class="token punctuation">]</span><span class="token punctuation">(</span>https://www.youtube.com/watch?v<span class="token operator">=</span>QB8cjKpdVQY<span class="token operator">&amp;</span>ab_channel<span class="token operator">=</span>ChrisTitusTech<span class="token punctuation">)</span>
-</code></pre>
-<p>Alias:<br>
-<img src="https://normannator.de/archlinux/IMG/Alias.PNG" alt="enter image description here"></p>
-<h4 id="config-light-dm-greeter">Config Light DM Greeter</h4>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman lightdm-webkit2-greeter
-
-<span class="token comment"># Open /etc/lightdm/lightdm.conf</span>
-user-session<span class="token operator">=</span>awesome <span class="token comment"># your user-session -&gt; ls /usr/share/xsessions/*.desktop</span>
-
-greeter-session<span class="token operator">=</span>lightdm-webkit2-greeter
-</code></pre>
-<h4 id="alternative-terminal-terminator">Alternative Terminal: Terminator</h4>
-<p>For More information click <a href="https://www.youtube.com/watch?v=iaXQdyHRL8M&amp;t=215s&amp;ab_channel=ChrisTitusTech">here</a></p>
 <h2 id="post-steps">Post Steps</h2>
 <h3 id="remove-orphans">Remove Orphans</h3>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -Rns <span class="token variable"><span class="token variable">$(</span>pacman -Qtdq<span class="token variable">)</span></span>  <span class="token comment"># Removes unused Packages</span>
