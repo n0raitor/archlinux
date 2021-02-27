@@ -27,17 +27,16 @@ dhcpcd wlp0s1
 <h4 id="on-lan">On LAN</h4>
 <pre class=" language-bash"><code class="prism  language-bash">dhcpcd <span class="token operator">&lt;</span>ethernet-adapter<span class="token operator">&gt;</span>
 </code></pre>
+<h3 id="create-local-mirror-list">Create Local Mirror List</h3>
+<pre class=" language-bash"><code class="prism  language-bash">reflector --verbose --country <span class="token string">'Germany'</span> -l 200 -p https --sort rate --save /etc/pacman.d/mirrorlist
+</code></pre>
 <h3 id="update-database">Update Database</h3>
 <pre class=" language-bash"><code class="prism  language-bash">pacman -Syyy
 </code></pre>
 <h3 id="extra-if-you-want-a-gui-install--config-use-archfi">(extra) If you want a gui install / config use archfi</h3>
-<p>If you are using this, you can skip until the following steps to <em>“Set up XFCE”</em></p>
 <pre class=" language-bash"><code class="prism  language-bash">pacman -S <span class="token function">wget</span> pacman-contrib
 <span class="token function">wget</span> archfi.sf.net/archfi
 sh archfi
-</code></pre>
-<h3 id="preconfig">PreConfig</h3>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">export</span> EDITOR<span class="token operator">=</span>nano <span class="token operator">&lt;</span>or vim<span class="token operator">&gt;</span>
 </code></pre>
 <h3 id="configure-partitions">Configure Partitions</h3>
 <p>I use <em>gdisk</em> for GPT Tables</p>
@@ -52,7 +51,7 @@ w
 gdisk /dev/<span class="token operator">&lt;</span>home-device<span class="token operator">&gt;</span>
 n, Enter, Enter, Enter, Enter  <span class="token comment"># Create Linux Filesystem Partition for the entire drive</span>
 </code></pre>
-<h4 id="encrypt-root-partition">Encrypt Root Partition</h4>
+<h3 id="encrypt-root-partition">Encrypt Root Partition</h3>
 <pre class=" language-bash"><code class="prism  language-bash">cryptsetup luksFormat /dev/sda1  <span class="token comment"># Root Partition Device</span>
 Confirm and Enter Passphrase.
 
@@ -75,7 +74,7 @@ mkswap /dev/vg1/swap
 
 mkfs.ext4 /dev/<span class="token operator">&lt;</span>home-partition<span class="token operator">&gt;</span>
 </code></pre>
-<h5 id="mount-partitions">Mount Partitions</h5>
+<h4 id="mount-partitions">Mount Partitions</h4>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">mount</span> /dev/vg1/root /mnt
 <span class="token function">mkdir</span> /mnt/home
 <span class="token function">mount</span> /dev/<span class="token operator">&lt;</span>home-partition<span class="token operator">&gt;</span> /mnt/home
@@ -83,40 +82,20 @@ mkfs.ext4 /dev/<span class="token operator">&lt;</span>home-partition<span class
 <span class="token function">mount</span> /dev/sda128 /mnt/boot
 swapon /dev/vg1/swap
 </code></pre>
-<h3 id="create-local-mirror-list">Create Local Mirror List</h3>
-<pre class=" language-bash"><code class="prism  language-bash">reflector --verbose --country <span class="token string">'Germany'</span> -l 200 -p https --sort rate --save /etc/pacman.d/mirrorlist
-
-<span class="token comment"># Alternative</span>
-<span class="token function">nano</span> /etc/pacman.d/mirrorlist
-</code></pre>
 <h3 id="install-base-packages">Install Base Packages</h3>
-<pre class=" language-bash"><code class="prism  language-bash">pacstrap /mnt base base-devel linux<span class="token operator">&lt;</span>-lts<span class="token operator">&gt;</span> linux-firmware <span class="token function">nano</span> <span class="token operator">&lt;</span>vim<span class="token operator">&gt;</span> dhcpcd lvm2  <span class="token comment"># &lt;&gt; ist optional</span>
-
-<span class="token comment">### you can add these packages, to the command above if you like:</span>
-<span class="token comment"># File Systems</span>
-dosfstools  <span class="token comment"># DOS filesystem utilities</span>
-btrfs-progs  <span class="token comment"># Btrfs filesystem utilities</span>
-xfsprogs  <span class="token comment"># XFS filesystem utilities</span>
-f2fs-tools  <span class="token comment"># Tools for Flash-Friendly File System (F2FS)</span>
-jfsutils  <span class="token comment">#  JFS filesystem utilities</span>
-reiserfsprogs  <span class="token comment"># Reiserfs utilities</span>
-dmraid  <span class="token comment"># Device mapper RAID interface</span>
-
+<pre class=" language-bash"><code class="prism  language-bash">pacstrap /mnt base base-devel linux<span class="token operator">&lt;</span>-lts<span class="token operator">&gt;</span> linux-firmware <span class="token function">nano</span> dhcpcd intel/amd-ucode lvm2  <span class="token comment"># &lt;&gt; ist optional</span>
 </code></pre>
-<p><a href="https://archlinux.org/packages/extra/x86_64/f2fs-tools/" title="View package details for f2fs-tools">f2fs-tools</a></p>
-<h3 id="config-arch-linux">Config Arch Linux</h3>
-<h4 id="pre-config">Pre Config</h4>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Set Computer Hostname</span>
-<span class="token keyword">echo</span> myhost <span class="token operator">&gt;</span> /etc/hostname 
- 
-<span class="token comment"># Set Keyboard Layout</span>
-<span class="token keyword">echo</span> KEYMAP<span class="token operator">=</span>de-latin1 <span class="token operator">&gt;</span> /etc/vconsole.conf  
-
-<span class="token comment"># Set Font (optional)</span>
-<span class="token keyword">echo</span> FONT<span class="token operator">=</span>lat9w-16 <span class="token operator">&gt;&gt;</span> /etc/vconsole.conf  
-
-<span class="token comment"># Set Locale</span>
+<h3 id="generate-filesystem-table">Generate Filesystem-Table</h3>
+<pre class=" language-bash"><code class="prism  language-bash">genfstab -U /mnt <span class="token operator">&gt;&gt;</span> /mnt/etc/fstab
+<span class="token function">cat</span> /mnt/etc/fstab  <span class="token comment"># check gen</span>
+</code></pre>
+<h3 id="change-to-root">Change to Root</h3>
+<pre class=" language-bash"><code class="prism  language-bash">arch-chroot /mnt
+</code></pre>
+<h3 id="generate-and-edit-config-files">Generate and Edit Config Files</h3>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token keyword">echo</span> myhost <span class="token operator">&gt;</span> /etc/hostname  <span class="token comment"># Set Hostname</span>
 <span class="token keyword">echo</span> LANG<span class="token operator">=</span>de_DE.UTF-8 <span class="token operator">&gt;</span> /etc/locale.conf  <span class="token comment"># Set Language</span>
+
 <span class="token function">nano</span> /etc/locale.gen
 -<span class="token operator">&gt;</span> uncomment this:
 <span class="token comment">#de_DE.UTF-8 UTF-8</span>
@@ -125,325 +104,47 @@ dmraid  <span class="token comment"># Device mapper RAID interface</span>
 <span class="token comment">#en_US.UTF-8</span>
 locale-gen
 
-<span class="token comment"># Set Time</span>
+<span class="token keyword">echo</span> KEYMAP<span class="token operator">=</span>de-latin1 <span class="token operator">&gt;</span> /etc/vconsole.conf  <span class="token comment"># Set Keyboard Layout</span>
+<span class="token keyword">echo</span> FONT<span class="token operator">=</span>lat9w-16 <span class="token operator">&gt;&gt;</span> /etc/vconsole.conf  <span class="token comment"># Set Console Font (optional)</span>
+
 <span class="token function">ln</span> -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime  <span class="token comment"># Set Timezone</span>
-hwclock --sysohc --utc <span class="token comment"># Sync Hardware-Clock</span>
+hwclock --sysohc  <span class="token comment"># Sync Hardware-Clock to System-Clock (optional)</span>
 
-<span class="token comment"># Set Root Password</span>
-arch-chroot /mnt /root
-<span class="token function">passwd</span> root
-<span class="token keyword">exit</span>
-
-<span class="token comment"># Gererate fstab</span>
-genfstab -U /mnt <span class="token operator">&gt;&gt;</span> /mnt/etc/fstab  <span class="token comment"># (alt. change -U to -L to use Label instead of UUID</span>
-<span class="token function">cat</span> /mnt/etc/fstab  <span class="token comment"># check gen</span>
-
-<span class="token comment"># Edit Fstab (optional)</span>
-<span class="token function">nano</span> /etc/fstab
-
-<span class="token comment"># Edit Crypttab (optional) -&gt; Not used here</span>
-<span class="token function">nano</span> /mnt/etc/crypttab  <span class="token comment"># Config encrypted block devices</span>
-</code></pre>
-<h4 id="change-to-root">!!!Change to Root!!!</h4>
-<pre class=" language-bash"><code class="prism  language-bash">arch-chroot /mnt
-</code></pre>
-<h4 id="edit-hosts-file">Edit Hosts file</h4>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">cat</span> /etc/hosts  <span class="token comment"># set Hosts file</span>
+<span class="token function">cat</span> /etc/hosts  <span class="token comment"># set Hosts file</span>
 --<span class="token operator">&gt;</span>
 <span class="token comment">#&lt;ip-address&gt;	&lt;hostname.domain.org&gt;	&lt;hostname&gt;</span>
 127.0.0.1		localhost.localdomain	localhost
 ::1				localhost.localdomain	localhost
 127.0.0.1		<span class="token operator">&lt;</span>hostname<span class="token operator">&gt;</span>.localdomain	<span class="token operator">&lt;</span>hostname<span class="token operator">&gt;</span>
 </code></pre>
-<h4 id="edit-mirror-list">Edit Mirror List</h4>
-<pre class=" language-bash"><code class="prism  language-bash">reflector --verbose --country <span class="token string">'Germany'</span> -l 200 -p https --sort rate --save /etc/pacman.d/mirrorlist
-
-<span class="token comment"># Alternative</span>
-<span class="token function">nano</span> /etc/pacman.d/mirrorlist
+<h3 id="install-packages">Install Packages</h3>
+<pre class=" language-bash"><code class="prism  language-bash">pacman -S grub efibootmgr networkmanager network-manager-applet wireless_tools wpa_supplicant dialog os-prober <span class="token function">mtools</span> dosfstools linux-<span class="token operator">&lt;</span>lts-<span class="token operator">&gt;</span>headers <span class="token function">git</span> reflector bash-completion net-tools
+<span class="token punctuation">(</span>bluez bluez-utils pulseaudio-bluetooth<span class="token punctuation">)</span> <span class="token comment"># Bluetooth</span>
+<span class="token punctuation">(</span>cups<span class="token punctuation">)</span> <span class="token comment"># Printing</span>
+xdg-utils xdg-user-dirs <span class="token comment"># Home Directories</span>
 </code></pre>
-<h4 id="edit-mkinitcpio.conf-and-generate">Edit mkinitcpio.conf and generate</h4>
+<h4 id="additional-packages">Additional Packages</h4>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S adobe-source-sans-pro-fonts <span class="token punctuation">(</span>alsa-plugin alsa-utils<span class="token punctuation">)</span> aspell-en aspell-de enchant gst-libav gst-plugins-good hunspell-en hunspell-de icedtea-web jre8/11-openjdk languagetool libmythes mythes-en mythes-de pkgstats ttf-anonymous-pro ttf-bitstream-vera ttf-dejavu ttf-droid ttf-gentium ttf-liberation ttf-ubuntu-font-family
+</code></pre>
+<h3 id="set-root-password">Set Root Password</h3>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">passwd</span>
+</code></pre>
+<h3 id="install-grub">Install GRUB</h3>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">nano</span> /etc/mkinitcpio.conf
-<span class="token comment"># Add:</span>
-<span class="token comment"># ... autodetect keyboard keymap modconf block encrypt lvm2 filesystems ...</span>
-
-<span class="token comment"># Generate mkinitcpio</span>
+Add:
+<span class="token punctuation">..</span>. autodetect keyboard keymap modconf block encrypt lvm2 filesystems <span class="token punctuation">..</span>.
 mkinitcpio -p linux
-</code></pre>
-<h4 id="bootloader">Bootloader</h4>
-<p>(I used grub, you can use <em>syslinux</em> instead, if you want)</p>
-<pre class=" language-bash"><code class="prism  language-bash">pacman -S grub efibootmgr 
+
 grub-install --target<span class="token operator">=</span>x86_64-efi --efi-directory<span class="token operator">=</span>/boot --bootloader-id<span class="token operator">=</span>GRUB
 
-blkid  <span class="token comment"># BlockID</span>
+blkid <span class="token comment"># BlockID</span>
 -<span class="token operator">&gt;</span> Copy or note down UUID of root partition <span class="token punctuation">(</span>encrypted<span class="token punctuation">)</span>
 <span class="token function">nano</span> /etc/default/grub
 --<span class="token operator">&gt;</span> Edit: 
 <span class="token punctuation">..</span>.
 GRUB_CMDLINE_LINUX<span class="token operator">=</span><span class="token string">"cryptdevice=UUID="</span><span class="token operator">&lt;</span>UUID-copied<span class="token operator">&gt;</span>:cryptlvm root<span class="token operator">=</span>/dev/vg1/root"
 
-grub-mkconfig -o /boot/grub/grub.cfg  <span class="token comment"># Generate Grub config file</span>
-</code></pre>
-<h2 id="set-up-arch-linux-root">Set up Arch Linux Root</h2>
-<h3 id="updates">Updates</h3>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Install Contributed scripts and tools for pacman systems</span>
-pacman -S pacman-contrib
-
-<span class="token comment"># Install YAY - simple AUR Package Installation</span>
-<span class="token function">git</span> clone https://aur.archlinux.org/yay.git
-<span class="token function">cd</span> yay/
-makepkg -si PKGBUILD
-<span class="token comment"># Alternativ Package Installer: trizen, aurman, yaourt (End of life)</span>
-
-<span class="token comment"># Update System</span>
-pacman -Syu
-
-<span class="token comment"># Clean orphan</span>
-pacman -Rns <span class="token variable"><span class="token variable">$(</span>pacman -Qqtd<span class="token variable">)</span></span>
-
-<span class="token comment"># Clean Cache</span>
-pacman -Sc
-
-<span class="token comment"># Edit pacman.conf</span>
-<span class="token function">nano</span> /etc/pacman.conf
-<span class="token comment"># Uncomment Color</span>
-<span class="token comment"># Add ILoveCandy</span>
-pacman -Sy
-
-<span class="token comment">### Optional - Segnature Security ###</span>
-pacman -S archlinux-keyring  <span class="token comment"># Update keyring</span>
-pacman-key --refresh-keys  <span class="token comment"># Refresh pacman keys</span>
-<span class="token comment"># evtl. edit pacman.conf -&gt; SigLevel</span>
-gpg --recv-keys  <span class="token comment"># Add GPG key (optional-additional)</span>
-</code></pre>
-<h3 id="install">Install</h3>
-<h4 id="console">Console</h4>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment">### Generic</span>
-pacman -S usbutils dialog powertop
-<span class="token comment"># optional #</span>
-<span class="token comment"># lsof  # Lists open files for running Unix processes</span>
-<span class="token comment"># dmidecode  # Hardware Infos</span>
-<span class="token comment"># nmon  # Systen Monitor</span>
-<span class="token comment"># mc  # Dual Pane File Explorer</span>
-<span class="token comment"># neofetch  # system information tool</span>
-<span class="token comment"># fwupd  # Firmware upgrade</span>
-<span class="token comment"># gpm  # Console Mouse Support</span>
-<span class="token comment"># liveroot  # (AUR) root overlay fs</span>
-
-<span class="token comment">### Compression Tools</span>
-pacman -S <span class="token function">zip</span> unzip <span class="token function">unrar</span> p7zip lzop
-
-<span class="token comment">### Network Tools</span>
-pacman -S <span class="token function">rsync</span> <span class="token function">traceroute</span> bind-tools
-<span class="token comment"># optional #</span>
-<span class="token comment"># dnsutils  # DNS tools (nslookup)</span>
-<span class="token comment"># nmap  # Network Scanner</span>
-<span class="token comment"># netdiscover  # (AUR) Network Scanner with MAC vendors</span>
-<span class="token comment"># speedtest-cli  # SpeedTest</span>
-<span class="token comment"># arp-scan  # ARP SCANNER</span>
-<span class="token comment"># wavemon  # WIFI monitor</span>
-<span class="token comment"># net-tools  # (deprecated) old ifconfig</span>
-<span class="token comment"># dsniff  # tools for network auditing and penetration</span>
-<span class="token comment"># mitmproxy  # SSL-capable MITM HTTP proxy</span>
-<span class="token comment"># sslstrip  # tool to hijack HTTPS in MITM attack</span>
-
-<span class="token comment">### Web Browser</span>
-<span class="token comment"># optional: elinks, links, lynx</span>
-
-<span class="token comment">### Recovery Tools</span>
-<span class="token comment"># optional # </span>
-<span class="token comment"># ddrescue  # HD recovery tool</span>
-<span class="token comment"># dd_rescue  # HD recovery tool</span>
-<span class="token comment"># partclone  # Copy used block on partition</span>
-</code></pre>
-<h4 id="system">System</h4>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment">### Services</span>
-pacman -S networkmanager openssh xdg-user-dirs intel/amd-ucode <span class="token punctuation">(</span>bluez bluez-utils<span class="token punctuation">)</span> pkgstats 
-<span class="token comment"># optional #</span>
-<span class="token comment"># cronie  # Cron tasks server</span>
-<span class="token comment"># numlockon  # Numlock on on tty</span>
-<span class="token comment"># net-snmp  # SNMP Server</span>
-<span class="token comment"># samba  # Server SMB</span>
-<span class="token comment"># syslog-ng</span>
-<span class="token comment"># ntp</span>
-<span class="token comment"># haveged</span>
-
-<span class="token comment">### Filesystem</span>
-pacman -S os-prober dosfstools ntfs-3g gvfs 
-<span class="token comment"># optional #</span>
-<span class="token comment"># snapper  # snapshot manager (ext4, lvm, btrfs)</span>
-<span class="token comment"># btrfs-progs  # BTRFS ffile utils</span>
-<span class="token comment"># exfat-utils  # EXFAT file support</span>
-<span class="token comment"># gptfdisk</span>
-<span class="token comment"># autofs </span>
-<span class="token comment"># fuse2 </span>
-<span class="token comment"># fuse3</span>
-<span class="token comment"># fuseiso </span>
-<span class="token comment"># sshfs  # ssh client</span>
-<span class="token comment"># cifs-utils  # SMB mound command</span>
-<span class="token comment"># smbclient  # SMB full client</span>
-<span class="token comment"># nfs-utils</span>
-<span class="token comment"># open-iscsi</span>
-<span class="token comment"># glusterfs</span>
-<span class="token comment"># hfsprogs (AUR)</span>
-<span class="token comment"># mtpfs</span>
-<span class="token comment"># unionfs-fuse</span>
-<span class="token comment"># nilfs-utils</span>
-<span class="token comment"># s3fs-fuse</span>
-
-<span class="token comment">### Sound</span>
-pacman -S alsa-plugin alsa-utils pulseaudio pulseaudio-alsa <span class="token punctuation">(</span>pulseaudio-bluetooth<span class="token punctuation">)</span>
-<span class="token comment"># optional: pulseaudio-equalizer</span>
-
-<span class="token comment">### Printer</span>
-<span class="token function">sudo</span> pacman -S cups ghostscript cups-pdf hplip
-<span class="token comment"># optional #</span>
-<span class="token comment"># gutenprint  # Top quality printer drivers for POSIX systems</span>
-<span class="token comment"># foomatic-db foomatic-db-*  # Foomatic - The collected knowledge about printers, drivers, and driver options in XML files, used by foomatic-db-engine to generate PPD files.</span>
-</code></pre>
-<h4 id="xorg">XOrg</h4>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment">### Print GPU Info</span>
-lspci -k <span class="token operator">|</span> <span class="token function">grep</span> -A 2 -E <span class="token string">"(VGA|3D)"</span>
-
-<span class="token comment">### Install</span>
-pacman -S --needed xorg
-
-<span class="token comment">### Fonts - Default</span>
-pacman -S ttf-bitstream-vera ttf-dejavu ttf-liberation
-<span class="token comment"># optional #</span>
-<span class="token comment"># font-bh-ttf</span>
-<span class="token comment"># gsfonts </span>
-<span class="token comment"># sdl_ttf</span>
-<span class="token comment"># xorg-fonts-type1 </span>
-
-<span class="token comment">### Fonts - Misc</span>
-pacman -S ttf-anonymous-pro ttf-droid ttf-gentium  ttf-ubuntu-font-family ttf-ms-fonts ttf-roboto ttf-roboto-mono ttf-font-awesome
-<span class="token comment"># for my purpose</span>
-yay -S ttf-hackgen
-pacman -S ttf-fira-code
-<span class="token comment"># For More Fonts: pacman -Ss ttf</span>
-
-<span class="token comment">### input drivers</span>
-pacman -S xf86-input-synaptics <span class="token punctuation">(</span>optional: Laptop Touchpad-Driver<span class="token punctuation">)</span>
-<span class="token comment"># optional #</span>
-<span class="token comment"># xf86-input-libinput  #  Generic input driver for the X.Org server based on libinput</span>
-<span class="token comment"># xf86-input-elographics</span>
-<span class="token comment"># xf86-input-evdev</span>
-<span class="token comment"># xf86-input-vmmouse  # (VMWare)</span>
-<span class="token comment"># xf86-input-void</span>
-<span class="token comment"># xf86-input-wacom</span>
-<span class="token comment"># other: Saitek-*, Madcatz-*</span>
-
-<span class="token comment">### video drivers</span>
-
-<span class="token comment"># Proprietary</span>
-<span class="token function">sudo</span> pacman -S nvidia
-<span class="token comment"># optional #</span>
-<span class="token comment"># virtualbox-guest-utils  # (For Virtualbox)</span>
-<span class="token comment"># nvidia-390xx  # (AUR) End of life</span>
-<span class="token comment"># nvidia-dkms  # (For custom kernel)</span>
-<span class="token comment"># nvidia-390xx-dkms  # (AUR) (for custom kernel) -&gt; for my older laptop</span>
-<span class="token comment"># optional: nvidia-settings</span>
-
-<span class="token comment"># Opensource</span>
-<span class="token comment"># xf86-video-*</span>
-<span class="token comment"># e.g. nouveau</span>
-
-<span class="token comment"># ! Only use one Proprietary or Opensource Video Driver !</span>
-</code></pre>
-<p>also check out this <a href="https://wiki.archlinux.org/index.php/NVIDIA">link</a></p>
-<h4 id="desktop-environment">Desktop Environment</h4>
-<p>Choose one of the following:</p>
-<ol>
-<li><a href="https://wiki.archlinux.de/title/Plasma">Plasma5</a> (<em>Components: partitionmanager gnome-keyring xsettingsd kdeconnect sshfs systemdgenie</em>)</li>
-<li>XFCE4</li>
-<li>Gnome</li>
-<li>Cinnamon</li>
-<li>LXDE</li>
-<li>LXDE-GTK3</li>
-<li>LXQt</li>
-<li>Mate</li>
-<li>Enlightenment</li>
-<li>Openbox</li>
-<li>Deepin</li>
-</ol>
-<p>In my case I choosed: <strong>XFCE4</strong></p>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S --needed xfce4 xfce4-goodies lightdm lightdm-gtk-greeter lightdm-gkt-greeter-settings <span class="token punctuation">(</span>gvfs-afc<span class="token punctuation">)</span> udisks2 network-manager-applet
-
-<span class="token function">sudo</span> systemctl <span class="token function">enable</span> lightdm
-</code></pre>
-<p><em>TODO - Package installation guide for the Desktop Environments above</em> (mit archdi - hint)</p>
-<h4 id="display-manager">Display Manager</h4>
-<p>I choosed lightdm-gtk-greeter<br>
-Alternatives:</p>
-<ul>
-<li>gdm</li>
-<li>sddm</li>
-<li>lxdm</li>
-</ul>
-<h4 id="applications">Applications</h4>
-<h5 id="office">Office</h5>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment">### Suits</span>
-pacman -S libreoffice-still  <span class="token comment"># stable version (newer features in "fresh")</span>
-<span class="token comment"># alt. (aur): freeoffice/openoffice</span>
-
-<span class="token comment">### office language aids</span>
-pacman -S hunspell-en hunspell-de mythes-en mythes-de languagetool 
-yay -S libreoffice-extension-languagetool
-<span class="token comment"># optional #</span>
-<span class="token comment"># hyphen  # Hyphenation rules</span>
-
-<span class="token comment">### Tools</span>
-<span class="token comment"># galculator  # GTK+ based scientific calculator</span>
-<span class="token comment"># qalculate-gtk  #  GTK frontend for libqalculate</span>
-</code></pre>
-<h5 id="internet">Internet</h5>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment">### Web Browser</span>
-pacman -S chromium firefox midori vivaldi vivaldi-ffmpeg-codecs  <span class="token comment"># midori is a Light Browser</span>
-<span class="token comment"># optional #</span>
-<span class="token comment"># pepper-flash, firefox-i18n, flashplugin, freshplaerplugin (aur), opera, opera-ffmpeg-codecs, seamonkey, seamonkey-i18n (aur), falkon</span>
-
-
-</code></pre>
-<h1 id="hier-weiter">Hier weiter!!!</h1>
-<pre class=" language-bash"><code class="prism  language-bash">
-
-<span class="token comment"># GStreamer</span>
-<span class="token function">sudo</span> pacman -S gst-plugins-base gst-plugins-good gst-plugins-ugly gst-plugins-libav
-
-<span class="token comment"># Video Player</span>
-<span class="token function">sudo</span> pacman -S celluloid <span class="token punctuation">(</span>alt. smplayer<span class="token punctuation">)</span>
-
-<span class="token comment"># Video Tools</span>
-<span class="token function">sudo</span> pacman -S avidemux-qt <span class="token punctuation">(</span>-<span class="token operator">&gt;</span>videoEditor<span class="token punctuation">)</span> simplescreenrecorder
-
-<span class="token comment"># Burner Tools</span>
-zZz
-
-<span class="token comment"># Image</span>
-<span class="token function">sudo</span> pacman -S gimp
-
-<span class="token comment"># Dev</span>
-<span class="token function">sudo</span> pacman -S code <span class="token comment"># vscode</span>
-
-<span class="token comment"># System Applications</span>
-<span class="token function">sudo</span> pacman -S gparted wine winetricks
-
-<span class="token comment"># Add Multilib to PacmanConfig and Enable Eastereggs ;-)</span>
-
-<span class="token comment"># Pacman GUI</span>
-<span class="token function">sudo</span> pacman -S octopo pamac-aur
-
-<span class="token comment"># Conky Desktop</span>
-<span class="token punctuation">[</span>Link to Tutorial Video<span class="token punctuation">]</span><span class="token punctuation">(</span>https://www.youtube.com/watch?v<span class="token operator">=</span>QB8cjKpdVQY<span class="token operator">&amp;</span>ab_channel<span class="token operator">=</span>ChrisTitusTech<span class="token punctuation">)</span>
-</code></pre>
-<p>Alias:<br>
-<img src="https://normannator.de/archlinux/IMG/Alias.PNG" alt="enter image description here"></p>
-<h3 id="install-packages">Install Packages</h3>
-<pre class=" language-bash"><code class="prism  language-bash">pacman -S  wireless_tools wpa_supplicant  <span class="token function">mtools</span>  linux-<span class="token operator">&lt;</span>lts-<span class="token operator">&gt;</span>headers <span class="token function">git</span> reflector bash-completion
-xdg-utils  <span class="token comment"># Home Directories</span>
-</code></pre>
-<h4 id="additional-packages">Additional Packages</h4>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S adobe-source-sans-pro-fonts aspell-en aspell-de enchant gst-libav gst-plugins-good  icedtea-web jre8/11-openjdk libmythes 
+grub-mkconfig -o /boot/grub/grub.cfg <span class="token comment"># Generate Grub config file</span>
 </code></pre>
 <h3 id="set-up-services">Set up Services</h3>
 <pre class=" language-bash"><code class="prism  language-bash">systemctl <span class="token function">enable</span> NetworkManager
@@ -489,9 +190,26 @@ dhcpcd <span class="token operator">&lt;</span>adapter<span class="token operato
 <h3 id="update-system">Update System</h3>
 <pre class=" language-bash"><code class="prism  language-bash">pacman -Syu
 </code></pre>
+<h3 id="install-yay-for-simple-aur-package-installation">Install YAY for simple AUR Package Installation</h3>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">git</span> clone https://aur.archlinux.org/yay.git
+<span class="token function">cd</span> yay/
+makepkg -si PKGBUILD
+</code></pre>
+<h3 id="install-graphics-drivers">Install Graphics Drivers</h3>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S nvidia nvidia-utils nvidia-settings
+</code></pre>
+<p>also check out this <a href="https://wiki.archlinux.org/index.php/NVIDIA">link</a></p>
+<p>In my case of Laptop:</p>
+<pre class=" language-bash"><code class="prism  language-bash">yay -S nvidia-390xx-dkms
+</code></pre>
+<h3 id="install-browser">Install Browser</h3>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S vivaldi vivaldi-ffmpeg-codecs
+</code></pre>
 <h3 id="install-xfce4-and-greeter">Install XFCE4 and Greeter</h3>
-<pre class=" language-bash"><code class="prism  language-bash">
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S --needed xorg
+<span class="token function">sudo</span> pacman -S --needed xfce4 xfce4-goodies lightdm lightdm-gtk-greeter lightdm-gkt-greeter-settings
 
+<span class="token function">sudo</span> systemctl <span class="token function">enable</span> lightdm
 <span class="token function">reboot</span>
 </code></pre>
 <h2 id="set-up-xfce4">Set up XFCE4</h2>
@@ -543,11 +261,11 @@ systemctl <span class="token function">enable</span> dkms
 </code></pre>
 <h3 id="main-maintenance">Main Maintenance</h3>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S xfce4-session arandr <span class="token function">zip</span> unzip <span class="token punctuation">(</span>bash-completion<span class="token punctuation">)</span>
-<span class="token function">sudo</span> pacman -S links geany 
+<span class="token function">sudo</span> pacman -S links geany udisks2
 <span class="token function">sudo</span> pacman -S xfce4-whiskermenu-plugin
 <span class="token function">sudo</span> pacman -S alacarte menulibre xame gambas3-gv-gtk libcanberra libcanberra-pulse sound-theme-freedesktop
 yay -S sound-theme-smooth xfce4-volumed-pulse xfce4-mixer 
-<span class="token function">sudo</span> pacman -S xfce4-pulseaudio-plugin xscreensaver udevil udiskie thunar thunar-volman thunar-archive-plugin thunar-media-tags-plugin
+<span class="token function">sudo</span> pacman -S xfce4-pulseaudio-plugin xscreensaver udevil udiskie thunar gvfs thunar-volman thunar-archive-plugin thunar-media-tags-plugin
 
 <span class="token function">sudo</span> pacman -S networkmanager-openvpn
 systemctl restart networkmanager
@@ -558,7 +276,7 @@ yay -S xfce4-sensors-plugin-nvidia
 
 <span class="token function">sudo</span> pacman -S thunarx xarchiver file-roller <span class="token punctuation">(</span>ark<span class="token punctuation">)</span> archlinux-wallpaper xwallpaper archivetools archivetools archlinux-menu archlinux-themes-slim archlinux-xdg-menu fastjar p7zip
 
-
+pacman -S xf86-input-synaptics <span class="token punctuation">(</span>optional: Laptop Touchpad-Driver<span class="token punctuation">)</span>
 
 <span class="token comment"># Firewall Setup</span>
 <span class="token function">sudo</span> pacman -S ufw
@@ -570,7 +288,8 @@ yay -S xfce4-sensors-plugin-nvidia
 <h4 id="popup-menu-on-windows-icon">Popup Menu on Windows-Icon</h4>
 <p>In Keyboard Shortcuts set <code>xfce4-popup-whiskermenu</code> run on windows-key</p>
 <h4 id="setup-theme-and-fonts">setup Theme and Fonts</h4>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S arc-gtk-theme arc-icon-theme
+<pre class=" language-bash"><code class="prism  language-bash">yay -S ttf-hackgen <span class="token punctuation">(</span>ttf-fira-code<span class="token punctuation">)</span>
+<span class="token function">sudo</span> pacman -S ttf-fira-code arc-gtk-theme arc-icon-theme
 yay -S flat-remix catarell catarell-fonts
 <span class="token function">sudo</span> pacman -S futurist
 </code></pre>
@@ -607,7 +326,7 @@ makepkg -si
 yay -S gnome-system-tools
 <span class="token comment"># Now Clean Your AUR Clones Directory</span>
 
-<span class="token function">sudo</span> pacman -S openvpn networkmanager-openvpn
+<span class="token function">sudo</span> pacman -S ntfs-3g openvpn network-manager-applet networkmanager networkmanager-openvpn
 <span class="token comment"># import openvpn config with:</span>
 openvpn <span class="token function">import</span> --config <span class="token operator">&lt;</span>config-incl-path<span class="token operator">&gt;</span>
 nmcli connection <span class="token function">import</span> <span class="token function">type</span> openvpn <span class="token function">file</span> <span class="token operator">&lt;</span>file-to-ovpn<span class="token operator">&gt;</span>
@@ -702,7 +421,8 @@ Administrate User and Groups …</p>
 <li>Super + F: File Manager</li>
 </ul>
 <h4 id="and-more-programms">And More Programms</h4>
-<pre class=" language-bash"><code class="prism  language-bash">
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># sudo pacman -S firefox</span>
+
 <span class="token comment"># Version Control</span>
 yay -S github-desktop
 yay -S gitkraken
@@ -732,6 +452,72 @@ yay -S spotify
 yay -S slack-desktop
 </code></pre>
 <h2 id="additional-optional-packages">Additional Optional Packages</h2>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Console Generic</span>
+<span class="token function">sudo</span> pacman -S pacman-contrib usbutils <span class="token function">lsof</span> dmidecode neofetch powertop
+
+<span class="token comment"># compression tools</span>
+<span class="token function">sudo</span> pacman -S <span class="token function">zip</span> unzip <span class="token function">unrar</span> p7zip lzop
+
+<span class="token comment"># Console Network</span>
+<span class="token function">sudo</span> pacman -S <span class="token function">rsync</span> <span class="token function">traceroute</span> bind-tools
+
+<span class="token comment"># Services</span>
+<span class="token punctuation">(</span>if not done<span class="token punctuation">)</span>
+<span class="token function">sudo</span> pacman -S cronie xdg-user-dirs numlockon haveged
+
+<span class="token comment"># File System</span>
+<span class="token function">sudo</span> pacman -S dosfstools ntfs-3g btrfs-progs exfat-utils gptfdisk autofs fuse2 fuse3 fuseiso sshfs cifs-utils smbclient nfs-utils open-iscsi
+
+<span class="token comment"># Printer</span>
+<span class="token function">sudo</span> pacman -S cups ghostscript cups-pdf hplip
+
+<span class="token comment"># fonts</span>
+<span class="token function">sudo</span> pacman -S font-bh-ttf gsfonts sdl_ttf ttf-bitstream-vera ttf-dejavu ttf-liberation xorg-fonts-type1 ttf-ms-fonts ttf-roboto ttf-roboto-mono ttf-font-awesome
+
+<span class="token comment"># input driver</span>
+<span class="token function">sudo</span> pacman -S xf86-input-libinput
+
+<span class="token comment">#video driver</span>
+<span class="token function">sudo</span> pacman -S nvidea
+
+<span class="token comment">#############################</span>
+<span class="token comment"># office</span>
+yay -S freeoffice/openoffice
+
+<span class="token comment"># Light Browser</span>
+<span class="token function">sudo</span> pacman -S midori
+
+<span class="token comment"># GStreamer</span>
+<span class="token function">sudo</span> pacman -S gst-plugins-base gst-plugins-good gst-plugins-ugly gst-plugins-libav
+
+<span class="token comment"># Video Player</span>
+<span class="token function">sudo</span> pacman -S celluloid <span class="token punctuation">(</span>alt. smplayer<span class="token punctuation">)</span>
+
+<span class="token comment"># Video Tools</span>
+<span class="token function">sudo</span> pacman -S avidemux-qt <span class="token punctuation">(</span>-<span class="token operator">&gt;</span>videoEditor<span class="token punctuation">)</span> simplescreenrecorder
+
+<span class="token comment"># Burner Tools</span>
+zZz
+
+<span class="token comment"># Image</span>
+<span class="token function">sudo</span> pacman -S gimp
+
+<span class="token comment"># Dev</span>
+<span class="token function">sudo</span> pacman -S code <span class="token comment"># vscode</span>
+
+<span class="token comment"># System Applications</span>
+<span class="token function">sudo</span> pacman -S gparted wine winetricks
+
+<span class="token comment"># Add Multilib to PacmanConfig and Enable Eastereggs ;-)</span>
+
+<span class="token comment"># Pacman GUI</span>
+<span class="token function">sudo</span> pacman -S octopo pamac-aur
+
+<span class="token comment"># Conky Desktop</span>
+<span class="token punctuation">[</span>Link to Tutorial Video<span class="token punctuation">]</span><span class="token punctuation">(</span>https://www.youtube.com/watch?v<span class="token operator">=</span>QB8cjKpdVQY<span class="token operator">&amp;</span>ab_channel<span class="token operator">=</span>ChrisTitusTech<span class="token punctuation">)</span>
+</code></pre>
+<p>Alias:<br>
+<img src="https://normannator.de/archlinux/IMG/Alias.PNG" alt="enter image description here"></p>
 <h4 id="config-light-dm-greeter">Config Light DM Greeter</h4>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman lightdm-webkit2-greeter
 
