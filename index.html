@@ -207,6 +207,7 @@ pacman -Sc
 <span class="token function">nano</span> /etc/pacman.conf
 <span class="token comment"># Uncomment Color</span>
 <span class="token comment"># Add ILoveCandy</span>
+<span class="token comment"># uncomment multilib</span>
 pacman -Sy
 
 <span class="token comment">### Optional - Segnature Security ###</span>
@@ -354,9 +355,9 @@ pacman -S xf86-input-synaptics <span class="token punctuation">(</span>optional:
 <h4 id="desktop-environment">Desktop Environment</h4>
 <p>Choose one of the following:</p>
 <ol>
-<li><a href="https://wiki.archlinux.de/title/Plasma">Plasma5</a> (<em>Components: partitionmanager gnome-keyring xsettingsd kdeconnect sshfs systemdgenie</em>)</li>
-<li>XFCE4</li>
-<li>Gnome</li>
+<li><a href="https://wiki.archlinux.de/title/Plasma">Plasma5</a> (<em>Components: partitionmanager gnome-keyring xsettingsd kdeconnect sshfs systemdgenie</em>)  # QT</li>
+<li>XFCE4  # GTK</li>
+<li>Gnome  # GTK</li>
 <li>Cinnamon</li>
 <li>LXDE</li>
 <li>LXDE-GTK3</li>
@@ -402,42 +403,146 @@ pacman -S chromium firefox midori vivaldi vivaldi-ffmpeg-codecs  <span class="to
 <span class="token comment"># optional #</span>
 <span class="token comment"># pepper-flash, firefox-i18n, flashplugin, freshplaerplugin (aur), opera, opera-ffmpeg-codecs, seamonkey, seamonkey-i18n (aur), falkon</span>
 
+<span class="token comment">### Torrent</span>
+pacman -S qbittorrent
+<span class="token comment"># optional #</span>
+<span class="token comment"># transmission-gtk/qt</span>
+<span class="token comment"># ktorrent</span>
+<span class="token comment"># deluge</span>
+<span class="token comment"># tixati</span>
 
+<span class="token comment">### E-Mail</span>
+pacman -S thunderbird
+<span class="token comment"># optional #</span>
+<span class="token comment"># evolution + evolution-*</span>
+</code></pre>
+<h5 id="multimedia">Multimedia</h5>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment">### GStreamer - Streaming Videos</span>
+pacman -S gst-plugins-base gst-plugins-good gst-plugins-ugly gst-plugins-libav
+
+<span class="token comment">### Audio Player</span>
+<span class="token comment"># Optional #</span>
+<span class="token comment"># clementine  # (QT) Audio Player</span>
+<span class="token comment"># mixx  # (QT) Audio Player</span>
+<span class="token comment"># quodlibet  # (GTK) Audio Player</span>
+<span class="token comment"># elisa  # (QT) Audio Player</span>
+<span class="token comment"># amarok  # (AUR) (QT) Audio Player</span>
+<span class="token comment"># guayadeque  # (AUR) (GTK) Audio Player</span>
+<span class="token comment"># gmusicbrowser  # (AUR) (GTK) Audio Player</span>
+
+<span class="token comment">### Video Player</span>
+pacman -S celluloid 
+<span class="token comment"># optional #</span>
+<span class="token comment"># vlc  # (QT) Video Player</span>
+<span class="token comment"># smplayer  # (QT) Video Player</span>
+<span class="token comment"># smtube  # (QT) Youtube Player</span>
+<span class="token comment"># mpv  # (GTK) Recommended for smplayer</span>
+
+<span class="token comment">### Video Tools</span>
+<span class="token comment"># optional #</span>
+<span class="token comment"># avidemux-qt  # (QT) Video Editor</span>
+<span class="token comment"># simplescreenrecorder  # (QT) Screen Recorder</span>
+
+<span class="token comment">### Burner</span>
+<span class="token comment"># optional #</span>
+<span class="token comment"># k3b (QT)</span>
+<span class="token comment"># xfburn (GTK)</span>
+<span class="token comment"># brasero (GTK)</span>
+<span class="token comment"># gnomebaker (AUR)</span>
+</code></pre>
+<h5 id="graphic">Graphic</h5>
+<pre class=" language-bash"><code class="prism  language-bash">pacman -S gimp
+<span class="token comment"># optional #</span>
+<span class="token comment"># inkscape (GTK)</span>
+<span class="token comment"># dia (GTK)</span>
+<span class="token comment"># krita (QT)</span>
+</code></pre>
+<h5 id="dev">Dev</h5>
+<pre class=" language-bash"><code class="prism  language-bash">pacman -S code  <span class="token comment"># vscode</span>
+<span class="token comment"># optional #</span>
+<span class="token comment"># notepadqq (QT)</span>
+<span class="token comment"># geany (GTK)</span>
+<span class="token comment"># geany-plugins (GTK)</span>
+<span class="token comment"># kdevelop (QT)</span>
+<span class="token comment"># gource (Git code animation)	</span>
+</code></pre>
+<h5 id="system-1">System</h5>
+<pre class=" language-bash"><code class="prism  language-bash">pacman -S gparted bleachbit virtualbox
+yay -S virtualbox-ext-oracle  <span class="token comment"># (AUR) Ext Pack</span>
+<span class="token comment"># optional #</span>
+<span class="token comment"># keepassxc  # (QT) Password Manager</span>
+<span class="token comment"># keepass  # (MONO) Password Manager</span>
+<span class="token comment"># wine + wine_gecko + wine-mono # MS Windows App Support</span>
+<span class="token comment"># zenity + winetricks  # Recommended for Wine</span>
+<span class="token comment"># q4wine</span>
+<span class="token comment"># gdmap</span>
+<span class="token comment"># k4dirstat (aur)</span>
+<span class="token comment"># conky  # [Link to Tutorial Video](https://www.youtube.com/watch?v=QB8cjKpdVQY&amp;ab_channel=ChrisTitusTech)</span>
+
+<span class="token comment">### Pacman GUI</span>
+<span class="token comment"># optional #</span>
+<span class="token comment"># octopo  # (AUR) (QT)</span>
+<span class="token comment"># pamac-aur  # (AUR) (GTK)</span>
+</code></pre>
+<h3 id="config">Config</h3>
+<h4 id="bash">Bash</h4>
+<pre class=" language-bash"><code class="prism  language-bash">/etc/profile.d/editor.sh  <span class="token comment"># set default global editor</span>
+<span class="token function">nano</span> /etc/profile.d/alias.sh
+</code></pre>
+<p><img src="https://normannator.de/archlinux/IMG/Alias.PNG" alt="enter image description here"></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">nano</span> /etc/profile.d/ps1.sh  <span class="token comment"># (optional)</span>
+<span class="token comment"># Minimal				/home #</span>
+<span class="token comment"># User					user:/home #</span>
+<span class="token comment"># User and Hostname		user@hostname:/home #</span>
+
+<span class="token comment"># Now update .bashrc  # (optional)</span>
+</code></pre>
+<h4 id="firewall-optional">Firewall (optional)</h4>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># edit IPv4			/etc/iptables/iptables.rules</span>
+<span class="token comment"># edit IPv6			/etc/iptables/ip6tables.rules</span>
+
+<span class="token comment"># load Rules</span>
+<span class="token comment"># iptables-restore &amp; ip6tables-restore</span>
+
+<span class="token comment"># Start At Boot</span>
+<span class="token comment"># systemctl enable iptables &amp; systemctl enable ip6tables</span>
+
+<span class="token comment"># Generate Default Rules</span>
+<span class="token comment"># /etc/iptables/iptables.rules &amp; /etc/iptables/ip6tables.rules</span>
+</code></pre>
+<h4 id="accounts">Accounts</h4>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">useradd</span> -m -g <span class="token function">users</span> -s /bin/bash <span class="token operator">&lt;</span>name<span class="token operator">&gt;</span>
+<span class="token function">passwd</span> <span class="token operator">&lt;</span>name<span class="token operator">&gt;</span>
+EDITOR<span class="token operator">=</span>nano visudo
+--<span class="token operator">&gt;</span> Uncomment: <span class="token comment"># %wheel ALL=(ALL) ALL</span>
+gpasswd -a <span class="token operator">&lt;</span>user<span class="token operator">&gt;</span> wheel  <span class="token comment"># add user to wheel group</span>
+gpasswd -a <span class="token operator">&lt;</span>user<span class="token operator">&gt;</span> audio,video,games,power
+</code></pre>
+<h4 id="systemd">Systemd</h4>
+<h5 id="services">Services</h5>
+<pre class=" language-bash"><code class="prism  language-bash">Enable or Disable Services
+systemctl <span class="token function">enable</span> NetworkManager
+systemctl <span class="token function">enable</span> cups.service <span class="token comment"># previously installed</span>
+systemctl <span class="token function">enable</span> openssh.service
+</code></pre>
+<h6 id="set-up-services">Set up Services</h6>
+<pre class=" language-bash"><code class="prism  language-bash">pacman -S acpid dbus avahi
+
+systemctl <span class="token function">enable</span> acpid
+systemctl <span class="token function">enable</span> avahi-daemon
+</code></pre>
+<h5 id="timedatectl--optional">Timedatectl  (optional)</h5>
+<p>The hardware clock can be queried and set with the <em>timedatectl</em> command</p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Enable  # timedatectl set-ntp true</span>
+<span class="token comment"># Edit  # /etc/systemd/timesyncd.conf</span>
+systemctl <span class="token function">enable</span> --now systemd-timesyncd.service  <span class="token comment"># Sync System Time with atomic clock</span>
+</code></pre>
+<h4 id="boot-optional-and-redundant---done-above">Boot (optional and redundant -&gt; done above)</h4>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment">### initcpio</span>
+<span class="token comment"># edit /etc/mkinitcpio.conf</span>
+<span class="token comment"># mkinitcpio -p linux</span>
 </code></pre>
 <h1 id="hier-weiter">Hier weiter!!!</h1>
-<pre class=" language-bash"><code class="prism  language-bash">
-
-<span class="token comment"># GStreamer</span>
-<span class="token function">sudo</span> pacman -S gst-plugins-base gst-plugins-good gst-plugins-ugly gst-plugins-libav
-
-<span class="token comment"># Video Player</span>
-<span class="token function">sudo</span> pacman -S celluloid <span class="token punctuation">(</span>alt. smplayer<span class="token punctuation">)</span>
-
-<span class="token comment"># Video Tools</span>
-<span class="token function">sudo</span> pacman -S avidemux-qt <span class="token punctuation">(</span>-<span class="token operator">&gt;</span>videoEditor<span class="token punctuation">)</span> simplescreenrecorder
-
-<span class="token comment"># Burner Tools</span>
-zZz
-
-<span class="token comment"># Image</span>
-<span class="token function">sudo</span> pacman -S gimp
-
-<span class="token comment"># Dev</span>
-<span class="token function">sudo</span> pacman -S code <span class="token comment"># vscode</span>
-
-<span class="token comment"># System Applications</span>
-<span class="token function">sudo</span> pacman -S gparted wine winetricks
-
-<span class="token comment"># Add Multilib to PacmanConfig and Enable Eastereggs ;-)</span>
-
-<span class="token comment"># Pacman GUI</span>
-<span class="token function">sudo</span> pacman -S octopo pamac-aur
-
-<span class="token comment"># Conky Desktop</span>
-<span class="token punctuation">[</span>Link to Tutorial Video<span class="token punctuation">]</span><span class="token punctuation">(</span>https://www.youtube.com/watch?v<span class="token operator">=</span>QB8cjKpdVQY<span class="token operator">&amp;</span>ab_channel<span class="token operator">=</span>ChrisTitusTech<span class="token punctuation">)</span>
-</code></pre>
-<p>Alias:<br>
-<img src="https://normannator.de/archlinux/IMG/Alias.PNG" alt="enter image description here"></p>
 <h3 id="install-packages">Install Packages</h3>
 <pre class=" language-bash"><code class="prism  language-bash">pacman -S  wireless_tools wpa_supplicant  <span class="token function">mtools</span>  linux-<span class="token operator">&lt;</span>lts-<span class="token operator">&gt;</span>headers <span class="token function">git</span> reflector bash-completion
 xdg-utils  <span class="token comment"># Home Directories</span>
@@ -445,24 +550,10 @@ xdg-utils  <span class="token comment"># Home Directories</span>
 <h4 id="additional-packages">Additional Packages</h4>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S adobe-source-sans-pro-fonts aspell-en aspell-de enchant gst-libav gst-plugins-good  icedtea-web jre8/11-openjdk libmythes 
 </code></pre>
-<h3 id="set-up-services">Set up Services</h3>
-<pre class=" language-bash"><code class="prism  language-bash">systemctl <span class="token function">enable</span> NetworkManager
-systemctl <span class="token function">enable</span> cups.service <span class="token comment"># previously installed</span>
+<pre><code>
+### Set up User and Groups
+```bash
 
-pacman -S acpid dbus avahi
-
-systemctl <span class="token function">enable</span> acpid
-systemctl <span class="token function">enable</span> avahi-daemon
-
-systemctl <span class="token function">enable</span> --now systemd-timesyncd.service  <span class="token comment"># Sync System Time with atomic clock</span>
-</code></pre>
-<h3 id="set-up-user-and-groups">Set up User and Groups</h3>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">useradd</span> -m -g <span class="token function">users</span> -s /bin/bash <span class="token operator">&lt;</span>name<span class="token operator">&gt;</span>
-<span class="token function">passwd</span> <span class="token operator">&lt;</span>name<span class="token operator">&gt;</span>
-EDITOR<span class="token operator">=</span>nano visudo
---<span class="token operator">&gt;</span> Uncomment: <span class="token comment"># %wheel ALL=(ALL) ALL</span>
-gpasswd -a <span class="token operator">&lt;</span>user<span class="token operator">&gt;</span> wheel  <span class="token comment"># add user to wheel group</span>
-gpasswd -a <span class="token operator">&lt;</span>user<span class="token operator">&gt;</span> audio,video,games,power
 </code></pre>
 <h3 id="exit-and-reboot">Exit and Reboot</h3>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token keyword">exit</span>
@@ -530,8 +621,8 @@ After the line <span class="token string">"session required pam_unix.so"</span> 
 <h3 id="install-timeshift">Install Timeshift</h3>
 <pre class=" language-bash"><code class="prism  language-bash">yay -S timeshift
 </code></pre>
-<h3 id="install-virtualbox">Install VirtualBox</h3>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S virtualbox virtualbox-host-modules-arch virtualbox-guest-iso
+<h3 id="set-up-virtualbox">Set up VirtualBox</h3>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S virtualbox-host-modules-arch virtualbox-guest-iso
 <span class="token function">sudo</span> gpasswd -a <span class="token operator">&lt;</span>user<span class="token operator">&gt;</span> vboxusers
 systemctl <span class="token function">enable</span> dkms
 <span class="token function">sudo</span> <span class="token function">nano</span> /etc/modules-load.d/my-modules.conf
@@ -543,7 +634,7 @@ systemctl <span class="token function">enable</span> dkms
 </code></pre>
 <h3 id="main-maintenance">Main Maintenance</h3>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S xfce4-session arandr <span class="token function">zip</span> unzip <span class="token punctuation">(</span>bash-completion<span class="token punctuation">)</span>
-<span class="token function">sudo</span> pacman -S links geany 
+<span class="token function">sudo</span> pacman -S links
 <span class="token function">sudo</span> pacman -S xfce4-whiskermenu-plugin
 <span class="token function">sudo</span> pacman -S alacarte menulibre xame gambas3-gv-gtk libcanberra libcanberra-pulse sound-theme-freedesktop
 yay -S sound-theme-smooth xfce4-volumed-pulse xfce4-mixer 
@@ -582,8 +673,7 @@ yay -S flat-remix catarell catarell-fonts
 
 </code></pre>
 <h4 id="add-additional-packages">add additional packages</h4>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S gufw openssh
-<span class="token function">sudo</span> systemctl <span class="token function">enable</span> openssh.service
+<pre class=" language-bash"><code class="prism  language-bash">
 <span class="token function">sudo</span> systemctl <span class="token function">enable</span> sshd
 <span class="token function">sudo</span> systemctl start sshd
 
@@ -715,9 +805,6 @@ yay -S gitkraken
 
 <span class="token comment"># For Python Code Checking</span>
 pip3 <span class="token function">install</span> pylint
-
-<span class="token comment">#Visual Studio Code</span>
-yay -S vscode
 
 <span class="token comment">#install Zoom Client</span>
 yay -S zoom
