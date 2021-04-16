@@ -507,7 +507,8 @@ pacman -S thunderbird
 ##### Multimedia
 ```bash
 ### GStreamer - Streaming Videos
-pacman -S gst-plugins-base gst-plugins-good gst-plugins-ugly gst-plugins-libav
+pacman -S gst-plugins-base gst-plugins-good gst-plugins-ugly 
+# gst-plugins-libav - deprecated
 
 ### Audio Player
 # Optional #
@@ -639,7 +640,7 @@ gpasswd -a <user> audio,video,games,power
 Enable or Disable Services
 systemctl enable NetworkManager
 systemctl enable cups.service # previously installed
-systemctl enable openssh.service
+systemctl enable sshd.service # ssh Service
 ```
 ###### Set up Services
 ```bash
@@ -729,7 +730,7 @@ pacman -Syu
 ### (optional) Encrypt Home Partition
 **Notice! This only makes sense, if your home partiton is on an other drive than your root partition or you did not encrypt your root partition**
 ```bash
-# !!! Backup all your Data before this step !!!
+# !!! Backup all your Data and copy the backup to another drive or to the root drive  before this step !!!
 # Logged out. 
 # Switch to a console with Ctrl+Alt+F2. 
 # Login as a root and check that your user own no processes: 
@@ -811,12 +812,12 @@ reboot # optional
 
 ### Generate SSH-Key
 ```bash
-ssh-keygen
+ssh-keygen -t rsa -b 4096
 ```
 
 ### Main Maintenance
 ```bash
-sudo pacman -S xfce4-session xrandr
+sudo pacman -S xfce4-session xorg-xrandr
 sudo pacman -S xfce4-whiskermenu-plugin
 sudo pacman -S alacarte 
 yay -S menulibre xame
@@ -839,8 +840,8 @@ sudo pacman -S networkmanager-openvpn
 systemctl restart networkmanager
 
 sudo pacman -S ffmpegthumbnailer tumbler raw-thumbnailer libgsf catfish mlocate
-yay -S env-modules env-modules-tcl
-yay -S xfce4-sensors-plugin-nvidia
+yay -S env-modules # alzernatively env-modules-tcl
+# yay -S xfce4-sensors-plugin-nvidia - DEPRECATED
 # Description #
 # ffmpegthumbnailer  # Lightweight video thumbnailer that can be used by file managers.
 # tumbler  # D-Bus service for applications to request thumbnails
@@ -861,8 +862,8 @@ In Keyboard Shortcuts set ```xfce4-popup-whiskermenu``` run on windows-key
 #### setup Theme and Fonts
 ```bash
 sudo pacman -S arc-gtk-theme arc-icon-theme
-yay -S flat-remix catarell catarell-fonts
-sudo pacman -S futurist
+yay -S flat-remix cantatel cantatel-fonts
+# sudo pacman -S futurist - Deprevated
 ```
 #### setup undercover
 ```bash
@@ -885,11 +886,11 @@ yay -S xfce4-screensaver mugshot gnome-system-tools
 # To Install this, you need to do some more complicated stuff
 git clone https://aur.archlinux.org/gnome-system-tools.git
 cd gnome-system-tools/
-nano PKGBUILD (change FTP (first to HTTP/S)
 makepkg -si
 yay -S gnome-doc-utils
 yay -S liboobs -> git clone https://aur.archlinux.org/liboobs.git
 cd liboobs
+nano PKGBUILD (change FTP (first to HTTP/S)
 makepkg -si (maybe edit PKGBUILD)
 yay -S system-tools-backends
 makepkg -si
@@ -907,9 +908,10 @@ yay -S pycharm-professional
 
 #### Make XFCE4 look good!
 
-##### Docky/Plank
+##### Plank
 ```bash
-yay -S docky/plank  # Dock like OSX
+yay -S plank  # Dock like OSX
+yay -S plank-theme-arc
 ```
 ##### Desktop
 1. Right-Clock on Desktop -> Settings:

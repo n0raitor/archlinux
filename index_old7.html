@@ -446,8 +446,7 @@ pacman -S thunderbird
 </code></pre>
 <h5 id="multimedia">Multimedia</h5>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token comment">### GStreamer - Streaming Videos</span>
-pacman -S gst-plugins-base gst-plugins-good gst-plugins-ugly 
-<span class="token comment"># gst-plugins-libav - deprecated</span>
+pacman -S gst-plugins-base gst-plugins-good gst-plugins-ugly gst-plugins-libav
 
 <span class="token comment">### Audio Player</span>
 <span class="token comment"># Optional #</span>
@@ -561,7 +560,7 @@ gpasswd -a <span class="token operator">&lt;</span>user<span class="token operat
 <pre class=" language-bash"><code class="prism  language-bash">Enable or Disable Services
 systemctl <span class="token function">enable</span> NetworkManager
 systemctl <span class="token function">enable</span> cups.service <span class="token comment"># previously installed</span>
-systemctl <span class="token function">enable</span> sshd.service <span class="token comment"># ssh Service</span>
+systemctl <span class="token function">enable</span> openssh.service
 </code></pre>
 <h6 id="set-up-services">Set up Services</h6>
 <pre class=" language-bash"><code class="prism  language-bash">pacman -S acpid dbus avahi
@@ -627,7 +626,7 @@ dhcpcd <span class="token operator">&lt;</span>adapter<span class="token operato
 </code></pre>
 <h3 id="optional-encrypt-home-partition">(optional) Encrypt Home Partition</h3>
 <p><strong>Notice! This only makes sense, if your home partiton is on an other drive than your root partition or you did not encrypt your root partition</strong></p>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># !!! Backup all your Data and copy the backup to another drive or to the root drive  before this step !!!</span>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># !!! Backup all your Data before this step !!!</span>
 <span class="token comment"># Logged out. </span>
 <span class="token comment"># Switch to a console with Ctrl+Alt+F2. </span>
 <span class="token comment"># Login as a root and check that your user own no processes: </span>
@@ -703,10 +702,10 @@ systemctl <span class="token function">enable</span> dkms
 <span class="token function">reboot</span> <span class="token comment"># optional</span>
 </code></pre>
 <h3 id="generate-ssh-key">Generate SSH-Key</h3>
-<pre class=" language-bash"><code class="prism  language-bash">ssh-keygen -t rsa -b 4096
+<pre class=" language-bash"><code class="prism  language-bash">ssh-keygen
 </code></pre>
 <h3 id="main-maintenance">Main Maintenance</h3>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S xfce4-session xorg-xrandr
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S xfce4-session xrandr
 <span class="token function">sudo</span> pacman -S xfce4-whiskermenu-plugin
 <span class="token function">sudo</span> pacman -S alacarte 
 yay -S menulibre xame
@@ -729,8 +728,8 @@ yay -S sound-theme-smooth xfce4-volumed-pulse xfce4-mixer
 systemctl restart networkmanager
 
 <span class="token function">sudo</span> pacman -S ffmpegthumbnailer tumbler raw-thumbnailer libgsf catfish mlocate
-yay -S env-modules <span class="token comment"># alzernatively env-modules-tcl</span>
-<span class="token comment"># yay -S xfce4-sensors-plugin-nvidia - DEPRECATED</span>
+yay -S env-modules env-modules-tcl
+yay -S xfce4-sensors-plugin-nvidia
 <span class="token comment"># Description #</span>
 <span class="token comment"># ffmpegthumbnailer  # Lightweight video thumbnailer that can be used by file managers.</span>
 <span class="token comment"># tumbler  # D-Bus service for applications to request thumbnails</span>
@@ -747,8 +746,8 @@ yay -S env-modules <span class="token comment"># alzernatively env-modules-tcl</
 <p>In Keyboard Shortcuts set <code>xfce4-popup-whiskermenu</code> run on windows-key</p>
 <h4 id="setup-theme-and-fonts">setup Theme and Fonts</h4>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S arc-gtk-theme arc-icon-theme
-yay -S flat-remix cantatel cantatel-fonts
-<span class="token comment"># sudo pacman -S futurist - Deprevated</span>
+yay -S flat-remix catarell catarell-fonts
+<span class="token function">sudo</span> pacman -S futurist
 </code></pre>
 <h4 id="setup-undercover">setup undercover</h4>
 <pre class=" language-bash"><code class="prism  language-bash">yay -S kali-undercover
@@ -769,11 +768,11 @@ yay -S xfce4-screensaver mugshot gnome-system-tools
 <span class="token comment"># To Install this, you need to do some more complicated stuff</span>
 <span class="token function">git</span> clone https://aur.archlinux.org/gnome-system-tools.git
 <span class="token function">cd</span> gnome-system-tools/
+<span class="token function">nano</span> PKGBUILD <span class="token punctuation">(</span>change FTP <span class="token punctuation">(</span>first to HTTP/S<span class="token punctuation">)</span>
 makepkg -si
 yay -S gnome-doc-utils
 yay -S liboobs -<span class="token operator">&gt;</span> <span class="token function">git</span> clone https://aur.archlinux.org/liboobs.git
 <span class="token function">cd</span> liboobs
-<span class="token function">nano</span> PKGBUILD <span class="token punctuation">(</span>change FTP <span class="token punctuation">(</span>first to HTTP/S<span class="token punctuation">)</span>
 makepkg -si <span class="token punctuation">(</span>maybe edit PKGBUILD<span class="token punctuation">)</span>
 yay -S system-tools-backends
 makepkg -si
@@ -789,9 +788,8 @@ nmcli connection <span class="token function">import</span> <span class="token f
 yay -S pycharm-professional
 </code></pre>
 <h4 id="make-xfce4-look-good">Make XFCE4 look good!</h4>
-<h5 id="plank">Plank</h5>
-<pre class=" language-bash"><code class="prism  language-bash">yay -S plank  <span class="token comment"># Dock like OSX</span>
-yay -S plank-theme-arc
+<h5 id="dockyplank">Docky/Plank</h5>
+<pre class=" language-bash"><code class="prism  language-bash">yay -S docky/plank  <span class="token comment"># Dock like OSX</span>
 </code></pre>
 <h5 id="desktop">Desktop</h5>
 <ol>
