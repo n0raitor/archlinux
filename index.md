@@ -19,6 +19,18 @@ ip a # check internet connection (alternative: ip link)
 
 #### On Wifi
 ```bash
+# newer way:
+[iwctl](https://wiki.archlinux.org/index.php/Iwctl)
+```bash
+iwctl
+# Use help for support
+device list  # list network devices
+station <device> scan  # scan for networks
+station <device> get-networks  # get all networks
+station <device> connect SSID  # login into your wifi
+```
+
+##### old solution
 wpa_passphrase  SSID  Passwort  > /etc/wpa_supplicant/wpa_supplicant.conf
 wpa_supplicant -i wlp0s1 -D wext -c /etc/wpa_supplicant/wpa_supplicant.conf -B
 dhcpcd wlp0s1
@@ -127,6 +139,10 @@ dmraid  # Device mapper RAID interface
 
 ### Config Arch Linux
 
+```bash
+arch-chroot /mnt /root  # Change to Root Directory
+```
+
 #### Pre Config
 ```bash
 # Set Computer Hostname
@@ -150,10 +166,9 @@ locale-gen
 
 # Set Time
 ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime  # Set Timezone
-hwclock --sysohc --utc # Sync Hardware-Clock
+hwclock --systohc --utc # Sync Hardware-Clock
 
 # Set Root Password
-arch-chroot /mnt /root
 passwd root
 exit
 
@@ -166,11 +181,6 @@ nano /etc/fstab
 
 # Edit Crypttab (optional) -> Not used here
 nano /mnt/etc/crypttab  # Config encrypted block devices
-```
-
-#### !!!Change to Root!!!
-```bash
-arch-chroot /mnt
 ```
 
 #### Edit Hosts file
@@ -224,12 +234,6 @@ grub-mkconfig -o /boot/grub/grub.cfg  # Generate Grub config file
 # Install Contributed scripts and tools for pacman systems
 pacman -S pacman-contrib
 
-# Install YAY - simple AUR Package Installation
-git clone https://aur.archlinux.org/yay.git
-cd yay/
-makepkg -si PKGBUILD
-# Alternativ Package Installer: trizen, aurman, yaourt (End of life)
-
 # Update System
 pacman -Syu
 
@@ -254,6 +258,38 @@ gpg --recv-keys  # Add GPG key (optional-additional)
 ```
 
 ### Install
+
+
+#### Install YAY
+Change to User - This is required, because yay can't run as root because it uses the fake root to install packages.
+
+If you prefer to stay as root, feel free to replace this instead of an yay command (1. Method)
+```bash
+# the command yay -S <name>
+git clone https://aur.archlinux.org/<name>.git
+cd <name>
+makepkg -si
+```
+If you prefer using yay as root, use the following command instead (2. Method)
+```bash
+# the command yay -S <name>
+sudo -u <username> yay -S <name>
+```
+
+##### Installation (if you want to use yay)
+```bash
+su <uname>
+```
+```bash
+# Install YAY - simple AUR Package Installation
+pacman -S git
+git clone https://aur.archlinux.org/yay.git
+cd yay/
+makepkg -si PKGBUILD
+# Alternativ Package Installer: trizen, aurman, yaourt (End of life)
+```
+
+If you are using root to install this packages, run this commands as they are. If you use an other user to install the packages, use the prefix ```sudo ```
 
 #### Console
 ```bash
@@ -337,7 +373,7 @@ pacman -S alsa-plugin alsa-utils pulseaudio pulseaudio-alsa (pulseaudio-bluetoot
 # optional: pulseaudio-equalizer
 
 ### Printer
-sudo pacman -S cups ghostscript cups-pdf hplip
+pacman -S cups ghostscript cups-pdf hplip
 # optional #
 # gutenprint  # Top quality printer drivers for POSIX systems
 # foomatic-db foomatic-db-*  # Foomatic - The collected knowledge about printers, drivers, and driver options in XML files, used by foomatic-db-engine to generate PPD files.
@@ -438,7 +474,7 @@ pacman -S libreoffice-still  # stable version (newer features in "fresh")
 ### office language aids
 pacman -S hunspell-en hunspell-de mythes-en mythes-de aspell-en aspell-de languagetool enchant 
 yay -S libreoffice-extension-languagetool 
-sudo libmythes 
+pacman -S libmythes 
 # optional #
 # hyphen  # Hyphenation rules
 
@@ -551,6 +587,9 @@ yay -S virtualbox-ext-oracle  # (AUR) Ext Pack
 /etc/profile.d/editor.sh  # set default global editor
 nano /etc/profile.d/alias.sh
 ```
+use the the folowing rows:
+``` alias <left>="<right">```
+The (n) notation means, that there are n ways of signing this alias. Do not use this (n) e.g. (1) in the alias notation!
 ![enter image description here](https://normannator.de/archlinux/IMG/Alias.PNG)
 ```bash
 nano /etc/profile.d/ps1.sh  # (optional)
@@ -648,6 +687,24 @@ reboot
 
 #### With Wifi
 ```bash
+# newer way:
+[iwctl](https://wiki.archlinux.org/index.php/Iwctl)
+```bash
+iwctl
+# Use help for support
+device list  # list network devices
+station <device> scan  # scan for networks
+station <device> get-networks  # get all networks
+station <device> connect SSID  # login into your wifi
+```
+
+##### old solution
+wpa_passphrase  SSID  Passwort  > /etc/wpa_supplicant/wpa_supplicant.conf
+wpa_supplicant -i wlp0s1 -D wext -c /etc/wpa_supplicant/wpa_supplicant.conf -B
+dhcpcd wlp0s1
+```
+```bash
+# Alternative
 ip a # search Wifi Adapter
 nmtui
 -> Activate Connection->...

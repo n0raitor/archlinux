@@ -198,7 +198,7 @@ nano /etc/mkinitcpio.conf
 # ... autodetect keyboard keymap modconf block encrypt lvm2 filesystems ...
 
 # Generate mkinitcpio
-mkinitcpio -p linux-lts
+mkinitcpio -p linux
 ```
 
 #### Bootloader
@@ -622,7 +622,7 @@ systemctl enable --now systemd-timesyncd.service  # Sync System Time with atomic
 ```bash
 ### initcpio
 # edit /etc/mkinitcpio.conf
-# mkinitcpio -p linux(-lts)
+# mkinitcpio -p linux
 ```
 
 
@@ -670,68 +670,35 @@ pacman -Syu
 ```
 
 ### (optional) Encrypt Home Partition
-**Notice! This only makes sense, if your home partiton is on an other drive than your root partition or you did not encrypt your root partition**
 ```bash
 # !!! Backup all your Data before this step !!!
 # Logged out. 
 # Switch to a console with Ctrl+Alt+F2. 
 # Login as a root and check that your user own no processes: 
-ps -U username
+ps -U username 
 
-umount /home
-lsblk  # to check if umount was successful
+# Install the necessary applications: 
+sudo pacman -S rsync lsof ecryptfs-utils 
 
-gdisk /dev/<home-device>  # Type as LUKS
-cryptsetup luksFormat /dev/<home-device>
-cryptsetup open /dev/<home-device> crypt_home
-mkfs.ext4 /dev/mapper/crypt_home
-mount /dev/mapper/crypt_home /home
+# Then encrypt your home directory: 
+modprobe ecryptfs 
+ecryptfs-migrate-home -u username
 
-# Now copy your Backups to the Home directory (sudo recommended)
+# Mount your encrypted home. 
+ecryptfs-mount-private 
 
-# Change files to the right rights (important, if you backup and restore your files as root or with sudo)
-cd /home/
-chown -R <user> <user>/
-chgrp -R users <user>/
+# Unwrap the passphrase and save it somewhere where only you can access it. 
+ecryptfs-unwrap-passphrase 
 
-lsblk -f  # Note down the UUID of your device
-# <device>
-# - <device-partition>
-# - - <crypto 2>  UUID
+# Run 
+ls .ecryptfs 
 
-nano /etc/crypttab  # Edit this file and insert the following row
-# crypthome     UUID=<UUID enter here>    none                    luks,timeout=180
-
-cp /etc/fstab /etc/fstab.bak  # Backup Your FSTAB File
-nano /etc/fstab  # Edit this file
-### File content ###
-# <file system> <dir> <type> <options> <dump> <pass>
-
-# /dev/mapper/vg1-root
-UUID=...				/		ext4	rw,relatime     0 1
-
-# /dev/<home-device>
-/dev/mapper/crypthome	/home	ext4	rw,relatime     0 2
-
-# /dev/sdb128
-UUID=...				/boot	vfat	rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=ascii,shortname=mixed,utf8,errors=remount-ro   0 2
-
-# /dev/mapper/vg1-swap
-UUID=...				none	swap	defaults        0 0
-
-## alternatively
-genfstab -U
-
-
-### If Reboot does not work, try to rebuild the grub cfg.
-# Press Ctrl + Alt + F2
-cd /boot/grub
-mv grub.cfg grub.cfg.bak
-grub-mkconfig -o /boot/grub/grub.cfg
-reboot
-
-### If Startup works ... Continue
-
+# Edit /etc/pam.d/system-auth: 
+After the line "auth required pam_unix.so" add: auth required pam_ecryptfs.so unwrap 
+Above the line "password required pam_unix.so" insert: password optional pam_ecryptfs.so 
+After the line "session required pam_unix.so" add: session optional pam_ecryptfs.so unwrap 
+```
+![enter image description here](https://normannator.de/archlinux/IMG/Encrypt_Home.PNG)
 ```bash
 # Reboot and make sure that you can login to your desktop
 # If everything workes fine, feel free to remove your Backup (done before)
@@ -928,7 +895,7 @@ Usefull Shortcuts:
 - Super + F: File Manager
 
 
-### And More Programms (all optional)
+### And More Programms
 ```bash
 # Version Control
 yay -S github-desktop
@@ -954,60 +921,7 @@ yay -S spotify
 
 # communication
 yay -S slack-desktop
-
-# Instant Messaginger
-yay -S rambox
-
-# PDF Handler
-yay -S foxitreader
 ```
-**1Password**
-[Official Documentation](https://support.1password.com/getting-started-linux/#arch-linux)
-
-**Additional PDF Software**
-[Link](https://wiki.archlinux.org/index.php/PDF,_PS_and_DjVu)
-
-**Kali Linux Shell**
-If you want a more "Kali" like shell, feel free to install [this](https://wiki.archlinux.org/index.php/zsh) shell.
-
-**Ubuntu System Optimizer - Stacer**
-```bash
-yay -S stacer
-```
-
-**Ebook Reader **
-```bash
-yay -S calibre
-```
-
-**KDE Video Editor - KDEnlive**
-A simple video editor, but not that advanced compared to Davinci Resolve
-```bash
-yay -S kdenlive
-```
-
-**The Package Manager of Arch Linux**
-[Link](https://wiki.archlinux.de/title/Graphische_Paketmanager)
-
-**VLC**
-No Words needed
-
-**[NitroShare](https://nitroshare.net/) - File Transfer Software **
-Allows cross-platform file sharing
-```bash
-yay -S nitroshare
-```
-
-**Chromium**
-No Words needed - no data send to google
-
-**SimpleNote**
-Take notes and sync them
-[Follow the instructions](https://snapcraft.io/install/simplenote/arch)
-
-**No Adobe - Use the Libre Graphics Suite**
-[Follow this link](https://github.com/AppImage/AppImageKit/wiki/Libre-Graphics-Suite)
-
 
 ### Additional Optional Packages
 
