@@ -151,12 +151,11 @@ hwclock --systohc --utc <span class="token comment"># Sync Hardware-Clock</span>
 genfstab -U /mnt <span class="token operator">&gt;&gt;</span> /mnt/etc/fstab  <span class="token comment"># (alt. change -U to -L to use Label instead of UUID</span>
 <span class="token function">cat</span> /mnt/etc/fstab  <span class="token comment"># check gen</span>
 
-arch-chroot /mnt  <span class="token comment"># Switch Back to Root</span>
 <span class="token comment"># Edit Fstab (optional)</span>
 <span class="token function">nano</span> /etc/fstab
 
 <span class="token comment"># Edit Crypttab (optional) -&gt; Not used here</span>
-<span class="token comment"># nano /mnt/etc/crypttab  # Config encrypted block devices</span>
+<span class="token function">nano</span> /mnt/etc/crypttab  <span class="token comment"># Config encrypted block devices</span>
 </code></pre>
 <h4 id="edit-hosts-file">Edit Hosts file</h4>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">cat</span> /etc/hosts  <span class="token comment"># set Hosts file</span>
@@ -262,7 +261,7 @@ pacman -S usbutils dialog powertop
 pacman -S <span class="token function">zip</span> unzip <span class="token function">unrar</span> p7zip lzop
 
 <span class="token comment">### Network Tools</span>
-pacman -S <span class="token function">rsync</span> <span class="token function">traceroute</span> bind
+pacman -S <span class="token function">rsync</span> <span class="token function">traceroute</span> bind-tools
 <span class="token comment"># optional #</span>
 <span class="token comment"># dnsutils  # DNS tools (nslookup)</span>
 <span class="token comment"># nmap  # Network Scanner</span>
@@ -345,9 +344,9 @@ pacman -S ttf-bitstream-vera ttf-dejavu ttf-liberation adobe-source-sans-pro-fon
 <span class="token comment"># xorg-fonts-type1 </span>
 
 <span class="token comment">### Fonts - Misc</span>
-pacman -S ttf-anonymous-pro ttf-droid   ttf-ubuntu-font-family ttf-roboto ttf-roboto-mono ttf-font-awesome
+pacman -S ttf-anonymous-pro ttf-droid ttf-gentium  ttf-ubuntu-font-family ttf-ms-fonts ttf-roboto ttf-roboto-mono ttf-font-awesome
 <span class="token comment"># for my purpose</span>
-yay -S ttf-hackgen ttf-gentium ttf-ms-fonts
+yay -S ttf-hackgen
 pacman -S ttf-fira-code
 <span class="token comment"># For More Fonts: pacman -Ss ttf</span>
 
@@ -395,7 +394,11 @@ pacman -S xf86-input-synaptics <span class="token punctuation">(</span>optional:
 <li>Openbox</li>
 <li>Deepin</li>
 </ol>
-<p><strong>See next Chapter</strong></p>
+<p>In my case I choosed: <strong>XFCE4</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S --needed xfce4 xfce4-goodies lightdm lightdm-gtk-greeter lightdm-gkt-greeter-settings <span class="token punctuation">(</span>gvfs-afc<span class="token punctuation">)</span> udisks2 network-manager-applet
+
+<span class="token function">sudo</span> systemctl <span class="token function">enable</span> lightdm
+</code></pre>
 <p><em>TODO - Package installation guide for the Desktop Environments above</em> (mit archdi - hint)</p>
 <h4 id="display-manager">Display Manager</h4>
 <p>I choosed lightdm-gtk-greeter<br>
@@ -403,8 +406,7 @@ Alternatives:</p>
 <ul>
 <li>gdm</li>
 <li>sddm</li>
-<li>lxdm<br>
--&gt; See Your Desktop Environment Conditions</li>
+<li>lxdm</li>
 </ul>
 <h4 id="applications">Applications</h4>
 <h5 id="office">Office</h5>
@@ -585,30 +587,6 @@ xdg-utils  <span class="token comment"># Home Directories</span>
 pacman -S  gst-libav gst-plugins-good  <span class="token comment"># Multimedia graph framework</span>
 pacman -S icedtea-web  <span class="token comment"># Additional components for OpenJDK - Browser plug-in and Web Start implementation (optional)</span>
 </code></pre>
-<h3 id="install-desktop-environment">Install Desktop Environment</h3>
-<h4 id="xfce4">XFCE4</h4>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S --needed xfce4 xfce4-goodies lightdm lightdm-gtk-greeter lightdm-gkt-greeter-settings <span class="token punctuation">(</span>gvfs-afc<span class="token punctuation">)</span> udisks2 network-manager-applet
-
-<span class="token function">sudo</span> systemctl <span class="token function">enable</span> lightdm
-</code></pre>
-<h4 id="gnome">GNOME</h4>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S gnome gnome-extra gdm  
-<span class="token function">sudo</span> systemctl <span class="token function">enable</span> gdm.service  
-<span class="token function">sudo</span> systemctl start gdm.service
-
-<span class="token comment">#Download Gnome-Extensions aus dem Gnome-Software-Store  </span>
-<span class="token function">sudo</span> pacman -S gnome-software-packagekit-plugin <span class="token comment">#Damit man auf das AUR und Pacman mit dem Softwarecenter von Gnome zugreifen kann.  </span>
-<span class="token comment">#github.com:BenJetson/gnome-dash-fix.git #Gnome Kategorien in Anwendungsmenü automatisch generieren  </span>
-gsettings <span class="token keyword">set</span> <span class="token comment">#org.gnome.desktop.peripherals.touchpad click-method areas #Lösen von Gnome problemen für Touchpads von Laptops  </span>
-yay -S gnome-terminal-transparency  
-<span class="token comment">#-&gt; Say YES to deinstall the old terminal  </span>
-<span class="token comment">#Extensions im Browser (mit Plugin und gnome-shell-extension (yay)):</span>
-
--   Dash to Plank <span class="token punctuation">(</span>optional<span class="token punctuation">)</span>
--   Espresso <span class="token comment"># vgl. Präsentationsmodus</span>
--   Tiling Assistant <span class="token punctuation">(</span>dep?<span class="token operator">!</span><span class="token punctuation">)</span>
--   User Themes
-</code></pre>
 <h3 id="exit-and-reboot">Exit and Reboot</h3>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token keyword">exit</span>
 <span class="token function">umount</span> -a
@@ -769,7 +747,7 @@ yay -S env-modules <span class="token comment"># alzernatively env-modules-tcl</
 <p>In Keyboard Shortcuts set <code>xfce4-popup-whiskermenu</code> run on windows-key</p>
 <h4 id="setup-theme-and-fonts">setup Theme and Fonts</h4>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S arc-gtk-theme arc-icon-theme
-yay -S flat-remix cantatel-fonts
+yay -S flat-remix cantatel cantatel-fonts
 <span class="token comment"># sudo pacman -S futurist - Deprevated</span>
 </code></pre>
 <h4 id="setup-undercover">setup undercover</h4>
@@ -780,9 +758,8 @@ yay -S flat-remix cantatel-fonts
 
 </code></pre>
 <h4 id="add-additional-packages">add additional packages</h4>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># sudo systemctl enable sshd</span>
-<span class="token comment"># sudo systemctl start sshd</span>
-<span class="token comment"># -&gt; Already done, if not, run this commands</span>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> systemctl <span class="token function">enable</span> sshd
+<span class="token function">sudo</span> systemctl start sshd
 
 <span class="token function">sudo</span> pacman -S redshift
 <span class="token punctuation">(</span>sudo systemctl <span class="token function">enable</span> redshift<span class="token punctuation">)</span>
@@ -835,7 +812,7 @@ yay -S plank-theme-arc
 <li>Icons: Flat-Remix-Blue-Dark</li>
 <li>Fonts:
 <ul>
-<li>Default Font: Cantarel Regular - 11</li>
+<li>Default Font: Cantarell Regular - 11</li>
 <li>Default Monospace Font: Fira Code Medium - 10</li>
 <li>Rendering:
 <ul>
@@ -851,7 +828,7 @@ yay -S plank-theme-arc
 <li>Style:
 <ul>
 <li>Style: Arc-Dark</li>
-<li>Title Font: Cantarel Bold - 9</li>
+<li>Title Font: Cantarell Bold - 9</li>
 <li>Hide arrow up</li>
 </ul>
 </li>
@@ -867,7 +844,7 @@ yay -S plank-theme-arc
 <h5 id="lightdm-settings">LightDM Settings</h5>
 <p>Theme: Arc-Dark<br>
 Icon: Arc<br>
-Font: Cantarel Bold - 10</p>
+Font: Cantarell Bold - 10</p>
 <h5 id="screensaver">Screensaver</h5>
 <p>Settings-&gt;Screensaver:</p>
 <ul>
@@ -996,30 +973,6 @@ yay -Sc  <span class="token comment"># Removes Cache of YAY</span>
 </code></pre>
 <h3 id="optional-backup-your-system-manually">(optional) Backup your System manually</h3>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> <span class="token function">rsync</span> -aAXvP --delete --exclude<span class="token operator">=</span>/dev/* --exclude<span class="token operator">=</span>/proc/* --exclude<span class="token operator">=</span>/sys/* --exclude<span class="token operator">=</span>/tmp/* --exclude<span class="token operator">=</span>/run/* --exclude<span class="token operator">=</span>/mnt/* --exclude<span class="token operator">=</span>/media/* --exclude<span class="token operator">=</span>/lost+found --exclude<span class="token operator">=</span>/home/.ecryptfs / /mnt/backupDestination/
-</code></pre>
-<h2 id="set-dual-boot">Set Dual Boot</h2>
-<h3 id="in-general">In general</h3>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S os-probe
-
-<span class="token function">sudo</span> pacman -S ntfs-3g  <span class="token comment">#opt: If target Os is Windows</span>
-
-<span class="token comment"># Mount Dir of OS</span>
-<span class="token function">sudo</span> <span class="token function">mkdir</span> -p /mnt/os-mount
-<span class="token function">sudo</span> <span class="token function">mount</span> /dev/<span class="token operator">&lt;</span>partition-of-os-to-dual-boot<span class="token operator">&gt;</span> /mnt/os-mount
-
-<span class="token comment"># run os-prober</span>
-os-prober
-
-<span class="token comment"># recreate Grub Config</span>
-grub-mkconfig -o /boot/grub/grub.cfg
-</code></pre>
-<h2 id="extra">Extra</h2>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment">#Install Most for Manual Page highlighting</span>
-
-<span class="token function">sudo</span> pacman -S <span class="token function">most</span>  
-<span class="token function">export</span> PAGER<span class="token operator">=</span>most
-
-<span class="token comment"># See results on "man mv"</span>
 </code></pre>
 </div>
 </body>
