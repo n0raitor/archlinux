@@ -190,7 +190,7 @@ blkid  <span class="token comment"># BlockID</span>
 <span class="token function">nano</span> /etc/default/grub
 --<span class="token operator">&gt;</span> Edit: 
 <span class="token punctuation">..</span>.
-GRUB_CMDLINE_LINUX<span class="token operator">=</span><span class="token string">"cryptdevice=UUID="</span><span class="token operator">&lt;</span>UUID-copied<span class="token operator">&gt;</span>:cryptlvm root<span class="token operator">=</span>/dev/vg1/root"
+GRUB_CMDLINE_LINUX<span class="token operator">=</span><span class="token string">"cryptdevice=UUID="</span><span class="token operator">&lt;</span>UUID-copied<span class="token operator">&gt;</span><span class="token string">":cryptlvm root=/dev/vg1/root"</span>
 
 grub-mkconfig -o /boot/grub/grub.cfg  <span class="token comment"># Generate Grub config file</span>
 </code></pre>
@@ -355,7 +355,7 @@ pacman -S ttf-bitstream-vera ttf-dejavu ttf-liberation adobe-source-sans-pro-fon
 <span class="token comment">### Fonts - Misc</span>
 pacman -S ttf-anonymous-pro ttf-droid   ttf-ubuntu-font-family ttf-roboto ttf-roboto-mono ttf-font-awesome
 <span class="token comment"># for my purpose</span>
-yay -S ttf-hackgen ttf-gentium ttf-ms-fonts
+yay -S ttf-hackgen ttf-gentium-basic ttf-ms-fonts
 pacman -S ttf-fira-code
 <span class="token comment"># For More Fonts: pacman -Ss ttf</span>
 
@@ -720,6 +720,8 @@ grub-mkconfig -o /boot/grub/grub.cfg
 <pre class=" language-bash"><code class="prism  language-bash">yay -S timeshift
 </code></pre>
 <h3 id="set-up-virtualbox">Set up VirtualBox</h3>
+<p>Follow the instructions on the following <a href="https://wiki.archlinux.org/title/VirtualBox">site</a></p>
+<p><strong>Deprecated</strong></p>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S virtualbox-host-modules-arch virtualbox-guest-iso
 <span class="token function">sudo</span> gpasswd -a <span class="token operator">&lt;</span>user<span class="token operator">&gt;</span> vboxusers
 systemctl <span class="token function">enable</span> dkms
