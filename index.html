@@ -593,17 +593,14 @@ The (n) notation means, that there are n ways of signing this alias. Do not use 
 <span class="token function">sudo</span> ufw status verbose
 <span class="token function">sudo</span> systemctl <span class="token function">enable</span> ufw.service
 </code></pre>
-<pre><code>
-#### Systemd
-
-##### Services
-```bash
-Enable or Disable Services
-systemctl enable NetworkManager
-systemctl enable cups.service # previously installed
-systemctl enable sshd.service # ssh Service
+<h4 id="systemd">Systemd</h4>
+<h5 id="enable-installed-services">Enable installed services</h5>
+<pre class=" language-bash"><code class="prism  language-bash">Enable or Disable Services
+systemctl <span class="token function">enable</span> NetworkManager
+systemctl <span class="token function">enable</span> cups.service <span class="token comment"># previously installed</span>
+systemctl <span class="token function">enable</span> sshd.service <span class="token comment"># ssh Service</span>
 </code></pre>
-<h6 id="set-up-services">Set up Services</h6>
+<h5 id="set-up-important-services">Set up important Services</h5>
 <pre class=" language-bash"><code class="prism  language-bash">pacman -S acpid dbus avahi
 
 systemctl <span class="token function">enable</span> acpid
@@ -628,11 +625,161 @@ pacman -S  gst-libav gst-plugins-good  <span class="token comment"># Multimedia 
 pacman -S icedtea-web  <span class="token comment"># Additional components for OpenJDK - Browser plug-in and Web Start implementation (optional)</span>
 </code></pre>
 <h3 id="install-desktop-environment">Install Desktop Environment</h3>
+<hr>
 <h4 id="xfce4">XFCE4</h4>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S --needed xfce4 xfce4-goodies lightdm lightdm-gtk-greeter lightdm-gkt-greeter-settings <span class="token punctuation">(</span>gvfs-afc<span class="token punctuation">)</span> udisks2 network-manager-applet
 
 <span class="token function">sudo</span> systemctl <span class="token function">enable</span> lightdm
+<span class="token function">sudo</span> systemctl start lightdm
 </code></pre>
+<p><strong>XFCE Specific Config</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S xfce4-session xorg-xrandr
+<span class="token function">sudo</span> pacman -S xfce4-whiskermenu-plugin
+<span class="token function">sudo</span> yay -S alacarte-xfce <span class="token punctuation">(</span>not tested<span class="token punctuation">)</span>
+yay -S menulibre xame
+<span class="token function">sudo</span> pacman -S gambas3-gb-gtk3 libcanberra libcanberra-pulse sound-theme-freedesktop
+<span class="token comment"># Description #</span>
+<span class="token comment"># alacarte  # Menu editor for gnome</span>
+<span class="token comment"># menulibre  # An advanced menu editor that provides modern features in a clean, easy-to-use interface</span>
+<span class="token comment"># xame  # XFCE Applications Menu Editor</span>
+<span class="token comment"># gambas3-gb-gtk3  # GTK3 toolkit component</span>
+<span class="token comment"># libcanberra + libcanberra-pulse  # A small and lightweight implementation of the XDG Sound Theme Specification</span>
+<span class="token comment"># sound-theme-freedesktop  # Freedesktop sound theme</span>
+
+yay -S sound-theme-smooth xfce4-volumed-pulse xfce4-mixer 
+<span class="token function">sudo</span> pacman -S xfce4-pulseaudio-plugin xscreensaver udevil udiskie thunar thunar-volman thunar-archive-plugin thunar-media-tags-plugin
+<span class="token comment"># Description #</span>
+<span class="token comment"># udevil  # Mount and unmount without password</span>
+<span class="token comment"># udiskie  # Removable disk automounter using udisks</span>
+
+<span class="token function">sudo</span> pacman -S tumbler libgsf catfish mlocate  <span class="token comment"># Thunar Specific Packages</span>
+yay -S env-modules <span class="token comment"># alternatively env-modules-tcl</span>
+<span class="token comment"># yay -S xfce4-sensors-plugin-nvidia - DEPRECATED</span>
+
+Description
+<span class="token comment"># tumbler  # D-Bus service for applications to request thumbnails</span>
+<span class="token comment"># libgsf  # An extensible I/O abstraction library for dealing with structured file formats</span>
+<span class="token comment"># catfish  # Versatile file searching tool</span>
+<span class="token comment"># mlocate  # Merging locate/updatedb implementation</span>
+<span class="token comment"># env-modules/-tcl  # Provides for an easy dynamic modification of a user's environment via modulefile.</span>
+</code></pre>
+<p><strong>XFCE4 Settings</strong></p>
+<h4 id="popup-menu-on-windows-icon">Popup Menu on Windows-Icon</h4>
+<p>In Keyboard Shortcuts set <code>xfce4-popup-whiskermenu</code> run on windows-key</p>
+<p>yay -S xfce4-screensaver mugshot gnome-system-tools</p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># To Install this, you need to do some more complicated stuff</span>
+<span class="token function">git</span> clone https://aur.archlinux.org/gnome-system-tools.git
+<span class="token function">cd</span> gnome-system-tools/
+makepkg -si
+yay -S gnome-doc-utils
+yay -S liboobs -<span class="token operator">&gt;</span> <span class="token function">git</span> clone https://aur.archlinux.org/liboobs.git
+<span class="token function">cd</span> liboobs
+<span class="token function">nano</span> PKGBUILD <span class="token punctuation">(</span>change FTP <span class="token punctuation">(</span>first to HTTP/S<span class="token punctuation">)</span>
+makepkg -si <span class="token punctuation">(</span>maybe edit PKGBUILD<span class="token punctuation">)</span>
+yay -S system-tools-backends
+makepkg -si
+
+yay -S gnome-system-tools
+
+<span class="token comment"># Now Clean Your AUR Clones Directory</span>
+</code></pre>
+<p><strong>Make XFCE4 look good!</strong></p>
+<p><strong>Theme and Fonts - For Kali Look</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S arc-gtk-theme arc-icon-theme
+yay -S flat-remix cantatel-fonts
+<span class="token comment"># sudo pacman -S futurist - Deprevated</span>
+</code></pre>
+<p><strong>Plank</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash">yay -S plank  <span class="token comment"># Dock like OSX</span>
+yay -S plank-theme-arc
+</code></pre>
+<p><strong>Desktop</strong></p>
+<ol>
+<li>Right-Clock on Desktop -&gt; Settings:</li>
+<li>Select <em>usr/share/backgrounds/archlinux</em> as background folder and choose a nice background</li>
+<li>Symbols -&gt; Default Icons:
+<ul>
+<li>Deselect Home and Filesystem.</li>
+<li>Iconsize: 40</li>
+<li>Show icon tooltips. Size: 100</li>
+</ul>
+</li>
+</ol>
+<p><strong>Theme, Icon and Font</strong><br>
+Settings-&gt;Appearance:</p>
+<ol>
+<li>Style: Arc-Dark</li>
+<li>Icons: Flat-Remix-Blue-Dark</li>
+<li>Fonts:
+<ul>
+<li>Default Font: Cantarel Regular - 11</li>
+<li>Default Monospace Font: Fira Code Medium - 10</li>
+<li>Rendering:
+<ul>
+<li>Hinting: Low (Gering)</li>
+<li>Sub-Pixel order: RGB</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>Settings-&gt;Window Manager:</p>
+<ol>
+<li>Style:
+<ul>
+<li>Style: Arc-Dark</li>
+<li>Title Font: Cantarel Bold - 9</li>
+<li>Hide arrow up</li>
+</ul>
+</li>
+</ol>
+<p>For more Themes visit <a href="https://www.xfce-look.org/">this Page</a></p>
+<h5 id="terminal">Terminal</h5>
+<p><img src="https://normannator.de/archlinux/IMG/term-1.png" alt="enter image description here"><br>
+<img src="https://normannator.de/archlinux/IMG/term-2.png" alt="enter image description here"><br>
+<img src="https://normannator.de/archlinux/IMG/term-3.png" alt="enter image description here"><br>
+<img src="https://normannator.de/archlinux/IMG/term-4.png" alt="enter image description here"><br>
+<img src="https://normannator.de/archlinux/IMG/term-5.png" alt="enter image description here"><br>
+<img src="https://normannator.de/archlinux/IMG/term-6.png" alt="enter image description here"></p>
+<p><strong>LightDM Settings</strong><br>
+Theme: Arc-Dark<br>
+Icon: Arc<br>
+Font: Cantarel Bold - 10</p>
+<p><strong>Screensaver</strong><br>
+Settings-&gt;Screensaver:</p>
+<ul>
+<li>Floating XFCE</li>
+<li>Disable: Lock Screen with System Sleep<br>
+Settings-&gt;Keyboard: xflock4 (default Ctrl+Alt+L/Delete)</li>
+</ul>
+<p><strong>Whisker-Menu</strong><br>
+Delete the Old Menu Button and add the installed Wisker Menu to the Top Panel.<br>
+Right Click and Open Settings of Whisker Menu:</p>
+<ul>
+<li>List view</li>
+<li>Symbol-Size: Small</li>
+<li>Symbol Category: Smaller</li>
+<li>Head-&gt;Symbol only + Symbol -&gt; ArchLinux Symbol</li>
+<li>Behaviour: Select on Hover</li>
+</ul>
+<p>Settings-&gt;Keyboard-&gt;Shortcuts: add on pressing <em>super</em> (Windows Button): xfce4-popup-whiskermenu</p>
+<p><strong>More Configuration</strong><br>
+Open Whisker-Menu and Klick on the User Icon:<br>
+-&gt; Mugshot should open: Enter your Credentials</p>
+<p>In Settings: Type “User” and Open: <em>User Settings</em> (gnome-system-tools)<br>
+Administrate User and Groups …</p>
+<p>Logout and Login again that the changes take effect.</p>
+<p><strong>Config Light DM Greeter</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman lightdm-webkit2-greeter
+
+<span class="token comment"># Open /etc/lightdm/lightdm.conf</span>
+user-session<span class="token operator">=</span>awesome <span class="token comment"># your user-session -&gt; ls /usr/share/xsessions/*.desktop</span>
+
+greeter-session<span class="token operator">=</span>lightdm-webkit2-greeter
+</code></pre>
+<hr>
+<hr>
+<hr>
 <h4 id="gnome">GNOME</h4>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S gnome gnome-extra gdm  
 <span class="token function">sudo</span> systemctl <span class="token function">enable</span> gdm.service  
@@ -651,12 +798,13 @@ yay -S gnome-terminal-transparency
 -   Tiling Assistant <span class="token punctuation">(</span>dep?<span class="token operator">!</span><span class="token punctuation">)</span>
 -   User Themes
 </code></pre>
+<hr>
 <h3 id="exit-and-reboot">Exit and Reboot</h3>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token keyword">exit</span>
 <span class="token function">umount</span> -a
 <span class="token function">reboot</span>
 </code></pre>
-<h2 id="config---the-xfce4-desktop-environment">Config - The XFCE4 Desktop Environment</h2>
+<h2 id="config---os">Config - OS</h2>
 <h3 id="connect-to-internet">Connect to Internet</h3>
 <h4 id="with-wifi">With Wifi</h4>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># newer way:</span>
@@ -755,224 +903,110 @@ grub-mkconfig -o /boot/grub/grub.cfg
 <span class="token comment"># Reboot and make sure that you can login to your desktop</span>
 <span class="token comment"># If everything workes fine, feel free to remove your Backup (done before)</span>
 </code></pre>
-<h3 id="install-timeshift">Install Timeshift</h3>
-<pre class=" language-bash"><code class="prism  language-bash">yay -S timeshift
-</code></pre>
-<h3 id="set-up-virtualbox">Set up VirtualBox</h3>
-<p>Follow the instructions on the following <a href="https://wiki.archlinux.org/title/VirtualBox">site</a></p>
-<p><strong>Deprecated</strong></p>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S virtualbox-host-modules-arch virtualbox-guest-iso
-<span class="token function">sudo</span> gpasswd -a <span class="token operator">&lt;</span>user<span class="token operator">&gt;</span> vboxusers
-systemctl <span class="token function">enable</span> dkms
-<span class="token function">sudo</span> <span class="token function">nano</span> /etc/modules-load.d/my-modules.conf
---<span class="token operator">&gt;</span> add: vboxdrv
-<span class="token function">reboot</span> <span class="token comment"># optional</span>
-</code></pre>
 <h3 id="generate-ssh-key">Generate SSH-Key</h3>
 <pre class=" language-bash"><code class="prism  language-bash">ssh-keygen -t rsa -b 4096
 </code></pre>
 <h3 id="main-maintenance">Main Maintenance</h3>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S xfce4-session xorg-xrandr
-<span class="token function">sudo</span> pacman -S xfce4-whiskermenu-plugin
-<span class="token function">sudo</span> pacman -S alacarte 
-yay -S menulibre xame
-<span class="token function">sudo</span> pacman -S gambas3-gb-gtk3 libcanberra libcanberra-pulse sound-theme-freedesktop
-<span class="token comment"># Description #</span>
-<span class="token comment"># alacarte  # Menu editor for gnome</span>
-<span class="token comment"># menulibre  # An advanced menu editor that provides modern features in a clean, easy-to-use interface</span>
-<span class="token comment"># xame  # XFCE Applications Menu Editor</span>
-<span class="token comment"># gambas3-gb-gtk3  # GTK3 toolkit component</span>
-<span class="token comment"># libcanberra + libcanberra-pulse  # A small and lightweight implementation of the XDG Sound Theme Specification</span>
-<span class="token comment"># sound-theme-freedesktop  # Freedesktop sound theme</span>
-
-yay -S sound-theme-smooth xfce4-volumed-pulse xfce4-mixer 
-<span class="token function">sudo</span> pacman -S xfce4-pulseaudio-plugin xscreensaver udevil udiskie thunar thunar-volman thunar-archive-plugin thunar-media-tags-plugin
-<span class="token comment"># Description #</span>
-<span class="token comment"># udevil  # Mount and unmount without password</span>
-<span class="token comment"># udiskie  # Removable disk automounter using udisks</span>
-
-<span class="token function">sudo</span> pacman -S networkmanager-openvpn
+<p><strong>SSH</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># sudo systemctl enable sshd</span>
+<span class="token comment"># sudo systemctl start sshd</span>
+<span class="token comment"># -&gt; Already done, if not, run this commands</span>
+</code></pre>
+<p><strong>OpenVPN</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Setup OpenVPN</span>
+<span class="token function">sudo</span> pacman -S openvpn networkmanager-openvpn
 systemctl restart networkmanager
-
-<span class="token function">sudo</span> pacman -S ffmpegthumbnailer tumbler raw-thumbnailer libgsf catfish mlocate
-yay -S env-modules <span class="token comment"># alzernatively env-modules-tcl</span>
-<span class="token comment"># yay -S xfce4-sensors-plugin-nvidia - DEPRECATED</span>
-<span class="token comment"># Description #</span>
-<span class="token comment"># ffmpegthumbnailer  # Lightweight video thumbnailer that can be used by file managers.</span>
-<span class="token comment"># tumbler  # D-Bus service for applications to request thumbnails</span>
-<span class="token comment"># raw-thumbnailer  # A lightweight and fast raw image thumbnailer that can be used by file managers.</span>
-<span class="token comment"># libgsf  # An extensible I/O abstraction library for dealing with structured file formats</span>
-<span class="token comment"># catfish  # Versatile file searching tool</span>
-<span class="token comment"># mlocate  # Merging locate/updatedb implementation</span>
-<span class="token comment"># env-modules/-tcl  # Provides for an easy dynamic modification of a user's environment via modulefile.</span>
+<span class="token comment"># import openvpn config with:</span>
+openvpn <span class="token function">import</span> --config <span class="token operator">&lt;</span>config-incl-path<span class="token operator">&gt;</span>
+nmcli connection <span class="token function">import</span> <span class="token function">type</span> openvpn <span class="token function">file</span> <span class="token operator">&lt;</span>file-to-ovpn<span class="token operator">&gt;</span>
+</code></pre>
+<p><strong>Misc</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S ffmpegthumbnailer  <span class="token comment"># Lightweight video thumbnailer that can be used by file managers.</span>
+<span class="token function">sudo</span> pacman -S raw-thumbnailer  <span class="token comment"># A lightweight and fast raw image thumbnailer that can be used by file managers.</span>
 
 <span class="token function">sudo</span> pacman -S xarchiver file-roller ark archlinux-wallpaper xwallpaper archivetools archlinux-menu archlinux-themes-slim archlinux-xdg-menu fastjar
 </code></pre>
-<h3 id="xfce4-settings">XFCE4 Settings</h3>
-<h4 id="popup-menu-on-windows-icon">Popup Menu on Windows-Icon</h4>
-<p>In Keyboard Shortcuts set <code>xfce4-popup-whiskermenu</code> run on windows-key</p>
-<h4 id="setup-theme-and-fonts">setup Theme and Fonts</h4>
+<p><strong>Theme and Fonts - For Kali Look</strong><br>
+If not already done in XFCE</p>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S arc-gtk-theme arc-icon-theme
 yay -S flat-remix cantatel-fonts
 <span class="token comment"># sudo pacman -S futurist - Deprevated</span>
 </code></pre>
-<h4 id="setup-undercover">setup undercover</h4>
-<pre class=" language-bash"><code class="prism  language-bash">yay -S kali-undercover
-<span class="token function">alias</span> ku<span class="token operator">=</span>/usr/bin/kali-undercover
-
-<span class="token comment">#### cmatrix is the opposite ;) </span>
-
-</code></pre>
-<h4 id="add-additional-packages">add additional packages</h4>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># sudo systemctl enable sshd</span>
-<span class="token comment"># sudo systemctl start sshd</span>
-<span class="token comment"># -&gt; Already done, if not, run this commands</span>
-
-<span class="token function">sudo</span> pacman -S redshift
-<span class="token punctuation">(</span>sudo systemctl <span class="token function">enable</span> redshift<span class="token punctuation">)</span>
-
-yay -S xfce4-screensaver mugshot gnome-system-tools
-
-<span class="token comment"># To Install this, you need to do some more complicated stuff</span>
-<span class="token function">git</span> clone https://aur.archlinux.org/gnome-system-tools.git
-<span class="token function">cd</span> gnome-system-tools/
-makepkg -si
-yay -S gnome-doc-utils
-yay -S liboobs -<span class="token operator">&gt;</span> <span class="token function">git</span> clone https://aur.archlinux.org/liboobs.git
-<span class="token function">cd</span> liboobs
-<span class="token function">nano</span> PKGBUILD <span class="token punctuation">(</span>change FTP <span class="token punctuation">(</span>first to HTTP/S<span class="token punctuation">)</span>
-makepkg -si <span class="token punctuation">(</span>maybe edit PKGBUILD<span class="token punctuation">)</span>
-yay -S system-tools-backends
-makepkg -si
-
-yay -S gnome-system-tools
-<span class="token comment"># Now Clean Your AUR Clones Directory</span>
-
-<span class="token function">sudo</span> pacman -S openvpn networkmanager-openvpn
-<span class="token comment"># import openvpn config with:</span>
-openvpn <span class="token function">import</span> --config <span class="token operator">&lt;</span>config-incl-path<span class="token operator">&gt;</span>
-nmcli connection <span class="token function">import</span> <span class="token function">type</span> openvpn <span class="token function">file</span> <span class="token operator">&lt;</span>file-to-ovpn<span class="token operator">&gt;</span>
-
-yay -S pycharm-professional
-</code></pre>
-<h4 id="make-xfce4-look-good">Make XFCE4 look good!</h4>
-<h5 id="plank">Plank</h5>
-<pre class=" language-bash"><code class="prism  language-bash">yay -S plank  <span class="token comment"># Dock like OSX</span>
-yay -S plank-theme-arc
-</code></pre>
-<h5 id="desktop">Desktop</h5>
-<ol>
-<li>Right-Clock on Desktop -&gt; Settings:</li>
-<li>Select <em>usr/share/backgrounds/archlinux</em> as background folder and choose a nice background</li>
-<li>Symbols -&gt; Default Icons:
-<ul>
-<li>Deselect Home and Filesystem.</li>
-<li>Iconsize: 40</li>
-<li>Show icon tooltips. Size: 100</li>
-</ul>
-</li>
-</ol>
-<h5 id="theme-icon-and-font">Theme, Icon and Font</h5>
-<p>Settings-&gt;Appearance:</p>
-<ol>
-<li>Style: Arc-Dark</li>
-<li>Icons: Flat-Remix-Blue-Dark</li>
-<li>Fonts:
-<ul>
-<li>Default Font: Cantarel Regular - 11</li>
-<li>Default Monospace Font: Fira Code Medium - 10</li>
-<li>Rendering:
-<ul>
-<li>Hinting: Low (Gering)</li>
-<li>Sub-Pixel order: RGB</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<p>Settings-&gt;Window Manager:</p>
-<ol>
-<li>Style:
-<ul>
-<li>Style: Arc-Dark</li>
-<li>Title Font: Cantarel Bold - 9</li>
-<li>Hide arrow up</li>
-</ul>
-</li>
-</ol>
-<p>For more Themes visit <a href="https://www.xfce-look.org/">this Page</a></p>
-<h5 id="terminal">Terminal</h5>
-<p><img src="https://normannator.de/archlinux/IMG/term-1.png" alt="enter image description here"><br>
-<img src="https://normannator.de/archlinux/IMG/term-2.png" alt="enter image description here"><br>
-<img src="https://normannator.de/archlinux/IMG/term-3.png" alt="enter image description here"><br>
-<img src="https://normannator.de/archlinux/IMG/term-4.png" alt="enter image description here"><br>
-<img src="https://normannator.de/archlinux/IMG/term-5.png" alt="enter image description here"><br>
-<img src="https://normannator.de/archlinux/IMG/term-6.png" alt="enter image description here"></p>
-<h5 id="lightdm-settings">LightDM Settings</h5>
-<p>Theme: Arc-Dark<br>
-Icon: Arc<br>
-Font: Cantarel Bold - 10</p>
-<h5 id="screensaver">Screensaver</h5>
-<p>Settings-&gt;Screensaver:</p>
-<ul>
-<li>Floating XFCE</li>
-<li>Disable: Lock Screen with System Sleep<br>
-Settings-&gt;Keyboard: xflock4 (default Ctrl+Alt+L/Delete)</li>
-</ul>
-<h5 id="whisker-menu">Whisker-Menu</h5>
-<p>Delete the Old Menu Button and add the installed Wisker Menu to the Top Panel.<br>
-Right Click and Open Settings of Whisker Menu:</p>
-<ul>
-<li>List view</li>
-<li>Symbol-Size: Small</li>
-<li>Symbol Category: Smaller</li>
-<li>Head-&gt;Symbol only + Symbol -&gt; ArchLinux Symbol</li>
-<li>Behaviour: Select on Hover</li>
-</ul>
-<p>Settings-&gt;Keyboard-&gt;Shortcuts: add on pressing <em>super</em> (Windows Button): xfce4-popup-whiskermenu</p>
-<h4 id="more-configuration">More Configuration</h4>
-<p>Open Whisker-Menu and Klick on the User Icon:<br>
--&gt; Mugshot should open: Enter your Credentials</p>
-<p>In Settings: Type “User” and Open: <em>User Settings</em> (gnome-system-tools)<br>
-Administrate User and Groups …</p>
-<p>Logout and Login again that the changes take effect.</p>
-<p>Usefull Shortcuts:</p>
+<p><strong>Setup Useful Shortcuts</strong></p>
 <ul>
 <li>Super + T: Terminal</li>
 <li>Super + C: Chrome</li>
 <li>Super + F: File Manager</li>
 </ul>
+<hr>
+<h3 id="must-have-programms--packages">Must Have Programms / Packages</h3>
+<p><strong>Redshift</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># GNOME has it's own</span>
+<span class="token function">sudo</span> pacman -S redshift
+<span class="token punctuation">(</span>sudo systemctl <span class="token function">enable</span> redshift<span class="token punctuation">)</span>
+</code></pre>
+<p><strong>Install Timeshift - Backup Your Data!</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash">yay -S timeshift
+</code></pre>
+<p><strong>Brave</strong><br>
+Most secure Browser on earth…</p>
+<pre class=" language-bash"><code class="prism  language-bash">yay -S brave-bin
+</code></pre>
 <h3 id="and-more-programms-all-optional">And More Programms (all optional)</h3>
+<p><strong>Kali-Undercover</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash">yay -S kali-undercover
+<span class="token function">alias</span> ku<span class="token operator">=</span>/usr/bin/kali-undercover
+
+<span class="token comment">#### cmatrix is the opposite ;) </span>
+</code></pre>
+<p><strong>Pycharm-Professional</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash">yay -S pycharm-professional
+</code></pre>
+<p><strong>VirtualBox</strong></p>
+<pre><code>Follow the instructions on the following [site](https://wiki.archlinux.org/title/VirtualBox)
+
+**Deprecated - Just read the link above!!!**
+```bash
+sudo pacman -S virtualbox-host-modules-arch virtualbox-guest-iso
+sudo gpasswd -a &lt;user&gt; vboxusers
+systemctl enable dkms
+sudo nano /etc/modules-load.d/my-modules.conf
+--&gt; add: vboxdrv
+reboot # optional
+</code></pre>
+<p><strong>Git Tools</strong></p>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Version Control</span>
 yay -S github-desktop
 yay -S gitkraken
-
-<span class="token comment"># KVM Integration</span>
-<span class="token function">sudo</span> pacman -S qemu virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat
-
-<span class="token comment"># Python PIP</span>
-<span class="token function">sudo</span> pacman -S python-pip
+</code></pre>
+<p><strong>KVM Integration</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S qemu virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat
+</code></pre>
+<p><strong>Python Tools</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S python-pip
 
 <span class="token comment"># For Python Code Checking</span>
 pip3 <span class="token function">install</span> pylint
-
-<span class="token comment"># install Zoom Client</span>
+</code></pre>
+<p><strong>ZOOM Client</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># install Zoom Client</span>
 yay -S zoom
-
-<span class="token comment"># Write IMAGES to USB-Drives</span>
+</code></pre>
+<p><strong>Balena-Etcher</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Write IMAGES to USB-Drives</span>
 yay -S balena-etcher
-
-<span class="token comment"># Music Streaming</span>
+</code></pre>
+<p><strong>Spotify</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Music Streaming</span>
 yay -S spotify
-
-<span class="token comment"># communication</span>
+</code></pre>
+<p><strong>Slack</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># communication</span>
 yay -S slack-desktop
-
-<span class="token comment"># Instant Messaginger</span>
+</code></pre>
+<p><strong>Rambox</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Instant Messaginger</span>
 yay -S rambox
-
-<span class="token comment"># PDF Handler</span>
-yay -S foxitreader
 </code></pre>
 <p><strong>1Password</strong><br>
 <a href="https://support.1password.com/getting-started-linux/#arch-linux">Official Documentation</a></p>
@@ -994,7 +1028,10 @@ A simple video editor, but not that advanced compared to Davinci Resolve</p>
 <a href="https://wiki.archlinux.de/title/Graphische_Paketmanager">Link</a></p>
 <p><strong>VLC</strong><br>
 No Words needed</p>
-<p>**<a href="https://nitroshare.net/">NitroShare</a> - File Transfer Software **<br>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S vlc
+</code></pre>
+<p><strong>NitroShare- File Transfer Software</strong><br>
+<a href="https://nitroshare.net/">NitroShare.net</a><br>
 Allows cross-platform file sharing</p>
 <pre class=" language-bash"><code class="prism  language-bash">yay -S nitroshare
 </code></pre>
@@ -1005,17 +1042,8 @@ Take notes and sync them<br>
 <a href="https://snapcraft.io/install/simplenote/arch">Follow the instructions</a></p>
 <p><strong>No Adobe - Use the Libre Graphics Suite</strong><br>
 <a href="https://github.com/AppImage/AppImageKit/wiki/Libre-Graphics-Suite">Follow this link</a></p>
-<h3 id="additional-optional-packages">Additional Optional Packages</h3>
-<h4 id="config-light-dm-greeter">Config Light DM Greeter</h4>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman lightdm-webkit2-greeter
-
-<span class="token comment"># Open /etc/lightdm/lightdm.conf</span>
-user-session<span class="token operator">=</span>awesome <span class="token comment"># your user-session -&gt; ls /usr/share/xsessions/*.desktop</span>
-
-greeter-session<span class="token operator">=</span>lightdm-webkit2-greeter
-</code></pre>
-<h4 id="alternative-terminal-terminator">Alternative Terminal: Terminator</h4>
-<p>For More information click <a href="https://www.youtube.com/watch?v=iaXQdyHRL8M&amp;t=215s&amp;ab_channel=ChrisTitusTech">here</a></p>
+<p><strong>Alternative Terminal: Terminator</strong><br>
+For More information click <a href="https://www.youtube.com/watch?v=iaXQdyHRL8M&amp;t=215s&amp;ab_channel=ChrisTitusTech">here</a></p>
 <h2 id="post-steps-and-maintenance">Post Steps and Maintenance</h2>
 <h3 id="remove-orphans">Remove Orphans</h3>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -Rns <span class="token variable"><span class="token variable">$(</span>pacman -Qtdq<span class="token variable">)</span></span>  <span class="token comment"># Removes unused Packages</span>

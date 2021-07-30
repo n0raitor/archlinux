@@ -176,11 +176,12 @@ exit
 genfstab -U /mnt >> /mnt/etc/fstab  # (alt. change -U to -L to use Label instead of UUID
 cat /mnt/etc/fstab  # check gen
 
+arch-chroot /mnt  # Switch Back to Root
 # Edit Fstab (optional)
 nano /etc/fstab
 
 # Edit Crypttab (optional) -> Not used here
-nano /mnt/etc/crypttab  # Config encrypted block devices
+# nano /mnt/etc/crypttab  # Config encrypted block devices
 ```
 
 #### Edit Hosts file
@@ -222,7 +223,7 @@ blkid  # BlockID
 nano /etc/default/grub
 --> Edit: 
 ...
-GRUB_CMDLINE_LINUX="cryptdevice=UUID="<UUID-copied>:cryptlvm root=/dev/vg1/root"
+GRUB_CMDLINE_LINUX="cryptdevice=UUID="<UUID-copied>":cryptlvm root=/dev/vg1/root"
 
 grub-mkconfig -o /boot/grub/grub.cfg  # Generate Grub config file
 ```
@@ -256,9 +257,17 @@ pacman-key --refresh-keys  # Refresh pacman keys
 # evtl. edit pacman.conf -> SigLevel
 gpg --recv-keys  # Add GPG key (optional-additional)
 ```
+### Add Accounts
+```bash
+useradd -m -g users -s /bin/bash <name>
+passwd <name>
+EDITOR=nano visudo
+--> Uncomment: # %wheel ALL=(ALL) ALL
+gpasswd -a <user> wheel  # add user to wheel group
+gpasswd -a <user> audio,video,games,power
+```
 
 ### Install
-
 
 #### Install YAY
 Change to User - This is required, because yay can't run as root because it uses the fake root to install packages.
@@ -273,7 +282,7 @@ makepkg -si
 If you prefer using yay as root, use the following command instead (2. Method)
 ```bash
 # the command yay -S <name>
-sudo -u <username> yay -S <name>
+sudo -u <username-that-is-not-root> yay -S <name>
 ```
 
 ##### Installation (if you want to use yay)
@@ -288,7 +297,6 @@ cd yay/
 makepkg -si PKGBUILD
 # Alternativ Package Installer: trizen, aurman, yaourt (End of life)
 ```
-
 If you are using root to install this packages, run this commands as they are. If you use an other user to install the packages, use the prefix ```sudo ```
 
 #### Console
@@ -309,7 +317,7 @@ pacman -S usbutils dialog powertop
 pacman -S zip unzip unrar p7zip lzop
 
 ### Network Tools
-pacman -S rsync traceroute bind-tools
+pacman -S rsync traceroute bind
 # optional #
 # dnsutils  # DNS tools (nslookup)
 # nmap  # Network Scanner
@@ -396,9 +404,9 @@ pacman -S ttf-bitstream-vera ttf-dejavu ttf-liberation adobe-source-sans-pro-fon
 # xorg-fonts-type1 
 
 ### Fonts - Misc
-pacman -S ttf-anonymous-pro ttf-droid ttf-gentium  ttf-ubuntu-font-family ttf-ms-fonts ttf-roboto ttf-roboto-mono ttf-font-awesome
+pacman -S ttf-anonymous-pro ttf-droid   ttf-ubuntu-font-family ttf-roboto ttf-roboto-mono ttf-font-awesome
 # for my purpose
-yay -S ttf-hackgen
+yay -S ttf-hackgen ttf-gentium-basic ttf-ms-fonts
 pacman -S ttf-fira-code
 # For More Fonts: pacman -Ss ttf
 
@@ -416,7 +424,7 @@ pacman -S xf86-input-synaptics (optional: Laptop Touchpad-Driver)
 ### video drivers
 
 # Proprietary
-sudo pacman -S nvidia
+sudo pacman -S nvidia (if linux-lts -> nvidia-lts)
 # optional #
 # virtualbox-guest-utils  # (For Virtualbox)
 # nvidia-390xx  # (AUR) End of life
@@ -447,12 +455,7 @@ Choose one of the following:
 10. Openbox
 11. Deepin
 
-In my case I choosed: **XFCE4**
-```bash
-sudo pacman -S --needed xfce4 xfce4-goodies lightdm lightdm-gtk-greeter lightdm-gkt-greeter-settings (gvfs-afc) udisks2 network-manager-applet
-
-sudo systemctl enable lightdm
-```
+**See next Chapter**
 
 *TODO - Package installation guide for the Desktop Environments above* (mit archdi - hint)
 
@@ -462,6 +465,7 @@ Alternatives:
 * gdm
 * sddm
 * lxdm
+-> See Your Desktop Environment Conditions
 
 #### Applications
 
@@ -592,6 +596,49 @@ use the the folowing rows:
 ``` alias <left>="<right">```
 The (n) notation means, that there are n ways of signing this alias. Do not use this (n) e.g. (1) in the alias notation!
 ![enter image description here](https://normannator.de/archlinux/IMG/Alias.PNG)
+
+Edit the ~/.bashrc file to add alias permanently for your user.
+
+Example Alias Config Section:
+```bash
+# Main ALIAS
+alias ls="ls --color=auto"
+alias l="ls --color=auto -lA --time-style long-iso"
+alias ll="ls --color=auto -la --time-style long-iso"
+alias cd..="cd .."
+alias ..="cd .."
+alias ...="cd ../../"
+alias ....="cd ../../../"
+alias .....="cd ../../../../"
+alias ff="find / -name"
+alias f="find . -name"
+alias grep="grep --color=auto"
+alias egrep="egrep --color=auto"
+alias fgrep="fgrep --color=auto"
+alias ip="alias ip='ip -c'"
+alias pacman="pacman --color auto"
+alias pactree="pactree --color"
+alias vdir="vdir --color=auto"
+alias watch="watch --color"
+alias man="color function"
+alias yay="sudo -u norman yay"
+alias browser="midori &"
+
+# Kali Undercover Mode
+alias panic="kali-undercover"
+alias ku="kali-undercover"
+alias qwer="kali-undercover"
+
+# CUSTOM Additional ALIAS
+alias pgadmin="sudo /usr/pgadmin4/bin/pgadmin4"
+alias haskel="ghci"
+alias cyberghost="sudo cyberghostvpn --traffic sudo cyberghostvpn --traffic --connect --country-code"
+alias cyberghostlist="cyberghostvpn --traffic --country-code"
+alias spotifys="spotify --force-device-scale-factor=2.0 %U"
+alias vi="vim"
+```
+
+**Optional**
 ```bash
 nano /etc/profile.d/ps1.sh  # (optional)
 # Minimal				/home #
@@ -623,26 +670,16 @@ sudo ufw status verbose
 sudo systemctl enable ufw.service
 ```
 
-#### Accounts
-```bash
-useradd -m -g users -s /bin/bash <name>
-passwd <name>
-EDITOR=nano visudo
---> Uncomment: # %wheel ALL=(ALL) ALL
-gpasswd -a <user> wheel  # add user to wheel group
-gpasswd -a <user> audio,video,games,power
-```
-
 #### Systemd
 
-##### Services
+##### Enable installed services
 ```bash
 Enable or Disable Services
 systemctl enable NetworkManager
 systemctl enable cups.service # previously installed
 systemctl enable sshd.service # ssh Service
 ```
-###### Set up Services
+##### Set up important Services
 ```bash
 pacman -S acpid dbus avahi
 
@@ -675,6 +712,186 @@ pacman -S  gst-libav gst-plugins-good  # Multimedia graph framework
 pacman -S icedtea-web  # Additional components for OpenJDK - Browser plug-in and Web Start implementation (optional)
 ```
 
+### Install Desktop Environment
+------
+#### XFCE4
+```bash
+sudo pacman -S --needed xfce4 xfce4-goodies lightdm lightdm-gtk-greeter lightdm-gkt-greeter-settings (gvfs-afc) udisks2 network-manager-applet
+
+sudo systemctl enable lightdm
+sudo systemctl start lightdm
+```
+**XFCE Specific Config**
+```bash
+sudo pacman -S xfce4-session xorg-xrandr
+sudo pacman -S xfce4-whiskermenu-plugin
+sudo yay -S alacarte-xfce (not tested)
+yay -S menulibre xame
+sudo pacman -S gambas3-gb-gtk3 libcanberra libcanberra-pulse sound-theme-freedesktop
+# Description #
+# alacarte  # Menu editor for gnome
+# menulibre  # An advanced menu editor that provides modern features in a clean, easy-to-use interface
+# xame  # XFCE Applications Menu Editor
+# gambas3-gb-gtk3  # GTK3 toolkit component
+# libcanberra + libcanberra-pulse  # A small and lightweight implementation of the XDG Sound Theme Specification
+# sound-theme-freedesktop  # Freedesktop sound theme
+
+yay -S sound-theme-smooth xfce4-volumed-pulse xfce4-mixer 
+sudo pacman -S xfce4-pulseaudio-plugin xscreensaver udevil udiskie thunar thunar-volman thunar-archive-plugin thunar-media-tags-plugin
+# Description #
+# udevil  # Mount and unmount without password
+# udiskie  # Removable disk automounter using udisks
+
+sudo pacman -S tumbler libgsf catfish mlocate  # Thunar Specific Packages
+yay -S env-modules # alternatively env-modules-tcl
+# yay -S xfce4-sensors-plugin-nvidia - DEPRECATED
+
+Description
+# tumbler  # D-Bus service for applications to request thumbnails
+# libgsf  # An extensible I/O abstraction library for dealing with structured file formats
+# catfish  # Versatile file searching tool
+# mlocate  # Merging locate/updatedb implementation
+# env-modules/-tcl  # Provides for an easy dynamic modification of a user's environment via modulefile.
+```
+
+**XFCE4 Settings**
+
+#### Popup Menu on Windows-Icon
+In Keyboard Shortcuts set ```xfce4-popup-whiskermenu``` run on windows-key
+
+yay -S xfce4-screensaver mugshot gnome-system-tools
+
+```bash
+# To Install this, you need to do some more complicated stuff
+git clone https://aur.archlinux.org/gnome-system-tools.git
+cd gnome-system-tools/
+makepkg -si
+yay -S gnome-doc-utils
+yay -S liboobs -> git clone https://aur.archlinux.org/liboobs.git
+cd liboobs
+nano PKGBUILD (change FTP (first to HTTP/S)
+makepkg -si (maybe edit PKGBUILD)
+yay -S system-tools-backends
+makepkg -si
+
+yay -S gnome-system-tools
+
+# Now Clean Your AUR Clones Directory
+```
+
+**Make XFCE4 look good!**
+
+**Theme and Fonts - For Kali Look**
+```bash
+sudo pacman -S arc-gtk-theme arc-icon-theme
+yay -S flat-remix cantatel-fonts
+# sudo pacman -S futurist - Deprevated
+```
+
+**Plank**
+```bash
+yay -S plank  # Dock like OSX
+yay -S plank-theme-arc
+```
+
+**Desktop**
+1. Right-Clock on Desktop -> Settings:
+2. Select *usr/share/backgrounds/archlinux* as background folder and choose a nice background
+3. Symbols -> Default Icons: 
+	* Deselect Home and Filesystem.
+	* Iconsize: 40
+	* Show icon tooltips. Size: 100
+
+**Theme, Icon and Font**
+Settings->Appearance:
+1. Style: Arc-Dark
+2. Icons: Flat-Remix-Blue-Dark
+3. Fonts: 
+	* Default Font: Cantarel Regular - 11
+	* Default Monospace Font: Fira Code Medium - 10
+	* Rendering:
+		* Hinting: Low (Gering)
+		* Sub-Pixel order: RGB
+
+Settings->Window Manager:
+1. Style: 
+	* Style: Arc-Dark
+	* Title Font: Cantarel Bold - 9
+	* Hide arrow up
+
+For more Themes visit [this Page](https://www.xfce-look.org/)
+
+##### Terminal
+![enter image description here](https://normannator.de/archlinux/IMG/term-1.png)
+![enter image description here](https://normannator.de/archlinux/IMG/term-2.png)
+![enter image description here](https://normannator.de/archlinux/IMG/term-3.png)
+![enter image description here](https://normannator.de/archlinux/IMG/term-4.png)
+![enter image description here](https://normannator.de/archlinux/IMG/term-5.png)
+![enter image description here](https://normannator.de/archlinux/IMG/term-6.png)
+
+**LightDM Settings**
+Theme: Arc-Dark
+Icon: Arc
+Font: Cantarel Bold - 10
+
+**Screensaver**
+Settings->Screensaver: 
+* Floating XFCE
+* Disable: Lock Screen with System Sleep
+Settings->Keyboard: xflock4 (default Ctrl+Alt+L/Delete)
+
+**Whisker-Menu**
+Delete the Old Menu Button and add the installed Wisker Menu to the Top Panel.
+Right Click and Open Settings of Whisker Menu:
+* List view
+* Symbol-Size: Small
+* Symbol Category: Smaller
+* Head->Symbol only + Symbol -> ArchLinux Symbol 
+* Behaviour: Select on Hover
+
+Settings->Keyboard->Shortcuts: add on pressing *super* (Windows Button): xfce4-popup-whiskermenu
+
+**More Configuration**
+Open Whisker-Menu and Klick on the User Icon:
+-> Mugshot should open: Enter your Credentials
+
+In Settings: Type "User" and Open: *User Settings* (gnome-system-tools)
+Administrate User and Groups ...
+
+Logout and Login again that the changes take effect.
+
+**Config Light DM Greeter**
+```bash
+sudo pacman lightdm-webkit2-greeter
+
+# Open /etc/lightdm/lightdm.conf
+user-session=awesome # your user-session -> ls /usr/share/xsessions/*.desktop
+
+greeter-session=lightdm-webkit2-greeter
+```
+----
+-----
+----
+#### GNOME
+```bash
+sudo pacman -S gnome gnome-extra gdm  
+sudo systemctl enable gdm.service  
+sudo systemctl start gdm.service
+
+#Download Gnome-Extensions aus dem Gnome-Software-Store  
+sudo pacman -S gnome-software-packagekit-plugin #Damit man auf das AUR und Pacman mit dem Softwarecenter von Gnome zugreifen kann.  
+#github.com:BenJetson/gnome-dash-fix.git #Gnome Kategorien in Anwendungsmenü automatisch generieren  
+gsettings set #org.gnome.desktop.peripherals.touchpad click-method areas #Lösen von Gnome problemen für Touchpads von Laptops  
+yay -S gnome-terminal-transparency  
+#-> Say YES to deinstall the old terminal  
+#Extensions im Browser (mit Plugin und gnome-shell-extension (yay)):
+
+-   Dash to Plank (optional)
+-   Espresso # vgl. Präsentationsmodus
+-   Tiling Assistant (dep?!)
+-   User Themes
+```
+---
 ### Exit and Reboot
 ```bash
 exit
@@ -682,7 +899,7 @@ umount -a
 reboot
 ```
 
-## Config - The XFCE4 Desktop Environment
+## Config - OS
 
 ### Connect to Internet
 
@@ -795,12 +1012,90 @@ reboot
 # If everything workes fine, feel free to remove your Backup (done before)
 ```
 
-### Install Timeshift
+
+### Generate SSH-Key
+```bash
+ssh-keygen -t rsa -b 4096
+```
+
+### Main Maintenance
+**SSH**
+```bash
+# sudo systemctl enable sshd
+# sudo systemctl start sshd
+# -> Already done, if not, run this commands
+```
+**OpenVPN**
+```bash
+# Setup OpenVPN
+sudo pacman -S openvpn networkmanager-openvpn
+systemctl restart networkmanager
+# import openvpn config with:
+openvpn import --config <config-incl-path>
+nmcli connection import type openvpn file <file-to-ovpn>
+```
+
+**Misc**
+```bash
+sudo pacman -S ffmpegthumbnailer  # Lightweight video thumbnailer that can be used by file managers.
+sudo pacman -S raw-thumbnailer  # A lightweight and fast raw image thumbnailer that can be used by file managers.
+
+sudo pacman -S xarchiver file-roller ark archlinux-wallpaper xwallpaper archivetools archlinux-menu archlinux-themes-slim archlinux-xdg-menu fastjar
+```
+
+**Theme and Fonts - For Kali Look**
+If not already done in XFCE
+```bash
+sudo pacman -S arc-gtk-theme arc-icon-theme
+yay -S flat-remix cantatel-fonts
+# sudo pacman -S futurist - Deprevated
+```
+
+**Setup Useful Shortcuts**
+- Super + T: Terminal
+- Super + C: Chrome
+- Super + F: File Manager
+
+---
+### Must Have Programms / Packages
+
+**Redshift**
+```bash
+# GNOME has it's own
+sudo pacman -S redshift
+(sudo systemctl enable redshift)
+```
+
+**Install Timeshift - Backup Your Data!**
 ```bash
 yay -S timeshift
 ```
 
-### Set up VirtualBox
+**Brave**
+Most secure Browser on earth...
+```bash
+yay -S brave-bin
+```
+
+### And More Programms (all optional)
+
+**Kali-Undercover**
+```bash
+yay -S kali-undercover
+alias ku=/usr/bin/kali-undercover
+
+#### cmatrix is the opposite ;) 
+```
+**Pycharm-Professional**
+```bash
+yay -S pycharm-professional
+```
+
+**VirtualBox**
+```
+Follow the instructions on the following [site](https://wiki.archlinux.org/title/VirtualBox)
+
+**Deprecated - Just read the link above!!!**
 ```bash
 sudo pacman -S virtualbox-host-modules-arch virtualbox-guest-iso
 sudo gpasswd -a <user> vboxusers
@@ -810,216 +1105,56 @@ sudo nano /etc/modules-load.d/my-modules.conf
 reboot # optional
 ```
 
-### Generate SSH-Key
-```bash
-ssh-keygen -t rsa -b 4096
-```
-
-### Main Maintenance
-```bash
-sudo pacman -S xfce4-session xorg-xrandr
-sudo pacman -S xfce4-whiskermenu-plugin
-sudo pacman -S alacarte 
-yay -S menulibre xame
-sudo pacman -S gambas3-gb-gtk3 libcanberra libcanberra-pulse sound-theme-freedesktop
-# Description #
-# alacarte  # Menu editor for gnome
-# menulibre  # An advanced menu editor that provides modern features in a clean, easy-to-use interface
-# xame  # XFCE Applications Menu Editor
-# gambas3-gb-gtk3  # GTK3 toolkit component
-# libcanberra + libcanberra-pulse  # A small and lightweight implementation of the XDG Sound Theme Specification
-# sound-theme-freedesktop  # Freedesktop sound theme
-
-yay -S sound-theme-smooth xfce4-volumed-pulse xfce4-mixer 
-sudo pacman -S xfce4-pulseaudio-plugin xscreensaver udevil udiskie thunar thunar-volman thunar-archive-plugin thunar-media-tags-plugin
-# Description #
-# udevil  # Mount and unmount without password
-# udiskie  # Removable disk automounter using udisks
-
-sudo pacman -S networkmanager-openvpn
-systemctl restart networkmanager
-
-sudo pacman -S ffmpegthumbnailer tumbler raw-thumbnailer libgsf catfish mlocate
-yay -S env-modules # alzernatively env-modules-tcl
-# yay -S xfce4-sensors-plugin-nvidia - DEPRECATED
-# Description #
-# ffmpegthumbnailer  # Lightweight video thumbnailer that can be used by file managers.
-# tumbler  # D-Bus service for applications to request thumbnails
-# raw-thumbnailer  # A lightweight and fast raw image thumbnailer that can be used by file managers.
-# libgsf  # An extensible I/O abstraction library for dealing with structured file formats
-# catfish  # Versatile file searching tool
-# mlocate  # Merging locate/updatedb implementation
-# env-modules/-tcl  # Provides for an easy dynamic modification of a user's environment via modulefile.
-
-sudo pacman -S xarchiver file-roller ark archlinux-wallpaper xwallpaper archivetools archlinux-menu archlinux-themes-slim archlinux-xdg-menu fastjar
-```
-
-### XFCE4 Settings
-
-#### Popup Menu on Windows-Icon
-In Keyboard Shortcuts set ```xfce4-popup-whiskermenu``` run on windows-key
-
-#### setup Theme and Fonts
-```bash
-sudo pacman -S arc-gtk-theme arc-icon-theme
-yay -S flat-remix cantatel cantatel-fonts
-# sudo pacman -S futurist - Deprevated
-```
-#### setup undercover
-```bash
-yay -S kali-undercover
-alias ku=/usr/bin/kali-undercover
-
-#### cmatrix is the opposite ;) 
-
-```
-#### add additional packages
-```bash
-sudo systemctl enable sshd
-sudo systemctl start sshd
-
-sudo pacman -S redshift
-(sudo systemctl enable redshift)
-
-yay -S xfce4-screensaver mugshot gnome-system-tools
-
-# To Install this, you need to do some more complicated stuff
-git clone https://aur.archlinux.org/gnome-system-tools.git
-cd gnome-system-tools/
-makepkg -si
-yay -S gnome-doc-utils
-yay -S liboobs -> git clone https://aur.archlinux.org/liboobs.git
-cd liboobs
-nano PKGBUILD (change FTP (first to HTTP/S)
-makepkg -si (maybe edit PKGBUILD)
-yay -S system-tools-backends
-makepkg -si
-
-yay -S gnome-system-tools
-# Now Clean Your AUR Clones Directory
-
-sudo pacman -S openvpn networkmanager-openvpn
-# import openvpn config with:
-openvpn import --config <config-incl-path>
-nmcli connection import type openvpn file <file-to-ovpn>
-
-yay -S pycharm-professional
-```
-
-#### Make XFCE4 look good!
-
-##### Plank
-```bash
-yay -S plank  # Dock like OSX
-yay -S plank-theme-arc
-```
-##### Desktop
-1. Right-Clock on Desktop -> Settings:
-2. Select *usr/share/backgrounds/archlinux* as background folder and choose a nice background
-3. Symbols -> Default Icons: 
-	* Deselect Home and Filesystem.
-	* Iconsize: 40
-	* Show icon tooltips. Size: 100
-
-##### Theme, Icon and Font
-Settings->Appearance:
-1. Style: Arc-Dark
-2. Icons: Flat-Remix-Blue-Dark
-3. Fonts: 
-	* Default Font: Cantarell Regular - 11
-	* Default Monospace Font: Fira Code Medium - 10
-	* Rendering:
-		* Hinting: Low (Gering)
-		* Sub-Pixel order: RGB
-
-Settings->Window Manager:
-1. Style: 
-	* Style: Arc-Dark
-	* Title Font: Cantarell Bold - 9
-	* Hide arrow up
-
-For more Themes visit [this Page](https://www.xfce-look.org/)
-
-##### Terminal
-![enter image description here](https://normannator.de/archlinux/IMG/term-1.png)
-![enter image description here](https://normannator.de/archlinux/IMG/term-2.png)
-![enter image description here](https://normannator.de/archlinux/IMG/term-3.png)
-![enter image description here](https://normannator.de/archlinux/IMG/term-4.png)
-![enter image description here](https://normannator.de/archlinux/IMG/term-5.png)
-![enter image description here](https://normannator.de/archlinux/IMG/term-6.png)
-
-##### LightDM Settings
-Theme: Arc-Dark
-Icon: Arc
-Font: Cantarell Bold - 10
-
-##### Screensaver
-Settings->Screensaver: 
-* Floating XFCE
-* Disable: Lock Screen with System Sleep
-Settings->Keyboard: xflock4 (default Ctrl+Alt+L/Delete)
-
-##### Whisker-Menu
-Delete the Old Menu Button and add the installed Wisker Menu to the Top Panel.
-Right Click and Open Settings of Whisker Menu:
-* List view
-* Symbol-Size: Small
-* Symbol Category: Smaller
-* Head->Symbol only + Symbol -> ArchLinux Symbol 
-* Behaviour: Select on Hover
-
-Settings->Keyboard->Shortcuts: add on pressing *super* (Windows Button): xfce4-popup-whiskermenu
-
-#### More Configuration
-Open Whisker-Menu and Klick on the User Icon:
--> Mugshot should open: Enter your Credentials
-
-In Settings: Type "User" and Open: *User Settings* (gnome-system-tools)
-Administrate User and Groups ...
-
-Logout and Login again that the changes take effect.
-
-Edit the ~/.bashrc file to add alias permanently 
-
-Usefull Shortcuts:
-- Super + T: Terminal
-- Super + C: Chrome
-- Super + F: File Manager
-
-
-### And More Programms (all optional)
+**Git Tools**
 ```bash
 # Version Control
 yay -S github-desktop
 yay -S gitkraken
+```
 
-# KVM Integration
+**KVM Integration**
+```bash
 sudo pacman -S qemu virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat
+```
 
-# Python PIP
+**Python Tools**
+```bash
 sudo pacman -S python-pip
 
 # For Python Code Checking
 pip3 install pylint
+```
 
+**ZOOM Client**
+```bash
 # install Zoom Client
 yay -S zoom
+```
 
+**Balena-Etcher**
+```bash
 # Write IMAGES to USB-Drives
 yay -S balena-etcher
+```
 
+**Spotify**
+```bash
 # Music Streaming
 yay -S spotify
+```
 
+**Slack**
+```bash
 # communication
 yay -S slack-desktop
+```
 
+**Rambox**
+```bash
 # Instant Messaginger
 yay -S rambox
-
-# PDF Handler
-yay -S foxitreader
 ```
+
 **1Password**
 [Official Documentation](https://support.1password.com/getting-started-linux/#arch-linux)
 
@@ -1050,8 +1185,12 @@ yay -S kdenlive
 
 **VLC**
 No Words needed
+```bash
+sudo pacman -S vlc
+```
 
-**[NitroShare](https://nitroshare.net/) - File Transfer Software **
+**NitroShare- File Transfer Software**
+[NitroShare.net](https://nitroshare.net/) 
 Allows cross-platform file sharing
 ```bash
 yay -S nitroshare
@@ -1067,20 +1206,7 @@ Take notes and sync them
 **No Adobe - Use the Libre Graphics Suite**
 [Follow this link](https://github.com/AppImage/AppImageKit/wiki/Libre-Graphics-Suite)
 
-
-### Additional Optional Packages
-
-#### Config Light DM Greeter
-```bash
-sudo pacman lightdm-webkit2-greeter
-
-# Open /etc/lightdm/lightdm.conf
-user-session=awesome # your user-session -> ls /usr/share/xsessions/*.desktop
-
-greeter-session=lightdm-webkit2-greeter
-```
-
-#### Alternative Terminal: Terminator
+**Alternative Terminal: Terminator**
 For More information click [here](https://www.youtube.com/watch?v=iaXQdyHRL8M&t=215s&ab_channel=ChrisTitusTech)
 
 
@@ -1115,4 +1241,33 @@ sudo systemctl --failed sudo journalctl -p 3 -xb
 ### (optional) Backup your System manually
 ```bash
 sudo rsync -aAXvP --delete --exclude=/dev/* --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* --exclude=/run/* --exclude=/mnt/* --exclude=/media/* --exclude=/lost+found --exclude=/home/.ecryptfs / /mnt/backupDestination/
+```
+
+## Set Dual Boot
+ ### In general
+ ```bash
+ sudo pacman -S os-probe
+ 
+ sudo pacman -S ntfs-3g  #opt: If target Os is Windows
+
+ # Mount Dir of OS
+ sudo mkdir -p /mnt/os-mount
+ sudo mount /dev/<partition-of-os-to-dual-boot> /mnt/os-mount
+ 
+ # run os-prober
+ os-prober
+ 
+ # recreate Grub Config
+ grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+
+## Extra
+```bash
+#Install Most for Manual Page highlighting
+
+sudo pacman -S most  
+export PAGER=most
+
+# See results on "man mv"
 ```
