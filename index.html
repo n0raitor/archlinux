@@ -528,6 +528,45 @@ yay -S virtualbox-ext-oracle  <span class="token comment"># (AUR) Ext Pack</span
 <code>alias &lt;left&gt;="&lt;right"&gt;</code><br>
 The (n) notation means, that there are n ways of signing this alias. Do not use this (n) e.g. (1) in the alias notation!<br>
 <img src="https://normannator.de/archlinux/IMG/Alias.PNG" alt="enter image description here"></p>
+<p>Edit the ~/.bashrc file to add alias permanently for your user.</p>
+<p>Example Alias Config Section:</p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Main ALIAS</span>
+<span class="token function">alias</span> ls<span class="token operator">=</span><span class="token string">"ls --color=auto"</span>
+<span class="token function">alias</span> l<span class="token operator">=</span><span class="token string">"ls --color=auto -lA --time-style long-iso"</span>
+<span class="token function">alias</span> ll<span class="token operator">=</span><span class="token string">"ls --color=auto -la --time-style long-iso"</span>
+<span class="token function">alias</span> cd<span class="token punctuation">..</span><span class="token operator">=</span><span class="token string">"cd .."</span>
+<span class="token function">alias</span> <span class="token punctuation">..</span><span class="token operator">=</span><span class="token string">"cd .."</span>
+<span class="token function">alias</span> <span class="token punctuation">..</span>.<span class="token operator">=</span><span class="token string">"cd ../../"</span>
+<span class="token function">alias</span> <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token operator">=</span><span class="token string">"cd ../../../"</span>
+<span class="token function">alias</span> <span class="token punctuation">..</span><span class="token punctuation">..</span>.<span class="token operator">=</span><span class="token string">"cd ../../../../"</span>
+<span class="token function">alias</span> ff<span class="token operator">=</span><span class="token string">"find / -name"</span>
+<span class="token function">alias</span> f<span class="token operator">=</span><span class="token string">"find . -name"</span>
+<span class="token function">alias</span> grep<span class="token operator">=</span><span class="token string">"grep --color=auto"</span>
+<span class="token function">alias</span> egrep<span class="token operator">=</span><span class="token string">"egrep --color=auto"</span>
+<span class="token function">alias</span> fgrep<span class="token operator">=</span><span class="token string">"fgrep --color=auto"</span>
+<span class="token function">alias</span> ip<span class="token operator">=</span><span class="token string">"alias ip='ip -c'"</span>
+<span class="token function">alias</span> pacman<span class="token operator">=</span><span class="token string">"pacman --color auto"</span>
+<span class="token function">alias</span> pactree<span class="token operator">=</span><span class="token string">"pactree --color"</span>
+<span class="token function">alias</span> vdir<span class="token operator">=</span><span class="token string">"vdir --color=auto"</span>
+<span class="token function">alias</span> watch<span class="token operator">=</span><span class="token string">"watch --color"</span>
+<span class="token function">alias</span> man<span class="token operator">=</span><span class="token string">"color function"</span>
+<span class="token function">alias</span> yay<span class="token operator">=</span><span class="token string">"sudo -u norman yay"</span>
+<span class="token function">alias</span> browser<span class="token operator">=</span><span class="token string">"midori &amp;"</span>
+
+<span class="token comment"># Kali Undercover Mode</span>
+<span class="token function">alias</span> panic<span class="token operator">=</span><span class="token string">"kali-undercover"</span>
+<span class="token function">alias</span> ku<span class="token operator">=</span><span class="token string">"kali-undercover"</span>
+<span class="token function">alias</span> qwer<span class="token operator">=</span><span class="token string">"kali-undercover"</span>
+
+<span class="token comment"># CUSTOM Additional ALIAS</span>
+<span class="token function">alias</span> pgadmin<span class="token operator">=</span><span class="token string">"sudo /usr/pgadmin4/bin/pgadmin4"</span>
+<span class="token function">alias</span> haskel<span class="token operator">=</span><span class="token string">"ghci"</span>
+<span class="token function">alias</span> cyberghost<span class="token operator">=</span><span class="token string">"sudo cyberghostvpn --traffic sudo cyberghostvpn --traffic --connect --country-code"</span>
+<span class="token function">alias</span> cyberghostlist<span class="token operator">=</span><span class="token string">"cyberghostvpn --traffic --country-code"</span>
+<span class="token function">alias</span> spotifys<span class="token operator">=</span><span class="token string">"spotify --force-device-scale-factor=2.0 %U"</span>
+<span class="token function">alias</span> vi<span class="token operator">=</span><span class="token string">"vim"</span>
+</code></pre>
+<p><strong>Optional</strong></p>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">nano</span> /etc/profile.d/ps1.sh  <span class="token comment"># (optional)</span>
 <span class="token comment"># Minimal				/home #</span>
 <span class="token comment"># User					user:/home #</span>
@@ -897,7 +936,6 @@ Right Click and Open Settings of Whisker Menu:</p>
 <p>In Settings: Type “User” and Open: <em>User Settings</em> (gnome-system-tools)<br>
 Administrate User and Groups …</p>
 <p>Logout and Login again that the changes take effect.</p>
-<p>Edit the ~/.bashrc file to add alias permanently</p>
 <p>Usefull Shortcuts:</p>
 <ul>
 <li>Super + T: Terminal</li>
