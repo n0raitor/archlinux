@@ -221,6 +221,14 @@ pacman-key --refresh-keys  <span class="token comment"># Refresh pacman keys</sp
 <span class="token comment"># evtl. edit pacman.conf -&gt; SigLevel</span>
 gpg --recv-keys  <span class="token comment"># Add GPG key (optional-additional)</span>
 </code></pre>
+<h3 id="add-accounts">Add Accounts</h3>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">useradd</span> -m -g <span class="token function">users</span> -s /bin/bash <span class="token operator">&lt;</span>name<span class="token operator">&gt;</span>
+<span class="token function">passwd</span> <span class="token operator">&lt;</span>name<span class="token operator">&gt;</span>
+EDITOR<span class="token operator">=</span>nano visudo
+--<span class="token operator">&gt;</span> Uncomment: <span class="token comment"># %wheel ALL=(ALL) ALL</span>
+gpasswd -a <span class="token operator">&lt;</span>user<span class="token operator">&gt;</span> wheel  <span class="token comment"># add user to wheel group</span>
+gpasswd -a <span class="token operator">&lt;</span>user<span class="token operator">&gt;</span> audio,video,games,power
+</code></pre>
 <h3 id="install">Install</h3>
 <h4 id="install-yay">Install YAY</h4>
 <p>Change to User - This is required, because yay can’t run as root because it uses the fake root to install packages.</p>
@@ -232,7 +240,7 @@ makepkg -si
 </code></pre>
 <p>If you prefer using yay as root, use the following command instead (2. Method)</p>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># the command yay -S &lt;name&gt;</span>
-<span class="token function">sudo</span> -u <span class="token operator">&lt;</span>username<span class="token operator">&gt;</span> yay -S <span class="token operator">&lt;</span>name<span class="token operator">&gt;</span>
+<span class="token function">sudo</span> -u <span class="token operator">&lt;</span>username-that-is-not-root<span class="token operator">&gt;</span> yay -S <span class="token operator">&lt;</span>name<span class="token operator">&gt;</span>
 </code></pre>
 <h5 id="installation-if-you-want-to-use-yay">Installation (if you want to use yay)</h5>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">su</span> <span class="token operator">&lt;</span>uname<span class="token operator">&gt;</span>
@@ -546,20 +554,15 @@ The (n) notation means, that there are n ways of signing this alias. Do not use 
 <span class="token function">sudo</span> ufw status verbose
 <span class="token function">sudo</span> systemctl <span class="token function">enable</span> ufw.service
 </code></pre>
-<h4 id="accounts">Accounts</h4>
-<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">useradd</span> -m -g <span class="token function">users</span> -s /bin/bash <span class="token operator">&lt;</span>name<span class="token operator">&gt;</span>
-<span class="token function">passwd</span> <span class="token operator">&lt;</span>name<span class="token operator">&gt;</span>
-EDITOR<span class="token operator">=</span>nano visudo
---<span class="token operator">&gt;</span> Uncomment: <span class="token comment"># %wheel ALL=(ALL) ALL</span>
-gpasswd -a <span class="token operator">&lt;</span>user<span class="token operator">&gt;</span> wheel  <span class="token comment"># add user to wheel group</span>
-gpasswd -a <span class="token operator">&lt;</span>user<span class="token operator">&gt;</span> audio,video,games,power
-</code></pre>
-<h4 id="systemd">Systemd</h4>
-<h5 id="services">Services</h5>
-<pre class=" language-bash"><code class="prism  language-bash">Enable or Disable Services
-systemctl <span class="token function">enable</span> NetworkManager
-systemctl <span class="token function">enable</span> cups.service <span class="token comment"># previously installed</span>
-systemctl <span class="token function">enable</span> sshd.service <span class="token comment"># ssh Service</span>
+<pre><code>
+#### Systemd
+
+##### Services
+```bash
+Enable or Disable Services
+systemctl enable NetworkManager
+systemctl enable cups.service # previously installed
+systemctl enable sshd.service # ssh Service
 </code></pre>
 <h6 id="set-up-services">Set up Services</h6>
 <pre class=" language-bash"><code class="prism  language-bash">pacman -S acpid dbus avahi
