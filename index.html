@@ -373,7 +373,7 @@ pacman -S xf86-input-synaptics <span class="token punctuation">(</span>optional:
 <span class="token comment">### video drivers</span>
 
 <span class="token comment"># Proprietary</span>
-<span class="token function">sudo</span> pacman -S nvidia
+<span class="token function">sudo</span> pacman -S nvidia <span class="token punctuation">(</span>if linux-lts -<span class="token operator">&gt;</span> nvidia-lts<span class="token punctuation">)</span>
 <span class="token comment"># optional #</span>
 <span class="token comment"># virtualbox-guest-utils  # (For Virtualbox)</span>
 <span class="token comment"># nvidia-390xx  # (AUR) End of life</span>
