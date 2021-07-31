@@ -1225,6 +1225,31 @@ yay -Sc  # Removes Cache of YAY
 sudo pacman-optimize
 ```
 
+### Reduce Swappiness
+Forces System to use as much RAM as possible and reduces hard drive access
+```bash
+cat /proc/sys/vm/swappiness  # 60 by DEFAULT
+sudo nano /etc/sysctl.d/100-archlinux.conf
+-> vm.swappiness=10
+reboot
+
+cat /proc/sys/vm/swappiness  # should be 10 now
+```
+
+### Trim SSD
+Enable Trim for SSD - optimize performance of ssd-drive
+```bash
+sudo systemctl status fstrim.timer  # should be inactive, if not, skip to next heading
+
+sudo systemctl start fstrim.timer 
+sudo systemctl status fstrim.timer  # should be active now
+```
+
+### Set up XKILL Shotcut
+Check the shotcuts menu. If xkill is added, skip to the next heading. If not, add this:
+Ctrl+Alt+X        ->        xkill
+
+
 ### Make Arch Stable (Golden Rules)
 1. Do Backups with Timeshift and BtrFS
 2. Update only every Week

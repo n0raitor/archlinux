@@ -1054,6 +1054,25 @@ yay -Sc  <span class="token comment"># Removes Cache of YAY</span>
 <h3 id="optimize-pacmans-database-access-speeds">Optimize pacman’s database access speeds</h3>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman-optimize
 </code></pre>
+<h3 id="reduce-swappiness">Reduce Swappiness</h3>
+<p>Forces System to use as much RAM as possible and reduces hard drive access</p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">cat</span> /proc/sys/vm/swappiness  <span class="token comment"># 60 by DEFAULT</span>
+<span class="token function">sudo</span> <span class="token function">nano</span> /etc/sysctl.d/100-archlinux.conf
+-<span class="token operator">&gt;</span> vm.swappiness<span class="token operator">=</span>10
+<span class="token function">reboot</span>
+
+<span class="token function">cat</span> /proc/sys/vm/swappiness  <span class="token comment"># should be 10 now</span>
+</code></pre>
+<h3 id="trim-ssd">Trim SSD</h3>
+<p>Enable Trim for SSD - optimize performance of ssd-drive</p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> systemctl status fstrim.timer  <span class="token comment"># should be inactive, if not, skip to next heading</span>
+
+<span class="token function">sudo</span> systemctl start fstrim.timer 
+<span class="token function">sudo</span> systemctl status fstrim.timer  <span class="token comment"># should be active now</span>
+</code></pre>
+<h3 id="set-up-xkill-shotcut">Set up XKILL Shotcut</h3>
+<p>Check the shotcuts menu. If xkill is added, skip to the next heading. If not, add this:<br>
+Ctrl+Alt+X        -&gt;        xkill</p>
 <h3 id="make-arch-stable-golden-rules">Make Arch Stable (Golden Rules)</h3>
 <ol>
 <li>Do Backups with Timeshift and BtrFS</li>
