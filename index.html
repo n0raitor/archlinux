@@ -962,17 +962,16 @@ Most secure Browser on earth…</p>
 <p><strong>Pycharm-Professional</strong></p>
 <pre class=" language-bash"><code class="prism  language-bash">yay -S pycharm-professional
 </code></pre>
-<p><strong>VirtualBox</strong></p>
-<pre><code>Follow the instructions on the following [site](https://wiki.archlinux.org/title/VirtualBox)
-
-**Deprecated - Just read the link above!!!**
-```bash
-sudo pacman -S virtualbox-host-modules-arch virtualbox-guest-iso
-sudo gpasswd -a &lt;user&gt; vboxusers
-systemctl enable dkms
-sudo nano /etc/modules-load.d/my-modules.conf
---&gt; add: vboxdrv
-reboot # optional
+<p><strong>VirtualBox</strong><br>
+Follow the instructions on the following <a href="https://wiki.archlinux.org/title/VirtualBox">Site</a>.<br>
+German: <a href="https://wiki.archlinux.de/title/VirtualBox">https://wiki.archlinux.de/title/VirtualBox</a></p>
+<p><strong>Deprecated - Just read the link above!!!</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S virtualbox-host-modules-arch virtualbox-guest-iso
+<span class="token function">sudo</span> gpasswd -a <span class="token operator">&lt;</span>user<span class="token operator">&gt;</span> vboxusers
+systemctl <span class="token function">enable</span> dkms
+<span class="token function">sudo</span> <span class="token function">nano</span> /etc/modules-load.d/my-modules.conf
+--<span class="token operator">&gt;</span> add: vboxdrv
+<span class="token function">reboot</span> <span class="token comment"># optional</span>
 </code></pre>
 <p><strong>Git Tools</strong></p>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Version Control</span>
@@ -1104,12 +1103,22 @@ os-prober
 grub-mkconfig -o /boot/grub/grub.cfg
 </code></pre>
 <h2 id="extra">Extra</h2>
+<p><strong>Most</strong></p>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token comment">#Install Most for Manual Page highlighting</span>
 
 <span class="token function">sudo</span> pacman -S <span class="token function">most</span>  
 <span class="token function">export</span> PAGER<span class="token operator">=</span>most
 
 <span class="token comment"># See results on "man mv"</span>
+</code></pre>
+<p><strong>Pamac</strong><br>
+A Package Manager for Arch Linux Pacman Packages</p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S appstream-glib 
+yay -S archlinux-appstream-data-pamac
+yay -S pamac-aur-git
+
+<span class="token comment"># If "Missing Dependency: pamac-aur-git"</span>
+yay -S libpamac
 </code></pre>
 </div>
 </body>

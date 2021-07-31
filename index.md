@@ -1092,8 +1092,8 @@ yay -S pycharm-professional
 ```
 
 **VirtualBox**
-```
-Follow the instructions on the following [site](https://wiki.archlinux.org/title/VirtualBox)
+Follow the instructions on the following [Site](https://wiki.archlinux.org/title/VirtualBox).
+German: https://wiki.archlinux.de/title/VirtualBox
 
 **Deprecated - Just read the link above!!!**
 ```bash
@@ -1288,6 +1288,8 @@ sudo rsync -aAXvP --delete --exclude=/dev/* --exclude=/proc/* --exclude=/sys/* -
 
 
 ## Extra
+
+**Most**
 ```bash
 #Install Most for Manual Page highlighting
 
@@ -1295,4 +1297,15 @@ sudo pacman -S most
 export PAGER=most
 
 # See results on "man mv"
+```
+
+**Pamac**
+A Package Manager for Arch Linux Pacman Packages
+```bash
+sudo pacman -S appstream-glib 
+yay -S archlinux-appstream-data-pamac
+yay -S pamac-aur-git
+
+# If "Missing Dependency: pamac-aur-git"
+yay -S libpamac
 ```
