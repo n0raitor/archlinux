@@ -1095,6 +1095,10 @@ yay -S pycharm-professional
 Follow the instructions on the following [Site](https://wiki.archlinux.org/title/VirtualBox).
 German: https://wiki.archlinux.de/title/VirtualBox
 
+IMPORTANT
+Arch module for linux and dkms for linux-lts. 
+Use modprobe vboxdrv.
+
 **Deprecated - Just read the link above!!!**
 ```bash
 sudo pacman -S virtualbox-host-modules-arch virtualbox-guest-iso
