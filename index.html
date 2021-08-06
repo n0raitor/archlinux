@@ -959,9 +959,8 @@ Most secure Browser on earth…</p>
 
 <span class="token comment">#### cmatrix is the opposite ;) </span>
 </code></pre>
-<p><strong>Pycharm-Professional</strong></p>
-<pre class=" language-bash"><code class="prism  language-bash">yay -S pycharm-professional
-</code></pre>
+<p><strong>Pycharm-Professional and co. (Jetbrains Toolbox)</strong><br>
+<a href="https://www.jetbrains.com/de-de/toolbox-app/">Download Link</a></p>
 <p><strong>VirtualBox</strong><br>
 Follow the instructions on the following <a href="https://wiki.archlinux.org/title/VirtualBox">Site</a>.<br>
 German: <a href="https://wiki.archlinux.de/title/VirtualBox">https://wiki.archlinux.de/title/VirtualBox</a></p>
@@ -1046,6 +1045,23 @@ Take notes and sync them<br>
 <a href="https://github.com/AppImage/AppImageKit/wiki/Libre-Graphics-Suite">Follow this link</a></p>
 <p><strong>Alternative Terminal: Terminator</strong><br>
 For More information click <a href="https://www.youtube.com/watch?v=iaXQdyHRL8M&amp;t=215s&amp;ab_channel=ChrisTitusTech">here</a></p>
+<p><strong>Thunderbird</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S thunderbird thunderbird-i18n-de
+</code></pre>
+<p><strong>Brave</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash">yay -S brave-bin
+</code></pre>
+<p><strong>Handbrake</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S handbrake
+</code></pre>
+<p><strong>Brasero</strong><br>
+Burning Software</p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S brasero
+</code></pre>
+<p><strong>JDownloader 2</strong><br>
+Download Manager for stable downloads of large files.</p>
+<pre class=" language-bash"><code class="prism  language-bash">yay -S jdownloader2
+</code></pre>
 <h2 id="post-steps-and-maintenance">Post Steps and Maintenance</h2>
 <h3 id="remove-orphans">Remove Orphans</h3>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -Rns <span class="token variable"><span class="token variable">$(</span>pacman -Qtdq<span class="token variable">)</span></span>  <span class="token comment"># Removes unused Packages</span>
@@ -1123,6 +1139,61 @@ yay -S pamac-aur-git
 <span class="token comment"># If "Missing Dependency: pamac-aur-git"</span>
 yay -S libpamac
 </code></pre>
+<h2 id="cleanup-tips">Cleanup Tips</h2>
+<h3 id="clean-pkg">Clean PKG</h3>
+<ul>
+<li>sudo pacman -Sc</li>
+<li>or install <em>pacman-contrib</em>
+<ul>
+<li>paccache -h    # help page</li>
+<li>… -d  #Dry Mode (just list packages to remove)</li>
+<li>… -r  #Remove Packages from Dry Mode</li>
+</ul>
+</li>
+<li>oder mit paccache.timer jeden Monat automatisch bereinigen
+<ul>
+<li>sudo nano /etc/systemd/system/paccache.timer</li>
+<li>For this enter:<pre><code>[Unit]
+Description=Clean-up old pacman pkg
+
+[Timer]
+OnCalendar=monthly
+Persistent=true
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="remove-orphans-1">Remove Orphans</h3>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -R <span class="token variable"><span class="token variable">$(</span>pacman -Qtdq<span class="token variable">)</span></span>
+</code></pre>
+<h3 id="clean-cache-in-home">Clean Cache in /home</h3>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">du</span> -sh ~/.cache/    <span class="token comment"># Size of Cache</span>
+<span class="token function">rm</span> -rf ~/.cache/*
+</code></pre>
+<h3 id="remove-old-config-files">Remove old config files</h3>
+<p>-&gt; ~/.config und ~/.local/share<br>
+Remove them manualy! (only uninstalled files recommended)</p>
+<h3 id="find-and-remove-duplicates-empty-files-empty-dirs-broken-symlinks">Find and remove duplicates, empty files, empty dirs, broken symlinks</h3>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S rmlint
+rmlint --help
+rmlint /home/user     <span class="token comment">#Scans folder and saves special script to remove findings (read results)</span>
+</code></pre>
+<h3 id="find-the-largest-files-and-directories">Find the largest files and directories</h3>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S ncdu
+ncdu   <span class="token comment"># Run tool (command line)</span>
+</code></pre>
+<h4 id="alternative">Alternative</h4>
+<p>use <em>Filelight</em> #GUI Tool</p>
+<h4 id="oder">oder</h4>
+<p><em>Baobab</em>    #Gnome Tool</p>
+<h3 id="disk-cleaning-program">Disk Cleaning Program</h3>
+<p><em>BleachBit</em></p>
+<h3 id="clean-trash-remember">Clean Trash (Remember)</h3>
+<p>You know how to do that ;)</p>
 </div>
 </body>
 

@@ -1086,10 +1086,10 @@ alias ku=/usr/bin/kali-undercover
 
 #### cmatrix is the opposite ;) 
 ```
-**Pycharm-Professional**
-```bash
-yay -S pycharm-professional
-```
+
+**Pycharm-Professional and co. (Jetbrains Toolbox)**
+[Download Link](https://www.jetbrains.com/de-de/toolbox-app/)
+
 
 **VirtualBox**
 Follow the instructions on the following [Site](https://wiki.archlinux.org/title/VirtualBox).
@@ -1213,6 +1213,33 @@ Take notes and sync them
 **Alternative Terminal: Terminator**
 For More information click [here](https://www.youtube.com/watch?v=iaXQdyHRL8M&t=215s&ab_channel=ChrisTitusTech)
 
+**Thunderbird**
+```bash
+sudo pacman -S thunderbird thunderbird-i18n-de
+```
+
+**Brave**
+```bash
+yay -S brave-bin
+```
+
+**Handbrake**
+```bash
+sudo pacman -S handbrake
+```
+
+**Brasero**
+Burning Software
+```bash
+sudo pacman -S brasero
+```
+
+**JDownloader 2**
+Download Manager for stable downloads of large files.
+```bash
+yay -S jdownloader2
+```
+
 
 ## Post Steps and Maintenance
 
@@ -1313,3 +1340,66 @@ yay -S pamac-aur-git
 # If "Missing Dependency: pamac-aur-git"
 yay -S libpamac
 ```
+
+## Cleanup Tips
+
+### Clean PKG
+* sudo pacman -Sc
+* or install *pacman-contrib*
+	* paccache -h    # help page
+	* ... -d  #Dry Mode (just list packages to remove)
+	* .... -r  #Remove Packages from Dry Mode
+* oder mit paccache.timer jeden Monat automatisch bereinigen
+	* sudo nano /etc/systemd/system/paccache.timer
+	* For this enter:
+		```
+		[Unit]
+		Description=Clean-up old pacman pkg
+
+		[Timer]
+		OnCalendar=monthly
+		Persistent=true
+
+		[Install]
+		WantedBy=multi-user.target
+		```
+
+### Remove Orphans
+```bash
+sudo pacman -R $(pacman -Qtdq)
+```
+
+### Clean Cache in /home
+```bash
+du -sh ~/.cache/    # Size of Cache
+rm -rf ~/.cache/*
+```
+
+### Remove old config files
+-> ~/.config und ~/.local/share
+Remove them manualy! (only uninstalled files recommended)
+
+### Find and remove duplicates, empty files, empty dirs, broken symlinks
+```bash
+sudo pacman -S rmlint
+rmlint --help
+rmlint /home/user     #Scans folder and saves special script to remove findings (read results)
+```
+
+### Find the largest files and directories
+```bash
+sudo pacman -S ncdu
+ncdu   # Run tool (command line)
+```
+
+#### Alternative
+use *Filelight* #GUI Tool
+
+#### oder
+*Baobab*    #Gnome Tool
+
+### Disk Cleaning Program
+*BleachBit*
+
+### Clean Trash (Remember)
+You know how to do that ;)
