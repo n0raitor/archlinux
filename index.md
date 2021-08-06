@@ -877,20 +877,66 @@ greeter-session=lightdm-webkit2-greeter
 sudo pacman -S gnome gnome-extra gdm  
 sudo systemctl enable gdm.service  
 sudo systemctl start gdm.service
-
 #Download Gnome-Extensions aus dem Gnome-Software-Store  
+
 sudo pacman -S gnome-software-packagekit-plugin #Damit man auf das AUR und Pacman mit dem Softwarecenter von Gnome zugreifen kann.  
 #github.com:BenJetson/gnome-dash-fix.git #Gnome Kategorien in Anwendungsmenü automatisch generieren  
+
 gsettings set #org.gnome.desktop.peripherals.touchpad click-method areas #Lösen von Gnome problemen für Touchpads von Laptops  
+
 yay -S gnome-terminal-transparency  
 #-> Say YES to deinstall the old terminal  
-#Extensions im Browser (mit Plugin und gnome-shell-extension (yay)):
-
--   Dash to Plank (optional)
--   Espresso # vgl. Präsentationsmodus
--   Tiling Assistant (dep?!)
--   User Themes
 ```
+**Extensions im Browser (mit Plugin und gnome-shell-extension (yay))**:
+* [Blur my Shell](https://extensions.gnome.org/extension/3193/blur-my-shell/)
+* cpufreq
+* Dynamic Panel Transparency
+* Espresso
+* Frippery Move Clock
+* Panel OSD
+* Screenshot Tool
+* Shell Configurator
+* Sound Input & Output Device Chooser
+* Tray Icons: Reloaded
+* DEFAULT EXTENSIONS
+	* Applications Menu
+	* Places Status Indicator
+	* Removable Drive Menu
+	* User Themes
+	* Workspace Indicator
+
+**Gnome Tweaks**:
+```bash
+mkdir -p ~/.icons
+mkdir -p ~/.themes
+```
+* Appearance
+	* [Flat-Remix-GTK-Blue](https://www.gnome-look.org/p/1214931/)
+		* Extract Archive and move to: */usr/share/themes/*
+	* [Sweet-cursors](https://www.gnome-look.org/p/1393084/)
+		* Extract Archive and move to: *~/.icons*
+	* [Falt-Remix-Blue-Light/Dark](https://www.gnome-look.org/p/1012430/)
+		* Extract Archive and move to: *~/.icons*
+		* Alternative: [Neonyt](https://www.gnome-look.org/find?search=Neonyt)
+	* [Flat-Remix-Blue-fullPanel](https://www.gnome-look.org/p/1013030/)
+		* Extract Archive and move to: *~/.themes*
+* Fonts
+	* Cantarell Regular 11
+	* Cantarell Regular 11
+	* Fira Code Medium 10
+	* Cantarell Bold 11
+	* Hinting: Medium
+	* Gray
+	* Scaling: 1,35
+* Startup
+	* Thunderbird
+	* (JetBrains Toolbox (auto))
+	* (Insync (auto))
+
+**Wallpaper**
+* [Desert Blue](https://www.pling.com/p/1361442/)
+* [Neonyt](https://www.pling.com/p/1463678/)
+
 ---
 ### Exit and Reboot
 ```bash
@@ -1403,3 +1449,9 @@ use *Filelight* #GUI Tool
 
 ### Clean Trash (Remember)
 You know how to do that ;)
+
+
+## Improve Performance
+
+https://wiki.archlinux.org/title/improving_performance
+

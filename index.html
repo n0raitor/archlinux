@@ -784,20 +784,92 @@ greeter-session<span class="token operator">=</span>lightdm-webkit2-greeter
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S gnome gnome-extra gdm  
 <span class="token function">sudo</span> systemctl <span class="token function">enable</span> gdm.service  
 <span class="token function">sudo</span> systemctl start gdm.service
-
 <span class="token comment">#Download Gnome-Extensions aus dem Gnome-Software-Store  </span>
+
 <span class="token function">sudo</span> pacman -S gnome-software-packagekit-plugin <span class="token comment">#Damit man auf das AUR und Pacman mit dem Softwarecenter von Gnome zugreifen kann.  </span>
 <span class="token comment">#github.com:BenJetson/gnome-dash-fix.git #Gnome Kategorien in Anwendungsmenü automatisch generieren  </span>
+
 gsettings <span class="token keyword">set</span> <span class="token comment">#org.gnome.desktop.peripherals.touchpad click-method areas #Lösen von Gnome problemen für Touchpads von Laptops  </span>
+
 yay -S gnome-terminal-transparency  
 <span class="token comment">#-&gt; Say YES to deinstall the old terminal  </span>
-<span class="token comment">#Extensions im Browser (mit Plugin und gnome-shell-extension (yay)):</span>
-
--   Dash to Plank <span class="token punctuation">(</span>optional<span class="token punctuation">)</span>
--   Espresso <span class="token comment"># vgl. Präsentationsmodus</span>
--   Tiling Assistant <span class="token punctuation">(</span>dep?<span class="token operator">!</span><span class="token punctuation">)</span>
--   User Themes
 </code></pre>
+<p><strong>Extensions im Browser (mit Plugin und gnome-shell-extension (yay))</strong>:</p>
+<ul>
+<li><a href="https://extensions.gnome.org/extension/3193/blur-my-shell/">Blur my Shell</a></li>
+<li>cpufreq</li>
+<li>Dynamic Panel Transparency</li>
+<li>Espresso</li>
+<li>Frippery Move Clock</li>
+<li>Panel OSD</li>
+<li>Screenshot Tool</li>
+<li>Shell Configurator</li>
+<li>Sound Input &amp; Output Device Chooser</li>
+<li>Tray Icons: Reloaded</li>
+<li>DEFAULT EXTENSIONS
+<ul>
+<li>Applications Menu</li>
+<li>Places Status Indicator</li>
+<li>Removable Drive Menu</li>
+<li>User Themes</li>
+<li>Workspace Indicator</li>
+</ul>
+</li>
+</ul>
+<p><strong>Gnome Tweaks</strong>:</p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">mkdir</span> -p ~/.icons
+<span class="token function">mkdir</span> -p ~/.themes
+</code></pre>
+<ul>
+<li>Appearance
+<ul>
+<li><a href="https://www.gnome-look.org/p/1214931/">Flat-Remix-GTK-Blue</a>
+<ul>
+<li>Extract Archive and move to: <em>/usr/share/themes/</em></li>
+</ul>
+</li>
+<li><a href="https://www.gnome-look.org/p/1393084/">Sweet-cursors</a>
+<ul>
+<li>Extract Archive and move to: <em>~/.icons</em></li>
+</ul>
+</li>
+<li><a href="https://www.gnome-look.org/p/1012430/">Falt-Remix-Blue-Light/Dark</a>
+<ul>
+<li>Extract Archive and move to: <em>~/.icons</em></li>
+<li>Alternative: <a href="https://www.gnome-look.org/find?search=Neonyt">Neonyt</a></li>
+</ul>
+</li>
+<li><a href="https://www.gnome-look.org/p/1013030/">Flat-Remix-Blue-fullPanel</a>
+<ul>
+<li>Extract Archive and move to: <em>~/.themes</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Fonts
+<ul>
+<li>Cantarell Regular 11</li>
+<li>Cantarell Regular 11</li>
+<li>Fira Code Medium 10</li>
+<li>Cantarell Bold 11</li>
+<li>Hinting: Medium</li>
+<li>Gray</li>
+<li>Scaling: 1,35</li>
+</ul>
+</li>
+<li>Startup
+<ul>
+<li>Thunderbird</li>
+<li>(JetBrains Toolbox (auto))</li>
+<li>(Insync (auto))</li>
+</ul>
+</li>
+</ul>
+<p><strong>Wallpaper</strong></p>
+<ul>
+<li><a href="https://www.pling.com/p/1361442/">Desert Blue</a></li>
+<li><a href="https://www.pling.com/p/1463678/">Neonyt</a></li>
+</ul>
 <hr>
 <h3 id="exit-and-reboot">Exit and Reboot</h3>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token keyword">exit</span>
@@ -1194,6 +1266,8 @@ ncdu   <span class="token comment"># Run tool (command line)</span>
 <p><em>BleachBit</em></p>
 <h3 id="clean-trash-remember">Clean Trash (Remember)</h3>
 <p>You know how to do that ;)</p>
+<h2 id="improve-performance">Improve Performance</h2>
+<p><a href="https://wiki.archlinux.org/title/improving_performance">https://wiki.archlinux.org/title/improving_performance</a></p>
 </div>
 </body>
 
