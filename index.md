@@ -264,7 +264,7 @@ passwd <name>
 EDITOR=nano visudo
 --> Uncomment: # %wheel ALL=(ALL) ALL
 gpasswd -a <user> wheel  # add user to wheel group
-gpasswd -a <user> audio,video,games,power
+gpasswd -a <user> audio,video,games,power,optical
 ```
 
 ### Install
