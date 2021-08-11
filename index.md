@@ -907,6 +907,14 @@ yay -S gnome-terminal-transparency
 	* Workspace Indicator
 
 **Gnome Tweaks**:
+
+Stop the computer from suspending when the lid is closed:
+1.  start  Tweaks.
+2.  Select the  General  tab.
+3.  Switch the  Suspend when laptop lid is closed  switch to off.
+4. Close the  Tweaks  window.
+
+Other:
 ```bash
 mkdir -p ~/.icons
 mkdir -p ~/.themes
