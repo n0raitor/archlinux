@@ -1464,3 +1464,5 @@ You know how to do that ;)
 
 https://wiki.archlinux.org/title/improving_performance
 
+## Arch Linux for Music Production
+[This Guide shows the steps to make Arch Linux a open source Music Production System](https://normannator.de/archlinux/musicproduction/index.html)
