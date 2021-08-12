@@ -10,7 +10,144 @@
 
 <body class="stackedit">
   <div class="stackedit__html"><h1 id="arch-linux---music-production---installation-guide">Arch Linux - Music Production - Installation Guide</h1>
-<p>Hello World</p>
+<h2 id="pre-requirements">Pre Requirements</h2>
+<ul>
+<li>Follow the Installation Guide on <a href="https://normannator.de/archlinux">the Website</a> and choose your way into Arch.</li>
+<li>Package Requirements
+<ul>
+<li>Timeshift</li>
+<li>YAY</li>
+<li>octopi (if you prefer a Frontend for Pacman)</li>
+</ul>
+</li>
+</ul>
+<p>This Setup Process was tested with Manjaro KDE. (Pulse Audio included)</p>
+<h2 id="installation-guide">Installation Guide</h2>
+<h3 id="jack-audio-server">JACK Audio Server</h3>
+<p>Hold all audio work together. Make sure Version 2 is installed (has more features, do not use Version 1!).</p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S jack2
+</code></pre>
+<h3 id="cadence-jack-toolbox">Cadence JACK toolbox</h3>
+<p>Control Panel for Production Audio work</p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S cadence
+</code></pre>
+<p>Open Cadence and Coose in the Settings:</p>
+<ul>
+<li>Driver -&gt; ALSA -&gt; Select Interface</li>
+<li>Engine -&gt; Check Realtime</li>
+<li>(evtl. Realitme Priority: 95)<br>
+Do not try to Start the JACK Server now, we do that later</li>
+</ul>
+<p>Feel free to experiment with some of the shipped internal tools of <em>Cadence</em> later ;)</p>
+<h3 id="configuring-user-permissions-the-audio-group">Configuring User Permissions (the audio group)</h3>
+<p>We make sure now, to get the user in the group audio get <em>real-time scheduling</em> (the permission to get more CPU time)<br>
+This steps are explained in more details <a href="https://jackaudio.org/faq/linux_rt_config.html">here</a></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">groups</span> <span class="token comment">#show groups</span>
+
+<span class="token function">cd</span> /etc/security/
+<span class="token function">sudo</span> <span class="token function">nano</span> limits.conf
+Ctrl+W <span class="token comment"># Search: audio</span>
+<span class="token comment"># -&gt; If not found, follow on</span>
+<span class="token comment"># Go to end of the file</span>
+</code></pre>
+<p>Insert this:</p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># audio group</span>
+@audio		-		rtprio		95
+@audio		-		memlock		unlimited
+</code></pre>
+<p>Save with: Ctrl+O, Enter, Ctrl+W, Enter</p>
+<p>Now log out and log back in to make the changes take affect.</p>
+<p>Now Start the Cadence Server - Everything should work</p>
+<h3 id="ardour---daw">Ardour - DAW</h3>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S ardour
+
+<span class="token comment"># Optional</span>
+<span class="token function">sudo</span> pacman -S xjadeo  <span class="token comment"># A simple video player that is synchronized to jack (work with film files on music production base)</span>
+<span class="token function">sudo</span> pacman -S harvid  <span class="token comment"># HTTP Ardour Video Daemon</span>
+</code></pre>
+<p><strong>Now Start Ardour</strong><br>
+On Audio/MIDI Setup, choose: Audio System -&gt; JACK + Connect to JACK</p>
+<p>If an Error appears, make sure JACK has the right audio group privileges.</p>
+<p>Change Font Size: Preferences -&gt; Appearance -&gt; GUI and Font Scaling</p>
+<h3 id="difference-between-jack-and-pulseaudio">Difference between JACK and PulseAudio</h3>
+<p>Both are Audio Servers. They tend to not cooperate very well.<br>
+Deal with it with: A Jack Module for PulseAudio<br>
+-&gt; Use Jack as audio backend instead of using the soundcard directly.</p>
+<p>Maybe also take a look at <a href="https://pipewire.org/">PW</a></p>
+<h3 id="maybe-install-realtime-kernel">Maybe install RealTime Kernel</h3>
+<p>Linux Real Time Kernel might increase Performance but it is not necessary.<br>
+In Manjaro, the Kernel Menu make it easy to install the RT Kernal of Linux<br>
+If you do so, reboot your Machine.</p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">uname</span> -a  <span class="token comment"># Check if the installation was successful</span>
+</code></pre>
+<p>Make sure to test the RT Kernal first, before removing the other on!</p>
+<h3 id="install-more-audio-software">Install more Audio Software</h3>
+<p>If you want to install lots of Plugins / VST in a row, use the <em>pro-audio</em> group for your installation (Nice overview in <em>Octopi</em>)</p>
+<h4 id="zyn-fusion-new-user-interface-to-zynaddsubfx-3">Zyn-Fusion (new user interface to ZynAddSubFX 3)</h4>
+<pre class=" language-bash"><code class="prism  language-bash">yay -S zyn-fusion
+</code></pre>
+<p>In Ardour: Press Shift + E to open the Editor Mixer</p>
+<p>Add Plugins: Preferences -&gt; Plugins -&gt; Scan for Plugins</p>
+<p>Testing:</p>
+<ul>
+<li>CTRL + Shift + N: Create Midi Track</li>
+<li>Select as Instrument: ZynAddSubFX</li>
+<li>(Name should be one String with no White spaces, I guess…)</li>
+<li>Create
+<ul>
+<li>If Not Visible in Editor Mixer, click on Fader (in the Editor Mixer) -&gt; New Plugin -&gt; Plugin Manager</li>
+</ul>
+</li>
+</ul>
+<p>NOTE: Test all Plugins / VST your will install below</p>
+<h4 id="surge">Surge</h4>
+<pre class=" language-bash"><code class="prism  language-bash">yay -S surge-synthesizer-bin
+</code></pre>
+<h4 id="calf">Calf</h4>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S calf
+</code></pre>
+<h4 id="lsp">LSP</h4>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S lsp-plugins
+</code></pre>
+<h4 id="tap">Tap</h4>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S tap-plugins
+</code></pre>
+<h4 id="more-plugins-form-the-pro-audio-group---pacman">More Plugins (form the pro-audio Group -&gt; Pacman)</h4>
+<ul>
+<li>audacity</li>
+<li>calf</li>
+<li>caps</li>
+<li>carla</li>
+<li>dpf-plugins</li>
+<li>dragonfly-reverb</li>
+<li>drumgizmo</li>
+<li>ebumeter</li>
+<li>eq10q</li>
+<li>geonkick</li>
+<li>guitarix</li>
+<li>helm</li>
+<li>ir.lv2</li>
+<li>liquidsfz</li>
+<li>lsp-plugins</li>
+<li>mda.lv2</li>
+<li>ninjas2</li>
+<li>noise-repellent</li>
+<li>samplev1</li>
+<li>setbfree</li>
+<li>sherlock.lv2</li>
+<li>sonic-visualiser</li>
+<li>swh-plugins</li>
+<li>tap-plugins</li>
+<li>wolf-shaper</li>
+<li>wolf-spectrum</li>
+<li>x42-plugins</li>
+<li>zam-plugins</li>
+<li>zita-ajbridge</li>
+<li>zita-njbridge</li>
+<li>zita-rev1</li>
+</ul>
+<h4 id="install-plugins-from-the-aur">Install Plugins from the AUR</h4>
+<p>39:00</p>
 <blockquote>
 <p>Written with <a href="https://stackedit.io/">StackEdit</a>.</p>
 </blockquote>
