@@ -75,11 +75,6 @@ If an Error appears, make sure JACK has the right audio group privileges.
 
 Change Font Size: Preferences -> Appearance -> GUI and Font Scaling
 
-### Difference between JACK and PulseAudio
-Both are Audio Servers. They tend to not cooperate very well.
-Deal with it with: A Jack Module for PulseAudio
--> Use Jack as audio backend instead of using the soundcard directly.
-
 Maybe also take a look at [PW](https://pipewire.org/)
 
 ### Maybe install RealTime Kernel
@@ -168,6 +163,22 @@ sudo pacman -S tap-plugins
 - zita-rev1
 
 #### Install Plugins from the AUR
-39:00
+- Bitrot-git
+- invada-studio-plugins-lv2
+- 
+- 
+### Difference between JACK and PulseAudio
+Both are Audio Servers. They tend to not cooperate very well.
+Deal with it with: A Jack Module for PulseAudio
+-> Use Jack as audio backend instead of using the soundcard directly.
+
+#### PulseAudio Jack Module
+```bash
+sudo pacman -S pulseaudio-jack
+# or
+yay -S vcvrack-bin  # -> ASLA to JACK, Sound to System-Sound
+```
+
+
 
 > Written with [StackEdit](https://stackedit.io/).

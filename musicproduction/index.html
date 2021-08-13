@@ -69,10 +69,6 @@ Ctrl+W <span class="token comment"># Search: audio</span>
 On Audio/MIDI Setup, choose: Audio System -&gt; JACK + Connect to JACK</p>
 <p>If an Error appears, make sure JACK has the right audio group privileges.</p>
 <p>Change Font Size: Preferences -&gt; Appearance -&gt; GUI and Font Scaling</p>
-<h3 id="difference-between-jack-and-pulseaudio">Difference between JACK and PulseAudio</h3>
-<p>Both are Audio Servers. They tend to not cooperate very well.<br>
-Deal with it with: A Jack Module for PulseAudio<br>
--&gt; Use Jack as audio backend instead of using the soundcard directly.</p>
 <p>Maybe also take a look at <a href="https://pipewire.org/">PW</a></p>
 <h3 id="maybe-install-realtime-kernel">Maybe install RealTime Kernel</h3>
 <p>Linux Real Time Kernel might increase Performance but it is not necessary.<br>
@@ -147,7 +143,21 @@ If you do so, reboot your Machine.</p>
 <li>zita-rev1</li>
 </ul>
 <h4 id="install-plugins-from-the-aur">Install Plugins from the AUR</h4>
-<p>39:00</p>
+<ul>
+<li>Bitrot-git</li>
+<li>invada-studio-plugins-lv2</li>
+<li></li>
+<li></li>
+</ul>
+<h3 id="difference-between-jack-and-pulseaudio">Difference between JACK and PulseAudio</h3>
+<p>Both are Audio Servers. They tend to not cooperate very well.<br>
+Deal with it with: A Jack Module for PulseAudio<br>
+-&gt; Use Jack as audio backend instead of using the soundcard directly.</p>
+<h4 id="pulseaudio-jack-module">PulseAudio Jack Module</h4>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S pulseaudio-jack
+<span class="token comment"># or</span>
+yay -S vcvrack-bin  <span class="token comment"># -&gt; ASLA to JACK, Sound to System-Sound</span>
+</code></pre>
 <blockquote>
 <p>Written with <a href="https://stackedit.io/">StackEdit</a>.</p>
 </blockquote>
