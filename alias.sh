@@ -1,3 +1,4 @@
+# Main ALIAS
 alias ls="ls --color=auto"
 alias l="ls --color=auto -lA --time-style long-iso"
 alias ll="ls --color=auto -la --time-style long-iso"
@@ -19,6 +20,16 @@ alias watch="watch --color"
 alias man="color function"
 alias yay="sudo -u norman yay"
 alias browser="midori &"
+
+# Kali Undercover Mode
 alias panic="kali-undercover"
 alias ku="kali-undercover"
 alias qwer="kali-undercover"
+
+# CUSTOM Additional ALIAS
+alias pgadmin="sudo /usr/pgadmin4/bin/pgadmin4"
+alias haskel="ghci"
+alias cyberghost="sudo cyberghostvpn --traffic sudo cyberghostvpn --traffic --connect --country-code"
+alias cyberghostlist="cyberghostvpn --traffic --country-code"
+alias spotifys="spotify --force-device-scale-factor=2.0 %U"
+alias vi="vim"
