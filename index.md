@@ -716,6 +716,38 @@ pacman -S icedtea-web  # Additional components for OpenJDK - Browser plug-in and
 
 ### Install Desktop Environment
 ------
+#### XDLE
+```bash
+pacman -S ttf-dejavu ttf-liberation ttf-bitstream-vera lxde xorg xorg-video-drivers xorg-input-drivers gamin\
+gnome-icon-theme tango-icon-theme gtk-engines pm-utils udisks
+```
+##### Configuration for Login Managers
+
+###### GDM or KDM
+
+No manual configuration is needed. Just select LXDE from the available sessions listed by the display manager. If you don't see LXDE, restart your gdm or kdm, or reboot.
+
+###### SLIM
+
+With this display manager, some manual configuration is needed. Please refer to their  [official document](http://slim.berlios.de/manual.php)  and write your /etc/slim.conf and ~/.xinitrc. The command you should put in your ~/.xinitrc to start LXDE is:
+```bash
+exec startlxde
+```
+###### XDM
+
+Put this line at the end of "~/.xinitrc".
+```bash
+exec startlxde
+```
+Be sure to comment all other entries.
+
+###### No display manager, use startx
+
+Put this line at the end of "~/.xinitrc" or "/etc/X11/Xsession".
+```bash
+exec startlxde
+```
+
 #### XFCE4
 ```bash
 sudo pacman -S --needed xfce4 xfce4-goodies lightdm lightdm-gtk-greeter lightdm-gkt-greeter-settings (gvfs-afc) udisks2 network-manager-applet

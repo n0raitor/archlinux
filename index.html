@@ -628,6 +628,26 @@ pacman -S icedtea-web  <span class="token comment"># Additional components for O
 </code></pre>
 <h3 id="install-desktop-environment">Install Desktop Environment</h3>
 <hr>
+<h4 id="xdle">XDLE</h4>
+<pre class=" language-bash"><code class="prism  language-bash">pacman -S ttf-dejavu ttf-liberation ttf-bitstream-vera lxde xorg xorg-video-drivers xorg-input-drivers gamin\
+gnome-icon-theme tango-icon-theme gtk-engines pm-utils udisks
+</code></pre>
+<h5 id="configuration-for-login-managers">Configuration for Login Managers</h5>
+<h6 id="gdm-or-kdm">GDM or KDM</h6>
+<p>No manual configuration is needed. Just select LXDE from the available sessions listed by the display manager. If you don’t see LXDE, restart your gdm or kdm, or reboot.</p>
+<h6 id="slim">SLIM</h6>
+<p>With this display manager, some manual configuration is needed. Please refer to their  <a href="http://slim.berlios.de/manual.php">official document</a>  and write your /etc/slim.conf and ~/.xinitrc. The command you should put in your ~/.xinitrc to start LXDE is:</p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">exec</span> startlxde
+</code></pre>
+<h6 id="xdm">XDM</h6>
+<p>Put this line at the end of “~/.xinitrc”.</p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">exec</span> startlxde
+</code></pre>
+<p>Be sure to comment all other entries.</p>
+<h6 id="no-display-manager-use-startx">No display manager, use startx</h6>
+<p>Put this line at the end of “~/.xinitrc” or “/etc/X11/Xsession”.</p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">exec</span> startlxde
+</code></pre>
 <h4 id="xfce4">XFCE4</h4>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S --needed xfce4 xfce4-goodies lightdm lightdm-gtk-greeter lightdm-gkt-greeter-settings <span class="token punctuation">(</span>gvfs-afc<span class="token punctuation">)</span> udisks2 network-manager-applet
 
