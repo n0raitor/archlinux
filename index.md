@@ -637,6 +637,12 @@ alias cyberghost="sudo cyberghostvpn --traffic sudo cyberghostvpn --traffic --co
 alias cyberghostlist="cyberghostvpn --traffic --country-code"
 alias spotifys="spotify --force-device-scale-factor=2.0 %U"
 alias vi="vim"
+
+# German Man Page
+alias man="LANG=de_DE.UTF-8 man"
+
+# Integrate Most in Man
+export PAGER=most
 ```
 
 **Optional**
@@ -902,6 +908,17 @@ user-session=awesome # your user-session -> ls /usr/share/xsessions/*.desktop
 
 greeter-session=lightdm-webkit2-greeter
 ```
+
+**Edit Whisker Menu**
+```bash
+yay -S menulibre  # Integration to edit Menu Entries in the Whisker Menu
+```
+
+
+**Make XFCE Beautiful**
+  [Link](https://www.youtube.com/watch?v=uvvoJU69uNo&t=1s)
+
+
 ----
 -----
 ----
@@ -938,6 +955,13 @@ yay -S gnome-terminal-transparency
 	* Removable Drive Menu
 	* User Themes
 	* Workspace Indicator
+
+![enter image description here](https://normannator.de/archlinux/IMG/Gnome-Ext-1.png)
+
+![enter image description here](https://normannator.de/archlinux/IMG/Gnome-Ext-2.png)
+
+![enter image description here](https://normannator.de/archlinux/IMG/Gnome-Ext-3.png)
+
 
 **Gnome Tweaks**:
 
@@ -1200,7 +1224,7 @@ reboot # optional
 **Git Tools**
 ```bash
 # Version Control
-yay -S github-desktop
+yay -S github-desktop-bin
 yay -S gitkraken
 ```
 
@@ -1334,6 +1358,49 @@ Multi-Platform encryption and decryption tool
 sudo pacman -Ss veracrypt
 ```
 
+**Nautilus - Awesome File Manager**
+```bash
+sudo pacman -S nautilus
+
+# Install Awesome Extensions
+sudo pacman -S nautilus-terminal 
+yay -S nautilus-open-any-terminal
+```
+
+**Guitar Pro 6**
+```bash
+yay -S guitar-pro
+```
+
+**IDA**
+```bash
+yay -S ida-free
+```
+
+**Capstone**
+```bash
+Use Capstone to Deassemble Binary Files
+```
+
+**yED Graph Editor**
+Try It ;-)
+
+**Bildschirmaufnahmen mit Kazam**
+```bash
+yay -S kazam
+```
+
+**Nautilus - Awesome File Manager**
+```bash
+
+```
+
+**Man Page - German Edition**
+```bash
+sudo pacman -S man-pages-de
+alias man="LANG=de_DE.UTF-8 man"  # Write to ~/.bashrc or ~/.zshrc
+```
+
 
 ## Post Steps and Maintenance
 
@@ -1433,6 +1500,9 @@ yay -S pamac-aur-git
 
 # If "Missing Dependency: pamac-aur-git"
 yay -S libpamac
+
+# For Full Pamac
+yay -S libpamac-full
 ```
 
 **Set Route with net-tools manually**

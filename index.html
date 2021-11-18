@@ -566,6 +566,12 @@ The (n) notation means, that there are n ways of signing this alias. Do not use 
 <span class="token function">alias</span> cyberghostlist<span class="token operator">=</span><span class="token string">"cyberghostvpn --traffic --country-code"</span>
 <span class="token function">alias</span> spotifys<span class="token operator">=</span><span class="token string">"spotify --force-device-scale-factor=2.0 %U"</span>
 <span class="token function">alias</span> vi<span class="token operator">=</span><span class="token string">"vim"</span>
+
+<span class="token comment"># German Man Page</span>
+<span class="token function">alias</span> man<span class="token operator">=</span><span class="token string">"LANG=de_DE.UTF-8 man"</span>
+
+<span class="token comment"># Integrate Most in Man</span>
+<span class="token function">export</span> PAGER<span class="token operator">=</span>most
 </code></pre>
 <p><strong>Optional</strong></p>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">nano</span> /etc/profile.d/ps1.sh  <span class="token comment"># (optional)</span>
@@ -798,6 +804,11 @@ user-session<span class="token operator">=</span>awesome <span class="token comm
 
 greeter-session<span class="token operator">=</span>lightdm-webkit2-greeter
 </code></pre>
+<p><strong>Edit Whisker Menu</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash">yay -S menulibre  <span class="token comment"># Integration to edit Menu Entries in the Whisker Menu</span>
+</code></pre>
+<p><strong>Make XFCE Beautiful</strong><br>
+<a href="https://www.youtube.com/watch?v=uvvoJU69uNo&amp;t=1s">Link</a></p>
 <hr>
 <hr>
 <hr>
@@ -838,6 +849,9 @@ yay -S gnome-terminal-transparency
 </ul>
 </li>
 </ul>
+<p><img src="https://normannator.de/archlinux/IMG/Gnome-Ext-1.png" alt="enter image description here"></p>
+<p><img src="https://normannator.de/archlinux/IMG/Gnome-Ext-2.png" alt="enter image description here"></p>
+<p><img src="https://normannator.de/archlinux/IMG/Gnome-Ext-3.png" alt="enter image description here"></p>
 <p><strong>Gnome Tweaks</strong>:</p>
 <p>Stop the computer from suspending when the lid is closed:</p>
 <ol>
@@ -1079,7 +1093,7 @@ systemctl <span class="token function">enable</span> dkms
 </code></pre>
 <p><strong>Git Tools</strong></p>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Version Control</span>
-yay -S github-desktop
+yay -S github-desktop-bin
 yay -S gitkraken
 </code></pre>
 <p><strong>KVM Integration</strong></p>
@@ -1168,6 +1182,34 @@ Download Manager for stable downloads of large files.</p>
 Multi-Platform encryption and decryption tool</p>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -Ss veracrypt
 </code></pre>
+<p><strong>Nautilus - Awesome File Manager</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S nautilus
+
+<span class="token comment"># Install Awesome Extensions</span>
+<span class="token function">sudo</span> pacman -S nautilus-terminal 
+yay -S nautilus-open-any-terminal
+</code></pre>
+<p><strong>Guitar Pro 6</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash">yay -S guitar-pro
+</code></pre>
+<p><strong>IDA</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash">yay -S ida-free
+</code></pre>
+<p><strong>Capstone</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash">Use Capstone to Deassemble Binary Files
+</code></pre>
+<p><strong>yED Graph Editor</strong><br>
+Try It ;-)</p>
+<p><strong>Bildschirmaufnahmen mit Kazam</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash">yay -S kazam
+</code></pre>
+<p><strong>Nautilus - Awesome File Manager</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash">
+</code></pre>
+<p><strong>Man Page - German Edition</strong></p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -S man-pages-de
+<span class="token function">alias</span> man<span class="token operator">=</span><span class="token string">"LANG=de_DE.UTF-8 man"</span>  <span class="token comment"># Write to ~/.bashrc or ~/.zshrc</span>
+</code></pre>
 <h2 id="post-steps-and-maintenance">Post Steps and Maintenance</h2>
 <h3 id="remove-orphans">Remove Orphans</h3>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token function">sudo</span> pacman -Rns <span class="token variable"><span class="token variable">$(</span>pacman -Qtdq<span class="token variable">)</span></span>  <span class="token comment"># Removes unused Packages</span>
@@ -1244,6 +1286,9 @@ yay -S pamac-aur-git
 
 <span class="token comment"># If "Missing Dependency: pamac-aur-git"</span>
 yay -S libpamac
+
+<span class="token comment"># For Full Pamac</span>
+yay -S libpamac-full
 </code></pre>
 <p><strong>Set Route with net-tools manually</strong></p>
 <pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># e.g.</span>
