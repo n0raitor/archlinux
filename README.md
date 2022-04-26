@@ -1,5 +1,4 @@
 # archlinux
-Installation and Configuration GUIDE to my personal preferences of setting up archlinux with xfce4 and gnome
+Installation and Configuration GUIDE to my personal preferences of setting up ArchLinux
 
-Feel free to visit the generated Site with the results of this repo
-https://normannator.de/archlinux
+Feel free to visit [My Wiki Website](https://n0raitor.com/archlinux) 
