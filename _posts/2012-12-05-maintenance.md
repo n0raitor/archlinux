@@ -2,9 +2,6 @@
 title: 'Maintenance'
 layout: null
 ---
-
-## Post Steps and Maintenance
-
 ### Remove Orphans
 ```bash
 sudo pacman -Rns $(pacman -Qtdq)  # Removes unused Packages
@@ -62,8 +59,8 @@ sudo rsync -aAXvP --delete --exclude=/dev/* --exclude=/proc/* --exclude=/sys/* -
 ```
 
 ## Set Dual Boot
- ### In general
- ```bash
+### In general
+```
  sudo pacman -S os-probe
 
  sudo pacman -S ntfs-3g  #opt: If target Os is Windows
@@ -79,32 +76,7 @@ sudo rsync -aAXvP --delete --exclude=/dev/* --exclude=/proc/* --exclude=/sys/* -
  grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-
-## Extra
-
-**Most**
-```bash
-#Install Most for Manual Page highlighting
-
-sudo pacman -S most
-export PAGER=most
-
-# See results on "man mv"
-```
-
-**Pamac**
-A Package Manager for Arch Linux Pacman Packages
-```bash
-sudo pacman -S appstream-glib
-yay -S archlinux-appstream-data-pamac
-yay -S pamac-aur-git
-
-# If "Missing Dependency: pamac-aur-git"
-yay -S libpamac
-
-# For Full Pamac
-yay -S libpamac-full
-```
+### Extra
 
 **Set Route with net-tools manually**
 ```bash
@@ -112,9 +84,9 @@ yay -S libpamac-full
 sudo route add -net 172.16.0.0/16 tun0
 ```
 
-## Cleanup Tips
+### Cleanup Tips
 
-### Clean PKG
+#### Clean PKG
 * sudo pacman -Sc
 * or install *pacman-contrib*
 	* paccache -h    # help page
@@ -135,43 +107,43 @@ sudo route add -net 172.16.0.0/16 tun0
 		WantedBy=multi-user.target
 		```
 
-### Remove Orphans
+#### Remove Orphans
 ```bash
 sudo pacman -R $(pacman -Qtdq)
 ```
 
-### Clean Cache in /home
+#### Clean Cache in /home
 ```bash
 du -sh ~/.cache/    # Size of Cache
 rm -rf ~/.cache/*
 ```
 
-### Remove old config files
+#### Remove old config files
 -> ~/.config und ~/.local/share
 Remove them manualy! (only uninstalled files recommended)
 
-### Find and remove duplicates, empty files, empty dirs, broken symlinks
+#### Find and remove duplicates, empty files, empty dirs, broken symlinks
 ```bash
 sudo pacman -S rmlint
 rmlint --help
 rmlint /home/user     #Scans folder and saves special script to remove findings (read results)
 ```
 
-### Find the largest files and directories
+#### Find the largest files and directories
 ```bash
 sudo pacman -S ncdu
 ncdu   # Run tool (command line)
 ```
 
-### Clean Trash (Remember)
+#### Clean Trash (Remember)
 You know how to do that ;)
 
 
-## Improve Performance
+### Improve Performance
 
 https://wiki.archlinux.org/title/improving_performance
 
-## HiDPI Support of Desktop Environments
+### HiDPI Support of Desktop Environments
 [Source](https://github.com/normannator/archlinux/issues/source)
 **Gnome**
 HiDPI Support in Gnome is excellent. It auto-scales by default and is completely usable out of the box

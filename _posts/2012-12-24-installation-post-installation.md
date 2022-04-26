@@ -28,8 +28,6 @@ pacman -Sy
 ### Optional - Segnature Security ###
 pacman -S archlinux-keyring  # Update keyring
 pacman-key --refresh-keys  # Refresh pacman keys
-# evtl. edit pacman.conf -> SigLevel
-gpg --recv-keys  # Add GPG key (optional-additional)
 ```
 ### Add Accounts
 ```bash
@@ -41,8 +39,7 @@ gpasswd -a <user> wheel  # add user to wheel group
 gpasswd -a <user> audio,video,games,power,optical
 ```
 
-### Install
-
+### YAY
 #### Install YAY
 Change to User - This is required, because yay can't run as root because it uses the fake root to install packages.
 
@@ -59,7 +56,7 @@ If you prefer using yay as root, use the following command instead (2. Method)
 sudo -u <username-that-is-not-root> yay -S <name>
 ```
 
-##### Installation (if you want to use yay)
+#### Installation (if you want to use yay)
 ```bash
 su <uname>
 ```
@@ -73,9 +70,10 @@ makepkg -si PKGBUILD
 ```
 If you are using root to install this packages, run this commands as they are. If you use an other user to install the packages, use the prefix ```sudo ```
 
-#### Console
-```bash
-### Generic
+### Console
+
+####Generic
+```
 pacman -S usbutils dialog powertop
 # optional #
 # lsof  # Lists open files for running Unix processes
@@ -86,11 +84,15 @@ pacman -S usbutils dialog powertop
 # fwupd  # Firmware upgrade
 # gpm  # Console Mouse Support
 # liveroot  # (AUR) root overlay fs
+```
 
-### Compression Tools
+#### Compression Tools
+```
 pacman -S zip unzip unrar p7zip lzop
+```
 
-### Network Tools
+#### Network Tools
+```
 pacman -S rsync traceroute bind net-tools
 # optional #
 # dnsutils  # DNS tools (nslookup)
@@ -102,21 +104,13 @@ pacman -S rsync traceroute bind net-tools
 # dsniff  # tools for network auditing and penetration
 # mitmproxy  # SSL-capable MITM HTTP proxy
 # sslstrip  # tool to hijack HTTPS in MITM attack
-
-### Web Browser
-# optional: elinks, links, lynx
-
-### Recovery Tools
-# optional #
-# ddrescue  # HD recovery tool
-# dd_rescue  # HD recovery tool
-# partclone  # Copy used block on partition
 ```
 
-#### System
-```bash
-### Services
+### System
+#### Services
+```
 pacman -S networkmanager openssh xdg-user-dirs intel/amd-ucode (bluez bluez-utils) pkgstats
+pacman -S bluez bluez-utils  # For Bluetooth compatibles
 # optional #
 # cronie  # Cron tasks server
 # numlockon  # Numlock on on tty
@@ -125,8 +119,10 @@ pacman -S networkmanager openssh xdg-user-dirs intel/amd-ucode (bluez bluez-util
 # syslog-ng
 # ntp
 # haveged
+```
 
-### Filesystem
+#### Filesystem
+```
 pacman -S os-prober dosfstools ntfs-3g gvfs
 # optional #
 # snapper  # snapshot manager (ext4, lvm, btrfs)
@@ -148,35 +144,40 @@ pacman -S os-prober dosfstools ntfs-3g gvfs
 # unionfs-fuse
 # nilfs-utils
 # s3fs-fuse
+```
 
-### Sound
-pacman -S alsa-plugin alsa-utils pulseaudio pulseaudio-alsa (pulseaudio-bluetooth)
-# optional: pulseaudio-equalizer
+#### Sound
+```
+pacman -S alsa-plugin alsa-utils pulseaudio pulseaudio-alsa 
+pacman -S pulseaudio-bluetooth  # Bluetooth Support
+pacman -S pulseaudio-equalizer  # Optional
+```
 
-### Printer
+#### Printer
+```
 pacman -S cups ghostscript cups-pdf hplip
 # optional #
 # gutenprint  # Top quality printer drivers for POSIX systems
 # foomatic-db foomatic-db-*  # Foomatic - The collected knowledge about printers, drivers, and driver options in XML files, used by foomatic-db-engine to generate PPD files.
+```
 
-
-### Fonts - Default
+#### Fonts 
+```
 pacman -S ttf-bitstream-vera ttf-dejavu ttf-liberation adobe-source-sans-pro-fonts
 # optional #
 # font-bh-ttf
 # gsfonts
 # sdl_ttf
 # xorg-fonts-type1
-
-### Fonts - Misc
 pacman -S ttf-anonymous-pro ttf-droid   ttf-ubuntu-font-family ttf-roboto ttf-roboto-mono ttf-font-awesome
-# for my purpose
 yay -S ttf-hackgen ttf-gentium-basic ttf-ms-fonts
 pacman -S ttf-fira-code
 # For More Fonts: pacman -Ss ttf
+```
 
-### input drivers
-pacman -S xf86-input-synaptics (optional: Laptop Touchpad-Driver)
+#### input drivers
+```
+pacman -S xf86-input-synaptics  # optional: Laptop Touchpad-Driver
 # optional #
 # xf86-input-libinput  #  Generic input driver for the X.Org server based on libinput
 # xf86-input-elographics

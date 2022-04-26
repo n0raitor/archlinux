@@ -2,62 +2,48 @@
 title: 'Programms'
 layout: null
 ---
+This Section contains the most recommended programms to use on your OS
+### Internet
 
-#### Display Manager
-I choosed lightdm-gtk-greeter
-Alternatives:
-* gdm
-* sddm
-* lxdm
--> See Your Desktop Environment Conditions
-
-#### Applications
-
-##### Office
+#### WIFI
 ```bash
-### Suits
-pacman -S libreoffice-still  # stable version (newer features in "fresh")
-# alt. (aur): freeoffice/openoffice
-
-### office language aids
-pacman -S hunspell-en hunspell-de mythes-en mythes-de aspell-en aspell-de languagetool enchant
-yay -S libreoffice-extension-languagetool
-pacman -S libmythes
-# optional #
-# hyphen  # Hyphenation rules
-
-### Tools
-# galculator  # GTK+ based scientific calculator
-# qalculate-gtk  #  GTK frontend for libqalculate
+pacman -S  wireless_tools wpa_supplicant  mtools 
 ```
 
-##### Internet
-```bash
-### Web Browser
-pacman -S chromium firefox midori vivaldi vivaldi-ffmpeg-codecs  # midori is a Light Browser
-# optional #
+#### Web Browser
+```
+pacman -S chromium 
+yay -S brave-bin  # Most secure Browser on earth...
+# firefox 
+# midori 
+# vivaldi vivaldi-ffmpeg-codecs 
 # pepper-flash, firefox-i18n, flashplugin, freshplaerplugin (aur), opera, opera-ffmpeg-codecs, seamonkey, seamonkey-i18n (aur), falkon
+```
 
-### Torrent
+#### Torrent / Download-Manager
+```
 pacman -S qbittorrent
+yay -S jdownloader2
 # optional #
 # transmission-gtk/qt
 # ktorrent
 # deluge
 # tixati
+```
 
-### E-Mail
-pacman -S thunderbird
+#### E-Mail
+```
+pacman -S thunderbird thunderbird-i18n-de
 # optional #
 # evolution + evolution-*
 ```
 
-##### Multimedia
-```bash
-### GStreamer - Streaming Videos
+### Multimedia
+
+#### GStreamer - Streaming Videos
+```
 pacman -S gst-plugins-base gst-plugins-good gst-plugins-ugly
 # gst-plugins-libav - deprecated
-
 ### Audio Player
 # Optional #
 # clementine  # (QT) Audio Player
@@ -67,21 +53,33 @@ pacman -S gst-plugins-base gst-plugins-good gst-plugins-ugly
 # amarok  # (AUR) (QT) Audio Player
 # guayadeque  # (AUR) (GTK) Audio Player
 # gmusicbrowser  # (AUR) (GTK) Audio Player
+```
 
-### Video Player
-pacman -S celluloid
+#### Video Player
+```
+pacman -S vlc  # (QT) Video Player
+
 # optional #
-# vlc  # (QT) Video Player
+# celluloid
 # smplayer  # (QT) Video Player
 # smtube  # (QT) Youtube Player
 # mpv  # (GTK) Recommended for smplayer
+```
 
-### Video Tools
+#### Video Tools
+```
+sudo pacman -S handbrake
 # optional #
 # avidemux-qt  # (QT) Video Editor
 # simplescreenrecorder  # (QT) Screen Recorder
+```
 
-### Burner
+#### Burner
+```
+sudo pacman -S brasero  # Burning Software
+yay -S balena-etcher  # Write IMAGES to USB-Drives
+
+
 # optional #
 # k3b (QT)
 # xfburn (GTK)
@@ -89,7 +87,7 @@ pacman -S celluloid
 # gnomebaker (AUR)
 ```
 
-##### Graphic
+#### Graphic
 ```bash
 pacman -S gimp
 # optional #
@@ -98,7 +96,12 @@ pacman -S gimp
 # krita (QT)
 ```
 
-##### Dev
+#### E-Books
+```bash
+yay -S calibre
+```
+
+### Dev
 ```bash
 pacman -S code  # vscode
 # optional #
@@ -109,10 +112,9 @@ pacman -S code  # vscode
 # gource (Git code animation)
 ```
 
-##### System
+### System
 ```bash
-pacman -S gparted bleachbit virtualbox
-yay -S virtualbox-ext-oracle  # (AUR) Ext Pack
+pacman -S gparted bleachbit
 # optional #
 # keepassxc  # (QT) Password Manager
 # keepass  # (MONO) Password Manager
@@ -122,9 +124,9 @@ yay -S virtualbox-ext-oracle  # (AUR) Ext Pack
 # gdmap
 # k4dirstat (aur)
 # conky  # [Link to Tutorial Video](https://www.youtube.com/watch?v=QB8cjKpdVQY&ab_channel=ChrisTitusTech)
+```
 
-### Pacman GUI
-# optional #
-# octopo  # (AUR) (QT)
-# pamac-aur  # (AUR) (GTK)
+#### System Recovery
+```
+yay -S timeshift
 ```
