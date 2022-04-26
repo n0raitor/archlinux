@@ -10,8 +10,6 @@ umount -a
 reboot
 ```
 
-## Config - OS
-
 ### Connect to Internet
 
 #### With Wifi
@@ -25,18 +23,6 @@ device list  # list network devices
 station <device> scan  # scan for networks
 station <device> get-networks  # get all networks
 station <device> connect SSID  # login into your wifi
-```
-
-##### old solution
-wpa_passphrase  SSID  Passwort  > /etc/wpa_supplicant/wpa_supplicant.conf
-wpa_supplicant -i wlp0s1 -D wext -c /etc/wpa_supplicant/wpa_supplicant.conf -B
-dhcpcd wlp0s1
-```
-```bash
-# Alternative
-ip a # search Wifi Adapter
-nmtui
--> Activate Connection->...
 ```
 
 #### With Ethernet
@@ -57,39 +43,53 @@ pacman -Syu
 
 ### (optional) Encrypt Home Partition
 **Notice! This only makes sense, if your home partiton is on an other drive than your root partition or you did not encrypt your root partition**
-```bash
-# !!! Backup all your Data and copy the backup to another drive or to the root drive  before this step !!!
-# Logged out.
-# Switch to a console with Ctrl+Alt+F2.
-# Login as a root and check that your user own no processes:
-ps -U username
 
+!!! Backup all your Data and copy the backup to another drive or to the root drive  before this step !!!
+Logged out.
+Switch to a console with Ctrl+Alt+F2.
+Login as a root and check that your user own no processes:
+```
+ps -U username
+```
+```
 umount /home
 lsblk  # to check if umount was successful
-
+```
+```
 gdisk /dev/<home-device>  # Type as LUKS
 cryptsetup luksFormat /dev/<home-device>
 cryptsetup open /dev/<home-device> crypt_home
 mkfs.ext4 /dev/mapper/crypt_home
 mount /dev/mapper/crypt_home /home
+```
 
-# Now copy your Backups to the Home directory (sudo recommended)
+Now copy your Backups to the Home directory (sudo recommended)
 
-# Change files to the right rights (important, if you backup and restore your files as root or with sudo)
+Change files to the right rights (important, if you backup and restore your files as root or with sudo)
+```
 cd /home/
 chown -R <user> <user>/
 chgrp -R users <user>/
-
+```
+```
 lsblk -f  # Note down the UUID of your device
+```
+```
 # <device>
 # - <device-partition>
 # - - <crypto 2>  UUID
-
+```
+```
 nano /etc/crypttab  # Edit this file and insert the following row
+```
+```
 # crypthome     UUID=<UUID enter here>    none                    luks,timeout=180
-
+```
+```
 cp /etc/fstab /etc/fstab.bak  # Backup Your FSTAB File
 nano /etc/fstab  # Edit this file
+```
+```
 ### File content ###
 # <file system> <dir> <type> <options> <dump> <pass>
 
@@ -104,19 +104,16 @@ UUID=...				/boot	vfat	rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=
 
 # /dev/mapper/vg1-swap
 UUID=...				none	swap	defaults        0 0
+```
 
-## alternatively
-genfstab -U
-
-
-### If Reboot does not work, try to rebuild the grub cfg.
+#### If Reboot does not work, try to rebuild the grub cfg.
 # Press Ctrl + Alt + F2
 cd /boot/grub
 mv grub.cfg grub.cfg.bak
 grub-mkconfig -o /boot/grub/grub.cfg
 reboot
 
-### If Startup works ... Continue
+#### If Startup works ... Continue
 
 ```bash
 # Reboot and make sure that you can login to your desktop

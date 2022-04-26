@@ -14,7 +14,7 @@ cat /mnt/etc/fstab  # check gen
 arch-chroot /mnt /root  # Change to Root Directory
 ```
 
-###Set Computer Hostname
+### Set Computer Hostname
 ```
 echo myhost > /etc/hostname
 ```
@@ -24,12 +24,12 @@ echo myhost > /etc/hostname
 echo KEYMAP=de-latin1 > /etc/vconsole.conf
 ```
 
-###Set Font (optional)
+### Set Font (optional)
 ```
 echo FONT=lat9w-16 >> /etc/vconsole.conf
 ```
 
-###Set Locale
+### Set Locale
 ```
 echo LANG=de_DE.UTF-8 > /etc/locale.conf  # Set Language
 nano /etc/locale.gen
@@ -45,7 +45,7 @@ nano /etc/locale.gen
 locale-gen
 ```
 
-###Set Time
+### Set Time
 ```
 ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime  # Set Timezone
 hwclock --systohc --utc # Sync Hardware-Clock
@@ -68,7 +68,7 @@ Add:
 127.0.0.1		<hostname>.localdomain	<hostname>
 ```
 
-###Edit Mirror List
+### Edit Mirror List
 ```bash
 reflector --verbose --country 'Germany' -l 200 -p https --sort rate --save /etc/pacman.d/mirrorlist
 
@@ -90,12 +90,12 @@ mkinitcpio -p linux-lts
 mkinitcpio -p linux
 ```
 
-###Bootloader
+### Bootloader
 ```bash
 pacman -S grub efibootmgr
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 ```
-####Method 1.
+#### Method 1.
 blkid  # BlockID
 -> Copy or note down UUID of root partition (encrypted)
 ```
@@ -107,7 +107,7 @@ nano /etc/default/grub
 GRUB_CMDLINE_LINUX="cryptdevice=UUID="<UUID-copied>":cryptlvm root=/dev/vg1/root"
 ```
 
-####Method 2.
+#### Method 2.
 ``` 
 nano /etc/default/grub
 ```
@@ -115,7 +115,7 @@ nano /etc/default/grub
 2. On *GRUB_CMDLINE_LINUX_DEFAULT* add this line between *"=* and *log.level=3 quiet*:
 cryptdevice=/dev/<device-with-luks>:<volgroupe-id>:allow-discards 
 
-####Generate Grub Configuration
+#### Generate Grub Configuration
 ```
 grub-mkconfig -o /boot/grub/grub.cfg  # Generate Grub config file
 ```

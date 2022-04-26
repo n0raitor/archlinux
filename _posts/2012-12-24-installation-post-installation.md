@@ -72,7 +72,7 @@ If you are using root to install this packages, run this commands as they are. I
 
 ### Console
 
-####Generic
+#### Generic
 ```
 pacman -S usbutils dialog powertop
 # optional #

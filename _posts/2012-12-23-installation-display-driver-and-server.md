@@ -16,7 +16,7 @@ pacman -S --needed xorg
 ```
 
 ### video drivers
-####Proprietary
+#### Proprietary
 ```
 sudo pacman -S nvidia nvidia-lts nvidia-settings
 # optional #

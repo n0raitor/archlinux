@@ -2,7 +2,7 @@
 title: 'Post Installation Config'
 layout: null
 ---
-###Bash
+### Bash
 ```bash
 /etc/profile.d/editor.sh  # set default global editor
 nano /etc/profile.d/alias.sh
@@ -19,7 +19,7 @@ Edit the ~/.bashrc file to add alias permanently for your user.
 [https://github.com/n0raitor/archlinux-alias](My ArchLinux Alias Repo) 
 
 
-###Firewall
+### Firewall
 ```bash
 sudo pacman -S ufw gufw
 sudo ufw enable
