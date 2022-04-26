@@ -30,6 +30,7 @@ station <device> connect SSID  # login into your wifi
 ```
 
 ##### old solution
+```bash
 wpa_passphrase  SSID  Passwort  > /etc/wpa_supplicant/wpa_supplicant.conf
 wpa_supplicant -i wlp0s1 -D wext -c /etc/wpa_supplicant/wpa_supplicant.conf -B
 dhcpcd wlp0s1

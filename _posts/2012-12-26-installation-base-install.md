@@ -80,7 +80,7 @@ nano /etc/pacman.d/mirrorlist
 
 ### Install Base Packages
 ```bash
-pacstrap /mnt base base-devel linux<-lts> linux-firmware nano <vim> dhcpcd lvm2 reflector   # <> ist optional
+pacstrap /mnt base base-devel linux-lts linux linux-headers linux-lts-headers  linux-firmware nano vim dhcpcd lvm2 reflector  
 
 ### you can add these packages, to the command above if you like:
 # File Systems
@@ -94,3 +94,5 @@ dmraid  # Device mapper RAID interface
 
 ```
 [f2fs-tools](https://archlinux.org/packages/extra/x86_64/f2fs-tools/ "View package details for f2fs-tools")
+
+====
