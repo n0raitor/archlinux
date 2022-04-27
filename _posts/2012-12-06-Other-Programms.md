@@ -7,7 +7,7 @@ layout: null
 
 #### Suits
 ```
-pacman -S libreoffice-still  # stable version (newer features in "fresh")
+pacman -S libreoffice-still libreoffice-still-de # stable version (newer features in "fresh")
 # alt. (aur): freeoffice/openoffice
 ```
 
