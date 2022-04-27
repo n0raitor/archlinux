@@ -62,19 +62,29 @@ sudo rsync -aAXvP --delete --exclude=/dev/* --exclude=/proc/* --exclude=/sys/* -
 ### In general
 ```
  sudo pacman -S os-probe
-
+```
+```
  sudo pacman -S ntfs-3g  #opt: If target Os is Windows
+```
 
- # Mount Dir of OS
+**Mount Dir of OS**
+ ```
  sudo mkdir -p /mnt/os-mount
  sudo mount /dev/<partition-of-os-to-dual-boot> /mnt/os-mount
+```
 
- # run os-prober
- os-prober
+**run os-prober**
+```
+os-prober
+```
 
- # recreate Grub Config
+**recreate Grub Config**
+```
  grub-mkconfig -o /boot/grub/grub.cfg
 ```
+
+If a message appears: *Os-prober will not be executed*
+Solution: Set the named constant to the default/grub file as False
 
 ### Extra
 

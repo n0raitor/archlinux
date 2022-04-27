@@ -148,7 +148,7 @@ pacman -S os-prober dosfstools ntfs-3g gvfs
 
 #### Sound
 ```
-pacman -S alsa-plugin alsa-utils pulseaudio pulseaudio-alsa 
+pacman -S alsa-plugins alsa-utils pulseaudio pulseaudio-alsa 
 pacman -S pulseaudio-bluetooth  # Bluetooth Support
 pacman -S pulseaudio-equalizer  # Optional
 ```

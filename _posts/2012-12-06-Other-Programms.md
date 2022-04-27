@@ -13,7 +13,7 @@ pacman -S libreoffice-still  # stable version (newer features in "fresh")
 
 #### office language aids
 ```
-pacman -S hunspell hunspell-en_us hunspell-de mythes mythes-en mythes-de aspell aspell-en aspell-de languagetool enchant
+pacman -S hunspell hunspell-en_us hunspell-en_gb hunspell-de mythes mythes-en mythes-de aspell aspell-en aspell-de languagetool enchant
 yay -S libreoffice-extension-languagetool
 pacman -S libmythes
 # optional #
