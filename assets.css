@@ -634,7 +634,7 @@ code {
 
 #content .body code {
   border: 0px solid #000030;
-  background: #F6F6F6;
+  /* background: #F6F6F6; */
   border-radius: 2px;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
