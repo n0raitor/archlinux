@@ -204,3 +204,7 @@ yay -S pamac-aur-git
 
 yay -S libpamac-aur
 ```
+
+### Zim
+Knowledge Database
+[https://wiki.archlinux.org/title/Zim](https://wiki.archlinux.org/title/Zim)
