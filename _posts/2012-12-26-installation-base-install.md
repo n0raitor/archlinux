@@ -33,10 +33,10 @@ n, Enter, Enter, Enter, Enter  # Create Linux Filesystem Partition for the entir
 ```
 #### Encrypt Root Partition
 ```bash
-cryptsetup luksFormat /dev/sda1  # Root Partition Device
+cryptsetup luksFormat /dev/<os-device>1  # Root Partition Device
 Confirm and Enter Passphrase.
 
-cryptsetup open /dev/sda1 cryptlvm  # Open Created LVM Device
+cryptsetup open /dev/<os-device>1 cryptlvm  # Open Created LVM Device
 Enter Passphrase
 
 pvcreate /dev/mapper/cryptlvm  # create Physical Volume

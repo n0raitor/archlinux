@@ -11,7 +11,7 @@ cat /mnt/etc/fstab  # check gen
 
 ### Switch to Arch-Chroot
 ```bash
-arch-chroot /mnt /root  # Change to Root Directory
+arch-chroot /mnt  # Change to Root Directory
 ```
 
 ### Set Computer Hostname
