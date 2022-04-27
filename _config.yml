@@ -4,3 +4,6 @@ permalink: ':title'
 highlighter: pygments
 safe: false
 title: 'N0Raitor - Arch Wiki'
+kramdown:
+  syntax_highlighter: rouge
+  input: GFM
