@@ -163,7 +163,7 @@ code,
 kbd,
 pre,
 samp {
-    font-family: monospace, serif;
+    font-family: Monaco, monospace;
     font-size: 1em;
 }
 
@@ -173,6 +173,11 @@ samp {
 
 pre {
     white-space: pre-wrap;
+    background-color: #EBF1F5;
+    overflow: auto;
+    font-family: 'Monaco', monospace;
+    padding: 10px 10px;
+    border: Solid 1px;
 }
 
 /**
@@ -628,13 +633,13 @@ code {
 }
 
 #content .body code {
-  border: 1px solid #e2e7ea;
-  background: #eef1f2;
+  border: 0px solid #000030;
+  background: #EBF1F5;
   border-radius: 2px;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
-  color: #546974;
-  padding: 0 1px;
+  color: #000030;
+  padding: 0 0px;
 }
 
 #content .body p > code {
