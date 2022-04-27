@@ -130,3 +130,8 @@ pacman -S gparted bleachbit
 ```
 yay -S timeshift
 ```
+If the Daily/Weekly/Monthly Tasks do not work, try: 
+```
+systemctl status cronie.service
+Start and enable evtl
+```
