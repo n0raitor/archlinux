@@ -163,6 +163,10 @@ yay -S guitar-pro
 ```bash
 yay -S ida-free
 ```
+To Fix the Graph Generation:
+```
+git clone https://github.com/WqyJh/qwingraph_qt5 & cd qwingraph_qt5 & sudo ./install.sh
+```
 
 ### Ghidra
 ```bash
