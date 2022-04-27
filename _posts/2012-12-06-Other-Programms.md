@@ -117,6 +117,42 @@ A simple video editor, but not that advanced compared to Davinci Resolve
 yay -S kdenlive
 ```
 
+### DaVinci Resolve
+https://wiki.archlinux.org/title/DaVinci_Resolve
+
+cat ~/.local/share/applications/com.blackmagicdesign.resolve.desktop 
+`
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=DaVinci Resolve
+GenericName=DaVinci Resolve
+Comment=Revolutionary new tools for editing, visual effects, color correction and professional audio post production, all in a single application!
+Path=/opt/resolve/
+Exec=sh /home/norman/.local/bin/resolve %U
+Terminal=true
+MimeType=application/x-resolveproj;
+Icon=/opt/resolve/graphics/DV_Resolve.png
+StartupNotify=true
+Name[en_US]=DaVinci Resolve
+StartupWMClass=resolve
+`
+
+cat ~/.local/bin/resolve
+`
+#!/bin/bash
+#Script to run Davinci Resolve in HiDPI
+QT_DEVICE_PIXEL_RATIO=2 QT_AUTO_SCREEN_SCALE_FACTOR=true /opt/resolve/bin/resolve
+`
+
+**For Converting MP4 Videos (incompatible in free edition)**
+cat ~/.local/bin/resolve-convert.sh 
+`
+#!/bin/bash
+echo "Converting $1 ..."
+ffmpeg -i $1 -c:v dnxhd -profile:v dnxhr_hq -pix_fmt yuv422p -c:a pcm_s16le -f mov $1.mov
+`
+
 ### The Package Manager of Arch Linux
 [Link](https://wiki.archlinux.de/title/Graphische_Paketmanager)
 
@@ -208,3 +244,7 @@ yay -S libpamac-aur
 ### Zim
 Knowledge Database
 [https://wiki.archlinux.org/title/Zim](https://wiki.archlinux.org/title/Zim)
+
+### Epic-Asset-Manager
+[https://github.com/AchetaGames/Epic-Asset-Manager](https://github.com/AchetaGames/Epic-Asset-Manager)
+
