@@ -253,7 +253,9 @@ https://wiki.archlinux.org/title/gaming
 
 [itch.io](https://en.wikipedia.org/wiki/itch.io) — Indie game store.
 https://itch.io/ || [itch](https://aur.archlinux.org/packages/itch/)AUR
+
 Legendary — A free and open-source replacement for the Epic Games Launcher.
 https://github.com/derrod/legendary || [legendary](https://aur.archlinux.org/packages/legendary/)AUR
+
 Heroic Games Launcher — A GUI for legendary, an open-source alternative for the Epic Games Launcher.
 https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher || [heroic-games-launcher-bin](https://aur.archlinux.org/packages/heroic-games-launcher-bin/)AUR
