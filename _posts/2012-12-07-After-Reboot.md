@@ -155,7 +155,7 @@ sudo pacman -S xarchiver file-roller ark archlinux-wallpaper xwallpaper archivet
 If not already done in XFCE
 ```bash
 sudo pacman -S arc-gtk-theme arc-icon-theme
-yay -S flat-remix cantatel-fonts
+yay -S flat-remix cantarel-fonts
 # sudo pacman -S futurist - Deprevated
 ```
 
