@@ -10,6 +10,7 @@ layout: null
 pacman -S libreoffice-still libreoffice-still-de # stable version (newer features in "fresh")
 # alt. (aur): freeoffice/openoffice
 ```
+For extra image-grid support, add the (two available) Grid buttons to your Titlebar of LibreOffice Writer
 
 #### office language aids
 ```
@@ -115,6 +116,24 @@ yay -S rambox
 A Hackable Editor
 ```bash
 sudo pacman -S atom 
+```
+
+### Pomotroid - Graphical Pomodoro Timer
+```bash
+yay -S pomotroid-bin
+```
+This version my be a little buggy. If so, try the SNAP Version
+```bash
+# Install SNAP
+git clone https://aur.archlinux.org/snapd.git
+cd snapd
+makepkg -si
+
+sudo systemctl enable --now snapd.socket
+
+sudo ln -s /var/lib/snapd/snap /snap
+
+sudo snap install pomotroid
 ```
 
 ### 1Password

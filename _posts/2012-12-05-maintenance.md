@@ -2,6 +2,30 @@
 title: 'Maintenance'
 layout: null
 ---
+### Setup CUPS
+**Preconditions**
+```bash
+sudo pacman -S cups    # manjaro-printer (optional)
+sudo systemctl enable cups
+sudo systemctl start cups
+sudo pacman -S system-config-printer
+```
+**Install Your Brother Printer Driver**
+```bash
+yay -S <Printer Driver ID> (Search yay -Ss or in Pamac)  --  e.g. brother-dcpj315w
+sudo lpadmin -p dcpj315w -v lpd://${printer-ip}/BINARY_P1
+```
+Finally:
+* get IP-Addresse of your Printer: 
+* Open CUPS web interface and use "search new Printer"
+* Select your Network Printer and click "add"
+* Follow the instructions and use the driver you just installed
+* Use the "system-config-printer" application to remove the printer "dcpj315w"
+* Print :)
+
+NOTE: You may test this multiple times: Use the Test-Print Button to test the connectivity
+
+
 ### Remove Orphans
 ```bash
 sudo pacman -Rns $(pacman -Qtdq)  # Removes unused Packages

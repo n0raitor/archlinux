@@ -29,6 +29,9 @@ pacman -Sy
 pacman -S archlinux-keyring  # Update keyring
 pacman-key --refresh-keys  # Refresh pacman keys
 ```
+**If PGP Key-Sync fails**
+System time correct? It is simple as that
+
 ### Add Accounts
 ```bash
 useradd -m -g users -s /bin/bash <name>
