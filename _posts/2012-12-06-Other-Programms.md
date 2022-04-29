@@ -20,6 +20,12 @@ pacman -S libmythes
 # optional #
 # hyphen  # Hyphenation rules
 ```
+Evtl (da sehr groß):
+```bash
+cd /usr/share/hunspell
+sudo ln -s en_GB-large.dic en_GB.dic
+sudo ln -s en_GB-large.aff en_GB.aff
+```
 
 #### Tools
 ```
@@ -116,6 +122,10 @@ yay -S rambox
 A Hackable Editor
 ```bash
 sudo pacman -S atom 
+```
+Install Haskel Syntax Support
+```bash
+apm install language-haskell ide-haskell ide-haskell-cabal
 ```
 
 ### Pomotroid - Graphical Pomodoro Timer
