@@ -155,6 +155,36 @@ If you want a more "Kali" like shell, feel free to install [this](https://wiki.a
 yay -S stacer
 ```
 
+### Haskell
+```bash
+pacman -S ghc
+pacman -S cabal-install
+pacman -S haskell-language-server
+```
+
+GHCup
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+```
+
+To start a simple repl, run:
+```bash
+ghci
+```
+
+To start a new haskell project in the current directory, run:
+```bash
+cabal init --interactive
+```
+
+To install other GHC versions and tools, run:
+```bash
+ghcup tui
+```
+
+If you are new to Haskell, check out https://www.haskell.org/ghcup/steps/
+
+
 ### KDE Video Editor - KDEnlive
 A simple video editor, but not that advanced compared to Davinci Resolve
 ```bash
