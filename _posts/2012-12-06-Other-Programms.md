@@ -97,6 +97,12 @@ yay -S slack-desktop
 yay -S rambox
 ```
 
+### Atom
+A Hackable Editor
+```bash
+sudo pacman -S atom 
+```
+
 ### 1Password
 [Official Documentation](https://support.1password.com/getting-started-linux/#arch-linux)
 
