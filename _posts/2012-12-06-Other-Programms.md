@@ -85,6 +85,20 @@ yay -S zoom
 yay -S spotify
 ```
 
+### Remarkable
+Better MD Editor
+```bash
+yay -S remarkable
+```
+
+### Flameshot
+Screenshot Tool
+```bash
+sudo pacman -S flameshot 
+```
+Use "Flameshot gui" to setup Shortcut
+
+
 ### Slack
 ```bash
 # communication
@@ -107,7 +121,12 @@ sudo pacman -S atom
 [Official Documentation](https://support.1password.com/getting-started-linux/#arch-linux)
 
 ### Additional PDF Software
-[Link](https://wiki.archlinux.org/index.php/PDF,_PS_and_DjVu)
+Recommendation: xreader
+```bash
+sudo pacman -S xreader
+```
+
+[Alternatives](https://wiki.archlinux.org/index.php/PDF,_PS_and_DjVu)
 
 ### Kali Linux Shell
 If you want a more "Kali" like shell, feel free to install [this](https://wiki.archlinux.org/index.php/zsh) shell.
