@@ -251,7 +251,7 @@ For More information click [here](https://www.youtube.com/watch?v=iaXQdyHRL8M&t=
 ### VeraCrypt
 Multi-Platform encryption and decryption tool
 ```bash
-sudo pacman -Ss veracrypt
+sudo pacman -S veracrypt
 ```
 
 ### Nautilus - Awesome File Manager

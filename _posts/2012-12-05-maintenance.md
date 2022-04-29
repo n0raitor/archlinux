@@ -25,6 +25,32 @@ Finally:
 
 NOTE: You may test this multiple times: Use the Test-Print Button to test the connectivity
 
+### Activate Numberpad on Bootup
+[https://wiki.archlinux.org/title/Activating_numlock_on_bootup](https://wiki.archlinux.org/title/Activating_numlock_on_bootup)
+**KDE Plasma**
+Go to *System Settings > Input Devices > Keyboard*, in the *Hardware* tab, in the *NumLock on Plasma Startup* section, choose the desired NumLock behavior.
+
+**GNOME**
+Run the following command:
+```bash
+gsettings set org.gnome.desktop.peripherals.keyboard numlock-state true
+```
+
+In order to remember last state of numlock key (whether you disabled or enabled), use:
+
+```bash
+gsettings set org.gnome.desktop.peripherals.keyboard remember-numlock-state true
+```
+Note: The key *numlock-state* was moved from *org.gnome.settings-daemon.peripherals.keyboard* since GNOME 3.34
+Alternatively, you can use add *numlockx* on (from numlockx to a startup script, like */.bashrc* (if using Bash) or */.profile.*
+
+**Xfce**
+In the file ~/.config/xfce4/xfconf/xfce-perchannel-xml/keyboards.xml, make sure the following values are set to true:
+```
+<property name="Numlock" type="bool" value="true"/>
+<property name="RestoreNumlock" type="bool" value="true"/>
+```
+Note: If the file does not exist then open Settings > Keyboard, then check and uncheck the Restore num lock state on startup. This will create the *keyboards.xml* file.
 
 ### Remove Orphans
 ```bash
