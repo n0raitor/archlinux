@@ -288,6 +288,19 @@ yay -S ghidra
 Use Capstone to Deassemble Binary Files
 ```
 
+### Netbeans
+[https://wiki.archlinux.org/title/Netbeans](https://wiki.archlinux.org/title/Netbeans)
+
+### .RST Reader
+**Restview**
+```bash
+mkdir restview
+cd restview/
+virtualenv-2.7 venv # The second system I used just used 'virtualenv venv'
+./venv/bin/pip install restview
+./venv/bin/restview ~/path/MANUAL.rst
+```
+
 ### yED Graph Editor
 Try It ;-)
 

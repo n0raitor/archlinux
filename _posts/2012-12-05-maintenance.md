@@ -25,7 +25,7 @@ Finally:
 
 NOTE: You may test this multiple times: Use the Test-Print Button to test the connectivity
 
-### Activate Numberpad on Bootup
+### Activating NumLock on Bootup
 [https://wiki.archlinux.org/title/Activating_numlock_on_bootup](https://wiki.archlinux.org/title/Activating_numlock_on_bootup)
 **KDE Plasma**
 Go to *System Settings > Input Devices > Keyboard*, in the *Hardware* tab, in the *NumLock on Plasma Startup* section, choose the desired NumLock behavior.
@@ -110,26 +110,26 @@ sudo rsync -aAXvP --delete --exclude=/dev/* --exclude=/proc/* --exclude=/sys/* -
 
 ## Set Dual Boot
 ### In general
-```
+```bash
  sudo pacman -S os-probe
 ```
-```
+```bash
  sudo pacman -S ntfs-3g  #opt: If target Os is Windows
 ```
 
 **Mount Dir of OS**
- ```
+ ```bash
  sudo mkdir -p /mnt/os-mount
  sudo mount /dev/<partition-of-os-to-dual-boot> /mnt/os-mount
 ```
 
 **run os-prober**
-```
+```bash
 os-prober
 ```
 
 **recreate Grub Config**
-```
+```bash
  grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
