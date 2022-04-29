@@ -48,14 +48,14 @@ pacman -Syu
 Logged out.
 Switch to a console with Ctrl+Alt+F2.
 Login as a root and check that your user own no processes:
-```
+```bash
 ps -U username
 ```
-```
+```bash
 umount /home
 lsblk  # to check if umount was successful
 ```
-```
+```bash
 gdisk /dev/<home-device>  # Type as LUKS
 cryptsetup luksFormat /dev/<home-device>
 cryptsetup open /dev/<home-device> crypt_home
@@ -66,12 +66,12 @@ mount /dev/mapper/crypt_home /home
 Now copy your Backups to the Home directory (sudo recommended)
 
 Change files to the right rights (important, if you backup and restore your files as root or with sudo)
-```
+```bash
 cd /home/
 chown -R <user> <user>/
 chgrp -R users <user>/
 ```
-```
+```bash
 lsblk -f  # Note down the UUID of your device
 ```
 ```
@@ -79,13 +79,13 @@ lsblk -f  # Note down the UUID of your device
 # - <device-partition>
 # - - <crypto 2>  UUID
 ```
-```
+```bash
 nano /etc/crypttab  # Edit this file and insert the following row
 ```
 ```
 # crypthome     UUID=<UUID enter here>    none                    luks,timeout=180
 ```
-```
+```bash
 cp /etc/fstab /etc/fstab.bak  # Backup Your FSTAB File
 nano /etc/fstab  # Edit this file
 ```

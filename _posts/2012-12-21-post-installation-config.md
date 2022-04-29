@@ -8,7 +8,7 @@ layout: null
 nano /etc/profile.d/alias.sh
 ```
 use the the folowing rows:
-``` 
+```bash
 alias <left>="<right">
 ```
 
@@ -41,7 +41,7 @@ systemctl enable sshd.service # ssh Service
 pacman -S acpid dbus avahi
 ```
 Enable the Services:
-```
+```bash
 systemctl enable acpid
 systemctl enable avahi-daemon
 ```

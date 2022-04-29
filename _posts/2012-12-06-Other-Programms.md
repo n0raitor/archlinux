@@ -346,13 +346,3 @@ https://github.com/derrod/legendary || [legendary](https://aur.archlinux.org/pac
 
 Heroic Games Launcher — A GUI for legendary, an open-source alternative for the Epic Games Launcher.
 https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher || [heroic-games-launcher-bin](https://aur.archlinux.org/packages/heroic-games-launcher-bin/)AUR
-
-```javascript
-function sayHello(name) {
-  if (!name) {
-    console.log('Hello World');
-  } else {
-    console.log(`Hello ${name}`);
-  }
-}
-```

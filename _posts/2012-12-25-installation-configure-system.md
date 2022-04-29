@@ -15,22 +15,22 @@ arch-chroot /mnt  # Change to Root Directory
 ```
 
 ### Set Computer Hostname
-```
+```bash
 echo myhost > /etc/hostname
 ```
 
 ### Set Keyboard Layout
-```
+```bash
 echo KEYMAP=de-latin1 > /etc/vconsole.conf
 ```
 
 ### Set Font (optional)
-```
+```bash
 echo FONT=lat9w-16 >> /etc/vconsole.conf
 ```
 
 ### Set Locale
-```
+```bash
 echo LANG=de_DE.UTF-8 > /etc/locale.conf  # Set Language
 nano /etc/locale.gen
 ```
@@ -41,18 +41,18 @@ nano /etc/locale.gen
 #de_DE@euro ISO-8859-15
 #en_US.UTF-8
 ```
-```
+```bash
 locale-gen
 ```
 
 ### Set Time
-```
+```bash
 ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime  # Set Timezone
 hwclock --systohc --utc # Sync Hardware-Clock
 ```
 
 ### Set Root Password
-```
+```bash
 passwd root
 ```
 
@@ -71,8 +71,9 @@ Add:
 ### Edit Mirror List
 ```bash
 reflector --verbose --country 'Germany' -l 200 -p https --sort rate --save /etc/pacman.d/mirrorlist
-
-# Alternative
+```
+Alternative:
+```bash
 nano /etc/pacman.d/mirrorlist
 ```
 
@@ -85,7 +86,7 @@ Add between *block* and *filesystem*:
 * lvm2
 
 #### Generate mkinitcpio
-```
+```bash
 mkinitcpio -p linux-lts
 mkinitcpio -p linux
 ```
@@ -98,7 +99,7 @@ grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 #### Method 1.
 blkid  # BlockID
 -> Copy or note down UUID of root partition (encrypted)
-```
+```bash
 nano /etc/default/grub
 ```
 --> Edit:
@@ -108,7 +109,7 @@ GRUB_CMDLINE_LINUX="cryptdevice=UUID="<UUID-copied>":cryptlvm root=/dev/vg1/root
 ```
 
 #### Method 2.
-``` 
+```bash
 nano /etc/default/grub
 ```
 1. Remove the *#* in front of *GRUB_ENABLE_CRYPTODISK=y*
@@ -116,6 +117,6 @@ nano /etc/default/grub
 cryptdevice=/dev/<device-with-luks>:<volgroupe-id>:allow-discards 
 
 #### Generate Grub Configuration
-```
+```bash
 grub-mkconfig -o /boot/grub/grub.cfg  # Generate Grub config file
 ```

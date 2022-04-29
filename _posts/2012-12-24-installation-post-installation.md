@@ -76,7 +76,7 @@ If you are using root to install this packages, run this commands as they are. I
 ### Console
 
 #### Generic
-```
+```bash
 pacman -S usbutils dialog powertop
 # optional #
 # lsof  # Lists open files for running Unix processes
@@ -90,12 +90,12 @@ pacman -S usbutils dialog powertop
 ```
 
 #### Compression Tools
-```
+```bash
 pacman -S zip unzip unrar p7zip lzop
 ```
 
 #### Network Tools
-```
+```bash
 pacman -S rsync traceroute bind net-tools
 # optional #
 # dnsutils  # DNS tools (nslookup)
@@ -111,7 +111,7 @@ pacman -S rsync traceroute bind net-tools
 
 ### System
 #### Services
-```
+```bash
 pacman -S networkmanager openssh xdg-user-dirs intel/amd-ucode (bluez bluez-utils) pkgstats
 pacman -S bluez bluez-utils  # For Bluetooth compatibles
 # optional #
@@ -125,7 +125,7 @@ pacman -S bluez bluez-utils  # For Bluetooth compatibles
 ```
 
 #### Filesystem
-```
+```bash
 pacman -S os-prober dosfstools ntfs-3g gvfs
 # optional #
 # snapper  # snapshot manager (ext4, lvm, btrfs)
@@ -150,14 +150,14 @@ pacman -S os-prober dosfstools ntfs-3g gvfs
 ```
 
 #### Sound
-```
+```bash
 pacman -S alsa-plugins alsa-utils pulseaudio pulseaudio-alsa 
 pacman -S pulseaudio-bluetooth  # Bluetooth Support
 pacman -S pulseaudio-equalizer  # Optional
 ```
 
 #### Printer
-```
+```bash
 pacman -S cups ghostscript cups-pdf hplip
 # optional #
 # gutenprint  # Top quality printer drivers for POSIX systems
@@ -165,7 +165,7 @@ pacman -S cups ghostscript cups-pdf hplip
 ```
 
 #### Fonts 
-```
+```bash
 pacman -S ttf-bitstream-vera ttf-dejavu ttf-liberation adobe-source-sans-pro-fonts
 # optional #
 # font-bh-ttf
@@ -179,7 +179,7 @@ pacman -S ttf-fira-code
 ```
 
 #### input drivers
-```
+```bash
 pacman -S xf86-input-synaptics  # optional: Laptop Touchpad-Driver
 # optional #
 # xf86-input-libinput  #  Generic input driver for the X.Org server based on libinput

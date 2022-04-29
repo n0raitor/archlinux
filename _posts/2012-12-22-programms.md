@@ -11,7 +11,7 @@ pacman -S  wireless_tools wpa_supplicant  mtools
 ```
 
 #### Web Browser
-```
+```bash
 pacman -S chromium 
 yay -S brave-bin  # Most secure Browser on earth...
 # firefox 
@@ -21,7 +21,7 @@ yay -S brave-bin  # Most secure Browser on earth...
 ```
 
 #### Torrent / Download-Manager
-```
+```bash
 pacman -S qbittorrent
 yay -S jdownloader2
 # optional #
@@ -32,7 +32,7 @@ yay -S jdownloader2
 ```
 
 #### E-Mail
-```
+```bash
 pacman -S thunderbird thunderbird-i18n-de
 # optional #
 # evolution + evolution-*
@@ -41,7 +41,7 @@ pacman -S thunderbird thunderbird-i18n-de
 ### Multimedia
 
 #### GStreamer - Streaming Videos
-```
+```bash
 pacman -S gst-plugins-base gst-plugins-good gst-plugins-ugly
 # gst-plugins-libav - deprecated
 ### Audio Player
@@ -56,7 +56,7 @@ pacman -S gst-plugins-base gst-plugins-good gst-plugins-ugly
 ```
 
 #### Video Player
-```
+```bash
 pacman -S vlc  # (QT) Video Player
 
 # optional #
@@ -67,7 +67,7 @@ pacman -S vlc  # (QT) Video Player
 ```
 
 #### Video Tools
-```
+```bash
 sudo pacman -S handbrake
 # optional #
 # avidemux-qt  # (QT) Video Editor
@@ -75,7 +75,7 @@ sudo pacman -S handbrake
 ```
 
 #### Burner
-```
+```bash
 sudo pacman -S brasero  # Burning Software
 yay -S balena-etcher  # Write IMAGES to USB-Drives
 
@@ -127,11 +127,11 @@ pacman -S gparted bleachbit
 ```
 
 #### System Recovery
-```
+```bash
 yay -S timeshift
 ```
 If the Daily/Weekly/Monthly Tasks do not work, try: 
-```
+```bash
 systemctl status cronie.service
 Start and enable evtl
 ```

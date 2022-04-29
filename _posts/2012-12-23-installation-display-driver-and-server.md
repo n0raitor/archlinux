@@ -6,18 +6,18 @@ layout: null
 
 ### XOrg
 #### Print GPU Info
-```
+```bash
 lspci -k | grep -A 2 -E "(VGA|3D)"
 ```
 
 #### Install XORG
-```
+```bash
 pacman -S --needed xorg
 ```
 
 ### video drivers
 #### Proprietary
-```
+```bash
 sudo pacman -S nvidia nvidia-lts nvidia-settings
 # optional #
 # virtualbox-guest-utils  # (For Virtualbox)
@@ -27,7 +27,7 @@ sudo pacman -S nvidia nvidia-lts nvidia-settings
 ```
 
 #### Opensource
-```
+```bash
 # xf86-video-*
 # e.g. nouveau
 ```
