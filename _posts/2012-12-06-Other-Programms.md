@@ -128,6 +128,13 @@ Install Haskel Syntax Support
 apm install language-haskell ide-haskell ide-haskell-cabal
 ```
 
+**Use Tab Key and Spaces**
+See Soft Tabs and Tab Length under Settings > Editor Settings.
+To toggle indentation modes quickly you can use Ctrl-Shift-P and search for Editor: Toggle Soft Tabs.
+
+**Spell Checking**
+[https://cschnack.de/blog/2019/atom-spell-lang-swop/](https://cschnack.de/blog/2019/atom-spell-lang-swop/)
+
 ### Pomotroid - Graphical Pomodoro Timer
 ```bash
 yay -S pomotroid-bin
