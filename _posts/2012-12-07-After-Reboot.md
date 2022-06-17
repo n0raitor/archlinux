@@ -4,6 +4,7 @@ layout: null
 ---
 
 ### Exit and Reboot
+
 ```bash
 exit
 umount -a
@@ -13,6 +14,7 @@ reboot
 ### Connect to Internet
 
 #### With Wifi
+
 ```bash
 # newer way:
 [iwctl](https://wiki.archlinux.org/index.php/Iwctl)
@@ -26,114 +28,42 @@ station <device> connect SSID  # login into your wifi
 ```
 
 #### With Ethernet
+
 ```bash
 ip a # search for Ethernet adapter
 dhcpcd <adapter>
 ```
 
 ### Use Reflector as above
+
 ```bash
 reflector --verbose --country 'Germany' -l 200 -p https --sort rate --save /etc/pacman.d/mirrorlist
 ```
 
 ### Update System
+
 ```bash
 pacman -Syu
 ```
 
-### (optional) Encrypt Home Partition
-**Notice! This only makes sense, if your home partiton is on an other drive than your root partition or you did not encrypt your root partition**
+###### Generate SSH-Key
 
-!!! Backup all your Data and copy the backup to another drive or to the root drive  before this step !!!
-Logged out.
-Switch to a console with Ctrl+Alt+F2.
-Login as a root and check that your user own no processes:
-```bash
-ps -U username
-```
-```bash
-umount /home
-lsblk  # to check if umount was successful
-```
-```bash
-gdisk /dev/<home-device>  # Type as LUKS
-cryptsetup luksFormat /dev/<home-device>
-cryptsetup open /dev/<home-device> crypt_home
-mkfs.ext4 /dev/mapper/crypt_home
-mount /dev/mapper/crypt_home /home
-```
-
-Now copy your Backups to the Home directory (sudo recommended)
-
-Change files to the right rights (important, if you backup and restore your files as root or with sudo)
-```bash
-cd /home/
-chown -R <user> <user>/
-chgrp -R users <user>/
-```
-```bash
-lsblk -f  # Note down the UUID of your device
-```
-```
-# <device>
-# - <device-partition>
-# - - <crypto 2>  UUID
-```
-```bash
-nano /etc/crypttab  # Edit this file and insert the following row
-```
-```
-# crypthome     UUID=<UUID enter here>    none                    luks,timeout=180
-```
-```bash
-cp /etc/fstab /etc/fstab.bak  # Backup Your FSTAB File
-nano /etc/fstab  # Edit this file
-```
-```
-### File content ###
-# <file system> <dir> <type> <options> <dump> <pass>
-
-# /dev/mapper/vg1-root
-UUID=...				/		ext4	rw,relatime     0 1
-
-# /dev/<home-device>
-/dev/mapper/crypthome	/home	ext4	rw,relatime     0 2
-
-# /dev/sdb128
-UUID=...				/boot	vfat	rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=ascii,shortname=mixed,utf8,errors=remount-ro   0 2
-
-# /dev/mapper/vg1-swap
-UUID=...				none	swap	defaults        0 0
-```
-
-#### If Reboot does not work, try to rebuild the grub cfg.
-# Press Ctrl + Alt + F2
-cd /boot/grub
-mv grub.cfg grub.cfg.bak
-grub-mkconfig -o /boot/grub/grub.cfg
-reboot
-
-#### If Startup works ... Continue
-
-```bash
-# Reboot and make sure that you can login to your desktop
-# If everything workes fine, feel free to remove your Backup (done before)
-```
-
-
-### Generate SSH-Key
 ```bash
 ssh-keygen -t rsa -b 4096
 ```
 
 ### Main Maintenance
+
 **SSH**
+
 ```bash
 # sudo systemctl enable sshd
 # sudo systemctl start sshd
 # -> Already done, if not, run this commands
 ```
+
 **OpenVPN**
+
 ```bash
 # Setup OpenVPN
 sudo pacman -S openvpn networkmanager-openvpn
@@ -144,6 +74,7 @@ nmcli connection import type openvpn file <file-to-ovpn>
 ```
 
 **Misc**
+
 ```bash
 sudo pacman -S ffmpegthumbnailer  # Lightweight video thumbnailer that can be used by file managers.
 sudo pacman -S raw-thumbnailer  # A lightweight and fast raw image thumbnailer that can be used by file managers.
@@ -153,6 +84,7 @@ sudo pacman -S xarchiver file-roller ark archlinux-wallpaper xwallpaper archivet
 
 **Theme and Fonts - For Kali Look**
 If not already done in XFCE
+
 ```bash
 sudo pacman -S arc-gtk-theme arc-icon-theme
 yay -S flat-remix cantarel-fonts
@@ -160,6 +92,7 @@ yay -S flat-remix cantarel-fonts
 ```
 
 **Setup Useful Shortcuts**
+
 - Super + T: Terminal
 - Super + C: Chrome
 - Super + F: File Manager

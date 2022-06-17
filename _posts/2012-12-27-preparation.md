@@ -56,5 +56,5 @@ pacman -Syyy
 ### Update the System Clock
 
 ```bash
-
+timedatectl set-ntp true
 ```

@@ -4,34 +4,31 @@ category: Installation
 layout: null
 ---
 
-### (extra) If you want a gui install / config use archfi
-If you are using this, you can skip until the following steps to *"Set up XFCE"*
-```bash
-pacman -S wget pacman-contrib
-wget archfi.sf.net/archfi
-sh archfi
-```
-
 ## PreConfig
+
 ```bash
-export EDITOR=nano <or vim>
+export EDITOR=nano
 ```
 
 ### Configure Partitions
+
 I use *gdisk* for GPT Tables
+
 ```bash
 lsblk  # Print Devices
 gdisk /dev/<os-device>
 
 n, 128, -200M, Enter, ef00  # Create EFI Partition
-n, Enter, Enter, Enter, 8e00  # Create Linux LVM Partition
+n, 1, Enter, Enter, 8e00  # Create Linux LVM Partition
 w
 
-# If you are using a separate home drive, use this
+# If you are using a separate home drive, use this to create an encrypted home partition (LVM, luks added beneath)
 gdisk /dev/<home-device>
-n, Enter, Enter, Enter, Enter  # Create Linux Filesystem Partition for the entire drive
+n, 1, Enter, Enter, 8e00  # Create Linux Filesystem Partition for the entire driveNow copy your Backups to the Home directory (sudo recommended)
 ```
+
 #### Encrypt Root Partition
+
 ```bash
 cryptsetup luksFormat /dev/<os-device>1  # Root Partition Device
 Confirm and Enter Passphrase.
@@ -42,35 +39,51 @@ Enter Passphrase
 pvcreate /dev/mapper/cryptlvm  # create Physical Volume
 
 vgcreate vg1 /dev/mapper/cryptlvm  # create Volume Group
+
+# For the Home Partition Encryption (if created above)
+cryptsetup luksFormat /dev/<home-device>
+cryptsetup open /dev/<home-device> crypt_home
 ```
 
 #### Create Logical Volumes
+
+Note: for *<size-of-ram>* use the amount of RAW + 1G for swap (e.g. 16 GB RAM => 17GB SWAP), if you wish to use hibernate-mode (load current session from RAM in SWAP on Suspend)
+
 ```bash
 lvcreate -L <size-of-ram>G vg1 -n swap
 lvcreate -l 100%FREE vg1 -n root
 ```
-Check your work with *lsblk*
+
+Check your progress with *lsblk*
 
 #### Format Logical Volumes and Partitions
+
 ```bash
-mkfs.fat -F32 /dev/sda128
+mkfs.fat -F32 /dev/<os-device>128
 mkfs.ext4 /dev/vg1/root
 mkswap /dev/vg1/swap
 
-mkfs.ext4 /dev/<home-partition>
+# If you are using the above created encrypted home partition
+mkfs.ext4 /dev/mapper/crypt_home
 ```
 
 ##### Mount Partitions
+
 ```bash
 mount /dev/vg1/root /mnt
 mkdir /mnt/home
-mount /dev/<home-partition> /mnt/home
 mkdir /mnt/boot
-mount /dev/sda128 /mnt/boot
+mount /dev/<os-device>128 /mnt/boot
 swapon /dev/vg1/swap
+
+# If you are using the above created encrypted home partition
+mount /dev/mapper/crypt_home /home
 ```
 
 ### Create Local Mirror List
+
+*Note: This is for Server in Germany, feel free to tweak this command with your location*
+
 ```bash
 reflector --verbose --country 'Germany' -l 200 -p https --sort rate --save /etc/pacman.d/mirrorlist
 
@@ -79,20 +92,9 @@ nano /etc/pacman.d/mirrorlist
 ```
 
 ### Install Base Packages
+
 ```bash
-pacstrap /mnt base base-devel linux-lts linux linux-headers linux-lts-headers  linux-firmware nano vim dhcpcd lvm2 reflector  
-
-### you can add these packages, to the command above if you like:
-# File Systems
-dosfstools  # DOS filesystem utilities
-btrfs-progs  # Btrfs filesystem utilities
-xfsprogs  # XFS filesystem utilities
-f2fs-tools  # Tools for Flash-Friendly File System (F2FS)
-jfsutils  #  JFS filesystem utilities
-reiserfsprogs  # Reiserfs utilities
-dmraid  # Device mapper RAID interface
-
+pacstrap /mnt base base-devel linux-lts linux linux-headers linux-lts-headers  linux-firmware nano dhcpcd lvm2 reflector git  
 ```
-[f2fs-tools](https://archlinux.org/packages/extra/x86_64/f2fs-tools/ "View package details for f2fs-tools")
 
 ====
