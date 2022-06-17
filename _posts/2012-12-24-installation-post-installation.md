@@ -103,7 +103,7 @@ pacman -S pulseaudio-equalizer  # Optional
 Configuration tools for Linux networking
 
 ```bash
-pacman -S net-tools
+pacman -S net-tools wget curl
 ```
 
 #### Networmanager

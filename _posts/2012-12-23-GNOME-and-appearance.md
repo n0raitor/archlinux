@@ -141,3 +141,15 @@ For Kali-Style use:
 #### Themes
 
 Use Flat-Remix, Orchis, Nordic or Skeuos
+
+
+
+#### Terminal Color Scheme
+
+[Gogh](http://mayccoll.github.io/Gogh/)
+
+
+
+```bash
+bash -c "$(curl -sLo- https://git.io/vQgMr)"
+```
