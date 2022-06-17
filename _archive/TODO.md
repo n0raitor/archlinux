@@ -4,8 +4,6 @@ To Insert
 
 [https://pkgstats.archlinux.de/](https://pkgstats.archlinux.de/)
 
-
-
 *pacman-contrib*
 
 ```bash

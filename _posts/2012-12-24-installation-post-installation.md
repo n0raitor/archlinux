@@ -220,3 +220,13 @@ sudo pacman -S zip unzip unrar p7zip lzop
 ```bash
 pacman -S os-prober dosfstools ntfs-3g gvfs
 ```
+
+### Must Have for next Step
+
+**Timeshift**
+
+A system restore utility for Linux
+
+```bash
+yay -S timeshift-bin
+```
