@@ -122,6 +122,7 @@ pacman -S ttf-bitstream-vera ttf-dejavu ttf-liberation adobe-source-sans-pro-fon
 pacman -S ttf-anonymous-pro ttf-droid ttf-ubuntu-font-family ttf-roboto ttf-roboto-mono ttf-font-awesome
 yay -S ttf-hackgen ttf-gentium-basic ttf-ms-fonts
 pacman -S ttf-fira-code
+yay -S ttf-nerd-fonts-hack-complete-git 
 # For More Fonts: pacman -Ss ttf
 ```
 
@@ -138,3 +139,5 @@ For Kali-Style use:
 - Scaling: 1,35
 
 #### Themes
+
+Use Flat-Remix, Orchis, Nordic or Skeuos
