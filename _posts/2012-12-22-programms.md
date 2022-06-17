@@ -1,16 +1,21 @@
 ---
 title: 'Programms'
 layout: null
+
 ---
+
 This Section contains the most recommended programms to use on your OS
+
 ### Internet
 
 #### WIFI
+
 ```bash
 pacman -S  wireless_tools wpa_supplicant  mtools 
 ```
 
 #### Web Browser
+
 ```bash
 pacman -S chromium 
 yay -S brave-bin  # Most secure Browser on earth...
@@ -21,6 +26,7 @@ yay -S brave-bin  # Most secure Browser on earth...
 ```
 
 #### Torrent / Download-Manager
+
 ```bash
 pacman -S qbittorrent
 yay -S jdownloader2
@@ -32,6 +38,7 @@ yay -S jdownloader2
 ```
 
 #### E-Mail
+
 ```bash
 pacman -S thunderbird thunderbird-i18n-de
 # optional #
@@ -41,6 +48,7 @@ pacman -S thunderbird thunderbird-i18n-de
 ### Multimedia
 
 #### GStreamer - Streaming Videos
+
 ```bash
 pacman -S gst-plugins-base gst-plugins-good gst-plugins-ugly
 # gst-plugins-libav - deprecated
@@ -56,6 +64,7 @@ pacman -S gst-plugins-base gst-plugins-good gst-plugins-ugly
 ```
 
 #### Video Player
+
 ```bash
 pacman -S vlc  # (QT) Video Player
 
@@ -67,6 +76,7 @@ pacman -S vlc  # (QT) Video Player
 ```
 
 #### Video Tools
+
 ```bash
 sudo pacman -S handbrake
 # optional #
@@ -75,6 +85,7 @@ sudo pacman -S handbrake
 ```
 
 #### Burner
+
 ```bash
 sudo pacman -S brasero  # Burning Software
 yay -S balena-etcher  # Write IMAGES to USB-Drives
@@ -88,6 +99,7 @@ yay -S balena-etcher  # Write IMAGES to USB-Drives
 ```
 
 #### Graphic
+
 ```bash
 pacman -S gimp
 # optional #
@@ -97,11 +109,13 @@ pacman -S gimp
 ```
 
 #### E-Books
+
 ```bash
 yay -S calibre
 ```
 
 ### Dev
+
 ```bash
 pacman -S code  # vscode
 # optional #
@@ -113,6 +127,7 @@ pacman -S code  # vscode
 ```
 
 ### System
+
 ```bash
 pacman -S gparted bleachbit
 # optional #
@@ -127,10 +142,13 @@ pacman -S gparted bleachbit
 ```
 
 #### System Recovery
+
 ```bash
 yay -S timeshift
 ```
+
 If the Daily/Weekly/Monthly Tasks do not work, try: 
+
 ```bash
 systemctl status cronie.service
 Start and enable evtl
