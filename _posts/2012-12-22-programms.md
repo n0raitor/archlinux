@@ -10,8 +10,10 @@ This Section contains the most recommended programms to use on your OS
 
 #### WIFI
 
+Tools allowing to manipulate the Wireless Extensions
+
 ```bash
-pacman -S  wireless_tools wpa_supplicant  mtools 
+pacman -S  wireless_tools 
 ```
 
 #### Web Browser

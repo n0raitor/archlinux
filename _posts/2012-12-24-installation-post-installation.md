@@ -52,13 +52,13 @@ su <username>
 
 ```bash
 # Install YAY - simple AUR Package Installation
-pacman -S git
+sudo pacman -S git
 git clone https://aur.archlinux.org/yay.git
 cd yay/
 makepkg -si PKGBUILD
 ```
 
-NOW STAY IN USER MODE to get the commands working
+**NOW STAY IN USER MODE** to get the commands working
 
 ### Booting
 
@@ -71,7 +71,7 @@ NOW STAY IN USER MODE to get the commands working
 *Note: Replace the intel with amd, if your cpu is an amd-cpu*
 
 ```bash
-pacman -S intel-ucode
+sudo pacman -S intel-ucode
 ```
 
 ### Power management
@@ -93,9 +93,9 @@ sudo pacman -S powertop
 #### Sound System
 
 ```bash
-pacman -S alsa alsa-plugins alsa-utils pulseaudio pulseaudio-alsa 
-pacman -S pulseaudio-bluetooth  # Bluetooth Support
-pacman -S pulseaudio-equalizer  # Optional
+sudo pacman -S alsa alsa-plugins alsa-utils pulseaudio pulseaudio-alsa 
+sudo pacman -S pulseaudio-bluetooth  # Bluetooth Support
+sudo pacman -S pulseaudio-equalizer  # Optional
 ```
 
 ### Networking
@@ -103,7 +103,7 @@ pacman -S pulseaudio-equalizer  # Optional
 Configuration tools for Linux networking
 
 ```bash
-pacman -S net-tools wget curl
+sudo pacman -S net-tools wget curl
 ```
 
 #### Networmanager
@@ -147,7 +147,7 @@ sudo systemctl enable avahi-daemon
 **Bluetooth**
 
 ```bash
-pacman -S bluez bluez-utils
+sudo pacman -S bluez bluez-utils
 
 # Optional
 sudo systemctl enable bluetooth
@@ -160,7 +160,7 @@ sudo systemctl enable bluetooth
 **Xorg**
 
 ```bash
-pacman -S xorg
+sudo pacman -S xorg
 ```
 
 #### Display drivers
@@ -218,7 +218,7 @@ sudo pacman -S zip unzip unrar p7zip lzop
 **Filesystem**
 
 ```bash
-pacman -S os-prober dosfstools ntfs-3g gvfs
+sudo pacman -S os-prober dosfstools ntfs-3g gvfs
 ```
 
 ### Must Have for next Step
