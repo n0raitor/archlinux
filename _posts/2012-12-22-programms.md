@@ -119,9 +119,13 @@ For extra image-grid support, add the (two available) Grid buttons to your Title
 #### office language aids
 
 ```bash
-sudo pacman -S hunspell hunspell-en_us hunspell-en_gb hunspell-de mythes mythes-en mythes-de aspell aspell-en aspell-de languagetool enchant
+sudo pacman -S aspell aspell-de aspell-en
+sudo pacman -S hunspell hunspell-en_us hunspell-de mythes 
+sudo pacman -S mythes mythes-en mythes-de 
+sudo pacman -S languagetool enchant
 yay -S libreoffice-extension-languagetool
 sudo pacman -S libmythes
+sudo pacman -S speech-dispatcher
 # optional #
 # hyphen  # Hyphenation rules
 ```

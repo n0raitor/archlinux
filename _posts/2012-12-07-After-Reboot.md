@@ -36,13 +36,21 @@ openvpn import --config <config-incl-path>
 nmcli connection import type openvpn file <file-to-ovpn>
 ```
 
+**OpenConnect**
+
+```bash
+sudo pacman -S openconnect networkmanager-openconnect
+```
+
 **Misc**
 
 ```bash
 sudo pacman -S ffmpegthumbnailer  # Lightweight video thumbnailer that can be used by file managers.
 sudo pacman -S raw-thumbnailer  # A lightweight and fast raw image thumbnailer that can be used by file managers.
 
-sudo pacman -S xarchiver file-roller ark archlinux-wallpaper xwallpaper archivetools archlinux-menu archlinux-themes-slim archlinux-xdg-menu fastjar
+sudo pacman -S neofetch
+sudo pacman -S nano-syntax-highlighting
+sudo pacman -S hw-info
 ```
 
 **Theme and Fonts - For Kali Look**
