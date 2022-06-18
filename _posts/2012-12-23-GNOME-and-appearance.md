@@ -101,13 +101,15 @@ Visit [https://extensions.gnome.org/](https://extensions.gnome.org/)
 
 * [Blur my Shell](https://extensions.gnome.org/extension/3193/blur-my-shell/)
 
-* Dynamic Panel Transparency
+* DEP: Dynamic Panel Transparency
 
 * Frippery Move Clock
 
-* Panel OSD
+* DEP: Panel OSD
 
-* Shell Configurator
+* Gnome 4x UI Improvements 
+
+* DEP: Shell Configurator
 
 * Workspace Indicator
 
@@ -142,13 +144,9 @@ For Kali-Style use:
 
 Use Flat-Remix, Orchis, Nordic or Skeuos
 
-
-
 #### Terminal Color Scheme
 
 [Gogh](http://mayccoll.github.io/Gogh/)
-
-
 
 ```bash
 bash -c "$(curl -sLo- https://git.io/vQgMr)"
