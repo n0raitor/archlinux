@@ -13,7 +13,7 @@ This Section contains the most recommended programms to use on your OS
 Tools allowing to manipulate the Wireless Extensions
 
 ```bash
-pacman -S  wireless_tools 
+sudo pacman -S wireless_tools 
 ```
 
 #### Web Browser
