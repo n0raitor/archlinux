@@ -53,6 +53,13 @@ General INIT Maintenance:
 
 - Enable Firewall
 
+- Gnome Num-Lock:
+  
+  ```bash
+  # Set NumKey Enabled
+  gsettings set org.gnome.desktop.peripherals.keyboard numlock-state true
+  ```
+
 #### Gnome Improvements
 
 **Get a Transparent Terminal**
@@ -162,5 +169,5 @@ yay -S arch-linux-2d-wallpapers
 [Gogh](http://mayccoll.github.io/Gogh/)
 
 ```bash
-bash -c "$(curl -sLo- https://git.io/vQgMr)"
+bash -c "$(curl -sLo- https://git.io/vQgMr)"gpar
 ```

@@ -51,6 +51,10 @@ sudo pacman -S raw-thumbnailer  # A lightweight and fast raw image thumbnailer t
 sudo pacman -S neofetch
 sudo pacman -S nano-syntax-highlighting
 sudo pacman -S hw-info
+sudo pacman -S gnome-disk-utility gparted
+sudo pacman -S glances
+sudo pacman -S htop
+yay -S nvidia-system-monitor-git
 ```
 
 **Theme and Fonts - For Kali Look**
