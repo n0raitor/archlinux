@@ -3,47 +3,10 @@ title: 'After Reboot'
 layout: null
 ---
 
-### Exit and Reboot
-
-```bash
-exit
-umount -a
-reboot
-```
-
-### Connect to Internet
-
-#### With Wifi
-
-```bash
-# newer way:
-[iwctl](https://wiki.archlinux.org/index.php/Iwctl)
-```bash
-iwctl
-# Use help for support
-device list  # list network devices
-station <device> scan  # scan for networks
-station <device> get-networks  # get all networks
-station <device> connect SSID  # login into your wifi
-```
-
-#### With Ethernet
-
-```bash
-ip a # search for Ethernet adapter
-dhcpcd <adapter>
-```
-
 ### Use Reflector as above
 
 ```bash
 reflector --verbose --country 'Germany' -l 200 -p https --sort rate --save /etc/pacman.d/mirrorlist
-```
-
-### Update System
-
-```bash
-pacman -Syu
 ```
 
 ###### Generate SSH-Key

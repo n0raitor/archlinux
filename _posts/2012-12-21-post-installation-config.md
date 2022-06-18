@@ -11,32 +11,6 @@ layout: null
 nano /etc/profile.d/alias.sh
 ```
 
-use the the folowing rows:
-
-```bash
-alias <left>="<right">
-```
-
-The (n) notation means, that there are n ways of signing this alias. Do not use this (n) e.g. (1) in the alias notation!
-
-Edit the ~/.bashrc file to add alias permanently for your user.
-
-[https://github.com/n0raitor/archlinux-alias](My ArchLinux Alias Repo) 
-
-# 
-
-#### Timedatectl  (optional)
-
-The hardware clock can be queried and set with the _timedatectl_ command
-
-```bash
-# Enable  # timedatectl set-ntp true
-# Edit  # /etc/systemd/timesyncd.conf
-systemctl enable --now systemd-timesyncd.service  # Sync System Time with atomic clock
-```
-
-### Highlighting
-
 **Man Page - German Edition**
 
 ```bash
@@ -55,9 +29,35 @@ export PAGER=most
 # See results on "man mv"
 ```
 
-### Install other optional Packages
+### Use Reflector as above
 
 ```bash
-sudo pacman -S bash-completion
-sudo pacman -S xdg-utils xdg-user-dirs 
+reflector --verbose --country 'Germany' -l 200 -p https --sort rate --save /etc/pacman.d/mirrorlist
+```
+
+###### Generate SSH-Key
+
+```bash
+ssh-keygen -t rsa -b 4096
+```
+
+### Main Maintenance
+
+**SSH**
+
+```bash
+# sudo systemctl enable sshd
+# sudo systemctl start sshd
+# -> Already done, if not, run this commands
+```
+
+**OpenVPN**
+
+```bash
+# Setup OpenVPN
+sudo pacman -S openvpn networkmanager-openvpn
+systemctl restart networkmanager
+# import openvpn config with:
+openvpn import --config <config-incl-path>
+nmcli connection import type openvpn file <file-to-ovpn>
 ```
