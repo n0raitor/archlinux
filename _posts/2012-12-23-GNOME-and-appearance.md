@@ -142,6 +142,21 @@ For Kali-Style use:
 
 Use Flat-Remix, Orchis, Nordic or Skeuos
 
+#### Misc
+
+**Arch Artworks**
+
+```bash
+yay -S archlinux-artwork
+```
+
+**Arch Wallpaper**
+
+```bash
+yay -S arch-logo-dark-wallpapers
+yay -S arch-linux-2d-wallpapers
+```
+
 #### Terminal Color Scheme
 
 [Gogh](http://mayccoll.github.io/Gogh/)
