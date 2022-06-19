@@ -25,6 +25,8 @@ sudo pacman -S flatpak
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 ```
 
+******
+
 ### Internet
 
 #### WIFI
@@ -41,6 +43,24 @@ Most secure Browser on earth...
 
 ```bash
 yay -S brave-bin
+```
+
+#### Tor
+
+```bash
+sudo pacman -S torbrowser-launcher
+```
+
+**Alternative**
+
+```bash
+sudo pacman -S tor
+```
+
+*Nyx* is a command line monitor for Tor, it provides bandwidth usage, connection details and on-the-fly configuration editing
+
+```bash
+sudo pacman -S nyx
 ```
 
 #### Torrent / Download-Manager
@@ -64,6 +84,8 @@ yay -S protonmail-bridge-bin
 ```bash
 sudo pacman -S evolution
 ```
+
+******
 
 ### Multimedia
 
@@ -147,6 +169,12 @@ yay -S guitar-pro
 
 #### Graphic
 
+Blender
+
+```bash
+sudo pacman -S blender
+```
+
 Image Manipulation
 
 ```bash
@@ -159,11 +187,21 @@ Lightroom Alternative
 sudo pacman -S darktable
 ```
 
+Krita
+
+*Edit and paint images*
+
+```bash
+sudo pacman -S krita
+```
+
 #### E-Books
 
 ```bash
 sudo pacman -S calibre
 ```
+
+*****
 
 ### Development
 
@@ -174,6 +212,14 @@ sudo pacman -S gnome-builder
 ```
 
 **VS Code**
+
+Open Source:
+
+```bash
+yay -S vscodium-bin
+```
+
+Alternative:
 
 ```bash
 sudo pacman -S code  # vscode
@@ -270,6 +316,8 @@ If you are new to Haskell, check out [First steps - GHCup](https://www.haskell.o
 
 [Netbeans - ArchWiki](https://wiki.archlinux.org/title/Netbeans)
 
+*****
+
 ### System
 
 ```bash
@@ -290,6 +338,8 @@ If the Daily/Weekly/Monthly Tasks do not work, try:
 sudo systemctl enable cronie.service
 ```
 
+*****
+
 ### Office
 
 #### Zotero
@@ -297,6 +347,16 @@ sudo systemctl enable cronie.service
 ```bash
 yay -S zotero-bin
 ```
+
+#### PDF
+
+Recommendation: xreader
+
+```bash
+sudo pacman -S xreader
+```
+
+[Alternatives](https://wiki.archlinux.org/index.php/PDF,_PS_and_DjVu)
 
 #### Suits
 
@@ -320,6 +380,8 @@ sudo pacman -S speech-dispatcher
 # hyphen  # Hyphenation rules
 ```
 
+*****
+
 ### VirtualBox
 
 Follow the instructions on the following [Site](https://wiki.archlinux.org/title/VirtualBox).
@@ -339,11 +401,15 @@ sudo nano /etc/modules-load.d/vboxdrv.conf
 yay -S virtualbox-ext-oracle
 ```
 
-### Bottles
+### Emulation
+
+#### Bottles
 
 ```bash
 flatpak install flathub com.usebottles.bottles
 ```
+
+*****
 
 ### Communication
 
@@ -371,6 +437,15 @@ sudo pacman -S discord
 flatpak install flathub org.signal.Signal
 ```
 
+#### Rambox
+
+```bash
+# Instant Messaginger
+yay -S rambox 
+```
+
+*****
+
 ### MarkText
 
 Better MD Editor
@@ -379,18 +454,15 @@ Better MD Editor
 flatpak install marktext
 ```
 
-### Rambox
-
-```bash
-# Instant Messaginger
-yay -S rambox 
-```
+*****
 
 ### Pomotroid - Graphical Pomodoro Timer
 
 ```bash
 snap install pomotroid
 ```
+
+*****
 
 ### 1Password
 
@@ -400,16 +472,6 @@ snap install pomotroid
  curl -sS https://downloads.1password.com/linux/keys/1password.asc | gpg --import
  yay -S 1password
 ```
-
-### Additional PDF Software
-
-Recommendation: xreader
-
-```bash
-sudo pacman -S xreader
-```
-
-[Alternatives](https://wiki.archlinux.org/index.php/PDF,_PS_and_DjVu)
 
 ### Kali Linux Shell
 
@@ -432,8 +494,20 @@ A Package Manager for Arch Linux Pacman Packages
 ```bash
 sudo pacman -S appstream-glib
 yay -S archlinux-appstream-data-pamac
-yay -S pamac-aur-git  # Edit PKGBUILD
-yay -S libpamac-aur  # Edit PKGBUILD
+
+yay -S snapd-glib
+
+git clone https://aur.archlinux.org/libpamac-aur.git
+cd libpamac
+nano PKGBUILD  # Edit PKGBUILD
+# SET
+ENABLE_FLATPAK=1
+ENABLE_SNAPD=1
+
+makepkg -si
+
+
+yay -S pamac-aur
 ```
 
 ### No Adobe - Use the Libre Graphics Suite
@@ -448,7 +522,7 @@ Multi-Platform encryption and decryption tool
 sudo pacman -S veracrypt
 ```
 
-#### Install Awesome Extensions
+#### Install Awesome Nautilus Extensions
 
 ```bash
 sudo pacman -S nautilus-terminal
@@ -458,14 +532,16 @@ sudo pacman -S nautilus-terminal
 
 #### IDA
 
+**Requirement**
+
+```bash
+git clone https://github.com/WqyJh/qwingraph_qt5.git
+cd qwingraph_qt5
+sudo ./install.sh
+```
+
 ```bash
 yay -S ida-free
-```
-
-To Fix the Graph Generation:
-
-```
-git clone https://github.com/WqyJh/qwingraph_qt5 & cd qwingraph_qt5 & sudo ./install.sh
 ```
 
 #### Ghidra
@@ -477,7 +553,7 @@ yay -S ghidra
 #### EDB - Debugger
 
 ```bash
-yay -S edb-debugger
+yay -S edb-debugger-git
 ```
 
 #### Maltego
@@ -489,17 +565,53 @@ yay -S maltego
 # TODO Copy Transforms and Inport Configs auto inport
 ```
 
+### Penetration Testing
+
+#### Burp suite
+
+Burp Suite is an integrated platform for performing security testing of web applications. Its various tools work seamlessly together to support the entire testing process, from initial mapping and analysis of an application's attack surface, to finding and exploiting security vulnerabilities.
+
+This will install Burp Suite Community (free edition):
+
+```bash
+yay -S burpsuite
+```
+
+#### nmap
+
+```bash
+sudo pacman -S nmap
+```
+
+#### Wireshark
+
+```bash
+sudo pacman -S wireshark-qt
+```
+
+#### Hashcat
+
+```bash
+sudo pacman -S hashcat
+```
+
+*****
+
 ### .RST Reader
 
 **Restview**
 
 ```bash
-mkdir restview
-cd restview/
+sudo pacman --needed -S python-virtualenv
+
+mkdir -p ~/venv/restview
+cd ~/venv/restview
 virtualenv-2.7 venv # The second system I used just used 'virtualenv venv'
 ./venv/bin/pip install restview
 ./venv/bin/restview ~/path/MANUAL.rst
 ```
+
+****
 
 ### yED Graph Editor
 
@@ -513,17 +625,29 @@ use *Filelight* #GUI Tool
 
 *Baobab* #Gnome Tool
 
+****
+
 ### Disk Cleaning Program
 
 *BleachBit*
+
+****
 
 ### Zim
 
 Knowledge Database [Zim - ArchWiki](https://wiki.archlinux.org/title/Zim)
 
-### Epic-Asset-Manager
+****
+
+### Game Development
+
+#### Unreal Engine 4
+
+#### Epic-Asset-Manager
 
 [GitHub - AchetaGames/Epic-Asset-Manager: A frontend to Assets purchased on Epic Games Store](https://github.com/AchetaGames/Epic-Asset-Manager)
+
+****
 
 ### Gaming
 
@@ -558,6 +682,8 @@ Legendary — A free and open-source replacement for the Epic Games Launcher. [G
 
 Heroic Games Launcher — A GUI for legendary, an open-source alternative for the Epic Games Launcher. [GitHub - Heroic-Games-Launcher/HeroicGamesLauncher: A Native GOG and Epic Games Launcher for Linux, Windows and Mac.](https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher) || [heroic-games-launcher-bin](https://aur.archlinux.org/packages/heroic-games-launcher-bin/)AUR
 
+****
+
 ### Synology
 
 ```bash
@@ -565,8 +691,20 @@ yay -S synology-drive
 yay -S synology-note-station
 ```
 
+****
+
 ### Advanced Power Management
 
 ```bash
 sudo pacman -S tlp tlp-rdw
+```
+
+****
+
+### ZSH
+
+Extra
+
+```bash
+pamac install pamac-zsh-completions
 ```
