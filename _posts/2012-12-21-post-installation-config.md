@@ -6,9 +6,13 @@ layout: null
 
 ### Bash
 
+*use the dotfiles!*
+
+#### OR
+
 ```bash
-/etc/profile.d/editor.sh  # set default global editor
-nano /etc/profile.d/alias.sh
+sudo nano /etc/profile.d/editor.sh  # set default global editor
+
 ```
 
 **Man Page - German Edition**
@@ -38,7 +42,7 @@ reflector --verbose --country 'Germany' -l 200 -p https --sort rate --save /etc/
 ###### Generate SSH-Key
 
 ```bash
-ssh-keygen -t rsa -b 4096
+ssh-keygen -t rsa -b 4096 -o -a 100
 ```
 
 ### Main Maintenance
