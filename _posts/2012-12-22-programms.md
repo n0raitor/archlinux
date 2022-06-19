@@ -195,6 +195,12 @@ Krita
 sudo pacman -S krita
 ```
 
+yED Graph Editor
+
+```bash
+yay -S yed 
+```
+
 #### E-Books
 
 ```bash
@@ -606,30 +612,32 @@ sudo pacman --needed -S python-virtualenv
 
 mkdir -p ~/venv/restview
 cd ~/venv/restview
-virtualenv-2.7 venv # The second system I used just used 'virtualenv venv'
+virtualenv venv # The second system I used just used 'virtualenv venv'
 ./venv/bin/pip install restview
 ./venv/bin/restview ~/path/MANUAL.rst
 ```
 
 ****
 
-### yED Graph Editor
-
-Try It ;-)
-
-#### Alternative
-
-use *Filelight* #GUI Tool
-
-#### oder
-
-*Baobab* #Gnome Tool
-
-****
-
 ### Disk Cleaning Program
 
 *BleachBit*
+
+```bash
+sudo pacman -S bleachbit 
+```
+
+*Filelight* #GUI Tool
+
+```bash
+sudo pacman -S filelight 
+```
+
+*Baobab* #Gnome Tool
+
+```bash
+sudo pacman -S baobab 
+```
 
 ****
 
@@ -642,6 +650,8 @@ Knowledge Database [Zim - ArchWiki](https://wiki.archlinux.org/title/Zim)
 ### Game Development
 
 #### Unreal Engine 4
+
+[Unreal Engine 4 - ArchWiki](https://wiki.archlinux.org/title/Unreal_Engine_4)
 
 #### Epic-Asset-Manager
 
