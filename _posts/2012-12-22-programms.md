@@ -567,6 +567,7 @@ yay -S edb-debugger-git
 ```bash
 yay -S maltego
 
+python3 -m venv ~/Dokumente/venv/mcti
 # Create VENV and install maltego-trx and requests
 # TODO Copy Transforms and Inport Configs auto inport
 ```
