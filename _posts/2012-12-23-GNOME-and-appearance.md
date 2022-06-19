@@ -47,9 +47,10 @@ General INIT Maintenance:
   
   - Add Keyboard shortcut:
     
-    - gnome-terminal (on Ctrl+Alt+T)
+    - gnome-terminal (on CTRL + ALT + T)
     
-    - nautilus (on Ctrl+Alt+E)
+    - nautilus (on CTRL + ALT + E)
+    - xkill (on CTRL + ALT + ESC)
 
 - Enable Firewall
 
@@ -143,8 +144,6 @@ sudo pacman -S ttf-fira-code
 yay -S ttf-hackgen ttf-gentium-basic ttf-ms-fonts
 yay -S ttf-nerd-fonts-hack-complete-git 
 yay -S ttf-mac-fonts
-
-
 ```
 
 More on [Fonts - ArchWiki](https://wiki.archlinux.org/title/fonts)
