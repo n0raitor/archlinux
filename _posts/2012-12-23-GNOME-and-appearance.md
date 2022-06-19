@@ -105,6 +105,8 @@ Visit [https://extensions.gnome.org/](https://extensions.gnome.org/)
 * Resource Monitor or System Monitor
 
 * [Blur my Shell](https://extensions.gnome.org/extension/3193/blur-my-shell/)
+  
+  * IMPORTANT: The default dock (or Dash-to-Dock Ext) can get a shadow effect by enabling this extension. Tweak the settings (especially: Panel and Dock, disable it) to get rid of it
 
 * DEP: Dynamic Panel Transparency
 
@@ -117,6 +119,16 @@ Visit [https://extensions.gnome.org/](https://extensions.gnome.org/)
 * DEP: Shell Configurator
 
 * Workspace Indicator
+
+* NEW:
+  
+  * Desktop Cube
+  
+  * Useless Gaps
+  
+  * Fly-Pie
+  
+  * Compiz windows effect
 
 ### Appearance
 
@@ -171,3 +183,7 @@ yay -S arch-linux-2d-wallpapers
 ```bash
 bash -c "$(curl -sLo- https://git.io/vQgMr)"gpar
 ```
+
+### Wallpaper
+
+https://wallhaven.cc/
