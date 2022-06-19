@@ -82,13 +82,32 @@ sudo pacman -S intel-ucode
 
 #### Laptops
 
+**[auto-cpufreq]([https://github.com/AdnanHodzic/auto-cpufreq)**
+
+```bash
+yay -S auto-cpufreq
+
+sudo systemctl start auto-cpufreq
+sudo systemctl enable auto-cpufreq
+```
+
+##### Alternatives:
+
 **Powertop** is a tool provided by Intel to enable various powersaving modes in userspace, kernel and hardware. It is possible to monitor processes and show which of them are utilizing the CPU and wake it from its Idle-States, allowing to identify applications with particular high power demands.
 
 ```bash
 sudo pacman -S powertop
 ```
 
+**TLP**
+
+```bash
+sudo pacman -S tlp tlp-rdw
+```
+
 ### Multimedia
+
+
 
 #### Sound System
 
