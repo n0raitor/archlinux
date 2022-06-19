@@ -68,6 +68,6 @@ yay -S flat-remix cantarel-fonts
 
 **Setup Useful Shortcuts**
 
-- Super + T: Terminal
-- Super + C: Chrome
-- Super + F: File Manager
+- CTRL + ALT + T: Terminal
+- CTRL + ALT + E: File Manager
+- CTRL + ALT + ESC: xkill
