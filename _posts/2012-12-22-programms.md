@@ -713,6 +713,10 @@ sudo pacman -S tlp tlp-rdw
 
 ### ZSH
 
+```bash
+sudo pacman -S zsh zsh-syntax-highlighting zsh-autosuggestions zsh-theme-powerlevel10k
+```
+
 Extra
 
 ```bash
