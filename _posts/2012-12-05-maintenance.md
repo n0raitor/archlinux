@@ -310,3 +310,11 @@ To change the cursor size run the "dconf Editor" and go under org->gnome->deskto
 
 **GDM**
 Like Gnome, GDM auto-scales by default
+
+
+
+### AUR Checksum Skip
+
+```bash
+makepkg --skipchecksums -si
+```

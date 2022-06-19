@@ -16,8 +16,6 @@ sudo ln -s /var/lib/snapd/snap /snap
 sudo snap install snap-store
 ```
 
-
-
 ### FlatPak
 
 ```bash
@@ -331,6 +329,16 @@ IMPORTANT
 Arch module for linux and dkms for linux-lts.
 Use modprobe vboxdrv.
 
+```bash
+sudo pacman -S virtualbox virtualbox-host-dkms linux-lts-headers 
+
+sudo modprobe vboxdrv
+
+sudo nano /etc/modules-load.d/vboxdrv.conf
+# Add vboxdrv
+yay -S virtualbox-ext-oracle
+```
+
 ### Bottles
 
 ```bash
@@ -381,22 +389,7 @@ yay -S rambox
 ### Pomotroid - Graphical Pomodoro Timer
 
 ```bash
-yay -S pomotroid
-```
-
-This version my be a little buggy. If so, try the SNAP Version
-
-```bash
-# Install SNAP
-git clone https://aur.archlinux.org/snapd.git
-cd snapd
-makepkg -si
-
-sudo systemctl enable --now snapd.socket
-
-sudo ln -s /var/lib/snapd/snap /snap
-
-sudo snap install pomotroid
+snap install pomotroid
 ```
 
 ### 1Password
