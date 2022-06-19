@@ -139,11 +139,15 @@ These Fonts are for System Appearance and Document Creation Use-Cases
 ```bash
 sudo pacman -S ttf-bitstream-vera ttf-dejavu ttf-liberation adobe-source-sans-pro-fonts
 sudo pacman -S ttf-anonymous-pro ttf-droid ttf-ubuntu-font-family ttf-roboto ttf-roboto-mono ttf-font-awesome
-yay -S ttf-hackgen ttf-gentium-basic ttf-ms-fonts
 sudo pacman -S ttf-fira-code
+yay -S ttf-hackgen ttf-gentium-basic ttf-ms-fonts
 yay -S ttf-nerd-fonts-hack-complete-git 
-# For More Fonts: pacman -Ss ttf
+yay -S ttf-mac-fonts
+
+
 ```
+
+More on [Fonts - ArchWiki](https://wiki.archlinux.org/title/fonts)
 
 ##### Styles in Gnome
 
