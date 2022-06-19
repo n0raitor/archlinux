@@ -9,10 +9,10 @@ This Section contains the most recommended programms to use on your OS
 ### FlatPak
 
 ```bash
-pacman -S flatpak
+sudo pacman -S flatpak
 
 # integriert das Flathub Repositorium, das eine zentrale Sammelstelle für flatpaks darstellt.
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 ```
 
 ### Internet
@@ -85,6 +85,14 @@ A simple video editor, but not that advanced compared to Davinci Resolve
 yay -S kdenlive
 ```
 
+or
+
+**OpenShot**
+
+```bash
+sudo pacman -S openshot
+```
+
 **DaVinci Resolve**
 
 [DaVinci Resolve - ArchWiki](https://wiki.archlinux.org/title/DaVinci_Resolve)
@@ -117,6 +125,7 @@ sudo pacman -S audacity
 #### Spotify
 
 ```bash
+curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | gpg --import -
 yay -S spotify
 ```
 
@@ -143,7 +152,7 @@ sudo pacman -S darktable
 #### E-Books
 
 ```bash
-yay -S calibre
+sudo pacman -S calibre
 ```
 
 ### Development
@@ -171,7 +180,7 @@ yay -S bootstrap-studio
 A Hackable Editor
 
 ```bash
-sudo pacman -S atom 
+yay -S atom 
 ```
 
 Install Haskel Syntax Support
