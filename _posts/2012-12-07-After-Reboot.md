@@ -72,7 +72,6 @@ sudo systemctl restart NetworkManager
 ```bash
 # Lightweight video thumbnailer that can be used by file managers.
 sudo pacman -S ffmpegthumbnailer  
-
 ```
 
 **System Monitoring**
@@ -85,11 +84,4 @@ sudo pacman -S gnome-disk-utility gparted
 sudo pacman -S glances
 sudo pacman -S htop
 yay -S nvidia-system-monitor-git
-
 ```
-
-**Setup Useful Shortcuts**
-
-- CTRL + ALT + T: Terminal
-- CTRL + ALT + E: File Manager
-- CTRL + ALT + ESC: xkill

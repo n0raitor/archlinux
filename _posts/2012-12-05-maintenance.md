@@ -17,6 +17,10 @@ sudo pacman -S system-config-printer
 ```bash
 yay -S <Printer Driver ID> (Search yay -Ss or in Pamac)  --  e.g. brother-dcpj315w
 sudo lpadmin -p dcpj315w -v lpd://${printer-ip}/BINARY_P1
+
+# opt-dep
+yay -S brscan3
+
 ```
 
 Finally:
@@ -31,9 +35,6 @@ Finally:
 NOTE: You may test this multiple times: Use the Test-Print Button to test the connectivity
 
 ### Activating NumLock on Bootup
-
-**KDE Plasma**
-Go to *System Settings > Input Devices > Keyboard*, in the *Hardware* tab, in the *NumLock on Plasma Startup* section, choose the desired NumLock behavior.
 
 **GNOME**
 Run the following command:
@@ -50,16 +51,6 @@ gsettings set org.gnome.desktop.peripherals.keyboard remember-numlock-state true
 
 Note: The key *numlock-state* was moved from *org.gnome.settings-daemon.peripherals.keyboard* since GNOME 3.34
 Alternatively, you can use add *numlockx* on (from numlockx to a startup script, like */.bashrc* (if using Bash) or */.profile.*
-
-**Xfce**
-In the file ~/.config/xfce4/xfconf/xfce-perchannel-xml/keyboards.xml, make sure the following values are set to true:
-
-```
-<property name="Numlock" type="bool" value="true"/>
-<property name="RestoreNumlock" type="bool" value="true"/>
-```
-
-Note: If the file does not exist then open Settings > Keyboard, then check and uncheck the Restore num lock state on startup. This will create the *keyboards.xml* file.
 
 ### Remove Orphans
 
@@ -100,11 +91,6 @@ sudo systemctl start fstrim.timer
 sudo systemctl status fstrim.timer  # should be active now
 ```
 
-### Set up XKILL Shotcut
-
-Check the shotcuts menu. If xkill is added, skip to the next heading. If not, add this:
-Ctrl+Alt+X        ->        xkill
-
 ### Make Arch Stable (Golden Rules)
 
 1. Do Backups with Timeshift and BtrFS
@@ -130,7 +116,7 @@ sudo rsync -aAXvP --delete --exclude=/dev/* --exclude=/proc/* --exclude=/sys/* -
 ### In general
 
 ```bash
- sudo pacman -S os-probe
+ sudo pacman -S os-prober
 ```
 
 ```bash
@@ -157,7 +143,7 @@ os-prober
 ```
 
 If a message appears: *Os-prober will not be executed*
-Solution: Set the named constant to the default/grub file as False
+Solution: Set the named constant to the default/grub file as False (don't forget to uncommand the line)
 
 ### Extra
 
@@ -310,8 +296,6 @@ To change the cursor size run the "dconf Editor" and go under org->gnome->deskto
 
 **GDM**
 Like Gnome, GDM auto-scales by default
-
-
 
 ### AUR Checksum Skip
 
