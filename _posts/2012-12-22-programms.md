@@ -6,6 +6,18 @@ layout: null
 
 This Section contains the most recommended programms to use on your OS
 
+### Snap
+
+```bash
+yay -S snapd
+sudo systemctl enable snapd.socket
+sudo systemctl start snapd.socket
+sudo ln -s /var/lib/snapd/snap /snap
+sudo snap install snap-store
+```
+
+
+
 ### FlatPak
 
 ```bash
@@ -180,7 +192,7 @@ yay -S bootstrap-studio
 A Hackable Editor
 
 ```bash
-yay -S atom 
+snap install atom --classic
 ```
 
 Install Haskel Syntax Support
