@@ -50,6 +50,7 @@ General INIT Maintenance:
     - gnome-terminal (on CTRL + ALT + T)
     
     - nautilus (on CTRL + ALT + E)
+    
     - xkill (on CTRL + ALT + ESC)
 
 - Enable Firewall
@@ -125,11 +126,17 @@ Visit [https://extensions.gnome.org/](https://extensions.gnome.org/)
   
   * Desktop Cube
   
-  * Useless Gaps
+  * #Useless Gaps
   
-  * Fly-Pie
+  * #Fly-Pie
   
-  * Compiz windows effect
+  * #Compiz windows effect
+  
+  * Toggle Night Light 
+  
+  * Night Theme Switcher 
+  
+  * Window Is Ready - Notification Remover
 
 ### Appearance
 
